@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name quizProjectApp
@@ -8,36 +6,43 @@
  *
  * Main module of the application.
  */
- (function(){
-'use strict';
+(function() {
+  'use strict';
 
+  function config($routeProvider, localStorageServiceProvider) {
 
-angular
-  .module('quizProjectApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngMessages',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+    localStorageServiceProvider.setPrefix('ls');
+
+    var CONTROLLER_VIEW_MODEL_REFERENCE = 'ctrl';
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'MainController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }
 
- }());
+  angular
+    .module('quizProjectApp', [
+      'ngAnimate',
+      'ngCookies',
+      'ngMessages',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch',
+      'ui.sortable',
+      'LocalStorageModule'
+    ])
+    .config(['$routeProvider', 'localStorageServiceProvider', config]);
 
+}());
