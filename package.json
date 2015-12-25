@@ -37,6 +37,7 @@
   },
   "scripts": {
     "test": "grunt test"
+<<<<<<< HEAD
   },
   "dependencies": {
     "jasmine": "^2.4.1",
@@ -44,3 +45,7 @@
     "phantomjs": "^1.9.19"
   }
 }
+=======
+  }
+}
+>>>>>>> 6ea8b427dbfdb68b9104e4390d883238466c9a2c
