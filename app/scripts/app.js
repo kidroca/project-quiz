@@ -21,6 +21,16 @@
         controller: 'MainController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
+      .when('/my', {
+        templateUrl: 'views/my.html',
+        controller: 'MainController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
+      .when('/add', {
+        templateUrl: 'views/add-quiz.html',
+        controller: 'CreateQuizController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
@@ -31,7 +41,12 @@
       });
   }
 
-  angular
+  
+    angular.module('quizProjectApp.services', []);
+
+    angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
+
+    angular
     .module('quizProjectApp', [
       'ngAnimate',
       'ngCookies',
@@ -41,7 +56,8 @@
       'ngSanitize',
       'ngTouch',
       'ui.sortable',
-      'LocalStorageModule'
+      'LocalStorageModule',
+      'quizProjectApp.controllers',
     ])
     .config(['$routeProvider', 'localStorageServiceProvider', config]);
 
