@@ -1,13 +1,15 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <form name="quizForm" class="form-horizontal" 
-    ng-submit="ctrl.submitQuiz()" novalidate>
+    ng-submit="ctrl.addQuiz($storage.quiz, quizForm)" novalidate>
       <fieldset>
         <legend>Add Quiz</legend>
+        
+        <!-- Title -->
         <div class="form-group">
           <label for="quizTitle" class="col-lg-2 control-label">Title</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="ctrl.quiz.title" 
+            <input type="text" ng-model="$storage.quiz.title" 
               class="form-control" name="title" placeholder="Quiz Title"
               required ng-minlength="3" 
               ng-focus="titleFocus=true" ng-blur="titleFocus=false">
@@ -17,47 +19,56 @@
               </div>
           </div>
         </div>
+      
+        <!-- Description -->
         <div class="form-group">
           <label for="description" class="col-lg-2 control-label">Description</label>
           <div class="col-lg-10">
-            <textarea ng-model="ctrl.quiz.description" class="form-control" rows="3" name="description"
+            <textarea ng-model="$storage.quiz.description" class="form-control" rows="3" name="description"
               ng-minlength="5"
               ng-focus="descFocus=true" ng-blur="descFocus=false"></textarea>
             <div ng-show="(quizForm.description.$invalid && quizForm.description.$dirty) ||
-              (descFocus && !ctrl.quiz.description)"
+              (descFocus && !$storage.quiz.description)"
               class="alert alert-warning">
                 <p>Write a short description for the quiz.</p>
               </div>
           </div>
         </div>
+
+        <!-- Add Question -->
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
             <button class="btn btn-success" 
-              ng-click="ctrl.addQuestion()">Add New Question</button>
+              ng-click="ctrl.openQuesitonMenu()">Add New Question</button>
           </div>
         </div>
+
+        <!-- Questions -->
         <div class="form-group">
-          <label for="questions" class="col-lg-2 control-label">Question</label>
-          <div class="col-lg-10 col-lg-offset-2">
-            <ul class="list-group" name="questions">
-              <li class="list-group-item">
-                <span class="badge">14</span>
-                Cras justo odio.
-              </li>
-              <li class="list-group-item">
-                <span class="badge">2</span>
-                Dapibus ac facilisis in
-              </li>
-              <li class="list-group-item">
-                <span class="badge">1</span>
-                Morbi leo risus
+          <label for="questions" class="col-lg-2 control-label">Questions</label>
+          <div class="col-lg-10">
+            <ul class="list-group question-list" name="questions">
+              <li class="list-group-item clearfix" ng-repeat="question in $storage.quiz.questions">
+                  <em class="text-info hide-overflow" ng-bind="question.title"
+                    ng-click="ctrl.openQuesitonMenu(question)"
+                    uib-popover="This question has {{question.answers.length}} answers available"
+                    popover-placement="left" tooltip-class="info-tip" popover-trigger="mouseenter"></em>
+                  <span class="pull-right button-group">
+                      <button class="btn btn-xs btn-primary"
+                        ng-click="ctrl.openQuesitonMenu(question)"><span class="glyphicon glyphicon-edit"></span> Edit</button> 
+                      <button type="button" ng-click="ctrl.removeQuestion($index)" 
+                        class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+                  </span>
               </li>
             </ul>
           </div>
         </div>
+
+        <!-- Submit -->
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
-            <button class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary">Save Quiz</button>
+            <button ng-click="ctrl.resetForm()" class="btn btn-danger">Reset</button>
           </div>
         </div>
       </fieldset>
