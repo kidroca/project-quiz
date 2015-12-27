@@ -59,8 +59,8 @@
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default" type="button" ng-click="ctrl.cancel()">Close</button>
-    <span uib-popover="Please, assign the correct answer!" popover-trigger="mouseenter" tooltip-enable="!ctrl.hasCorrect()"
-        popover-placement="bottom" popup-class="danger">
+    <span uib-popover="Please, assign the correct answer!" popover-trigger="mouseenter" popover-enable="!ctrl.hasCorrect()"
+        popover-placement="bottom">
         <button type="button" class="btn btn-primary" type="button" 
         ng-click="ctrl.ok()" 
         ng-disabled="questionForm.$invalid || !ctrl.hasCorrect()">Save Question</button>
