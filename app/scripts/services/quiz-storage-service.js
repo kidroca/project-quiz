@@ -2,8 +2,7 @@
 	'use strict';
 
 	function quizStorageService($localStorage) {
-		var myQuizzes = $localStorage.myQuizzes || [];
-
+		
 		function getQuizzes() {
 			return $localStorage.quizzes.slice(0);
 		}
