@@ -1,16 +1,12 @@
 (function(){
 	'use strict';
 
-	var DEFAULT_STORAGE = {
-		quizzes: []
-	};
-
 	function quizStorageService($localStorage) {
 
-		$localStorage.$default(DEFAULT_STORAGE);
+		$localStorage.quizzes = $localStorage.quizzes || [];
 
 		function getQuizzes() {
-			return $localStorage.quizzes.slice(0);
+			return angular.copy($localStorage.quizzes);
 		}
 
 		function addQuiz(quiz) {

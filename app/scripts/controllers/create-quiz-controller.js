@@ -12,12 +12,23 @@
 	function CreateQuizController($scope, $uibModal, $sessionStorage, quizStorage) {
 		var self = this;
 
-		$scope.$storage = $sessionStorage.$default(DEFAULT_STORAGE); 
+		$sessionStorage.quiz = $sessionStorage.quiz || DEFAULT_STORAGE;
+		$scope.$storage = $sessionStorage.quiz;
 
-		self.addQuiz = function addQuiz(quiz) {
+		self.addQuiz = function addQuiz(quiz, form) {
 			quiz = JSON.parse(JSON.stringify(quiz));
 			quizStorage.addQuiz(quiz);
+
+			self.resetForm(form);
 			console.log('bachka');
+		};
+
+		self.resetForm = function resetForm(form) {
+			form.$setPristine();
+			form.$setUntouched();
+
+			$sessionStorage.quiz = DEFAULT_STORAGE;
+			$scope.$storage = $sessionStorage.quiz;
 		};
 
 		self.removeQuestion = function removeQuestion(index) {
