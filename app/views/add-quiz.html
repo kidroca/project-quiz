@@ -1,25 +1,45 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form class="form-horizontal">
+    <form name="quizForm" class="form-horizontal" 
+    ng-submit="ctrl.submitQuiz()" novalidate>
       <fieldset>
         <legend>Add Quiz</legend>
         <div class="form-group">
           <label for="quizTitle" class="col-lg-2 control-label">Title</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" required id="quizTitle" placeholder="Quiz Title">
+            <input type="text" ng-model="ctrl.quiz.title" 
+              class="form-control" name="title" placeholder="Quiz Title"
+              required ng-minlength="3" 
+              ng-focus="titleFocus=true" ng-blur="titleFocus=false">
+              <div ng-show="quizForm.title.$invalid && (quizForm.title.$dirty || titleFocus)"  
+              class="alert alert-warning">
+                <p>Enter a quiz title of at least 3 characters.</p>
+              </div>
           </div>
         </div>
         <div class="form-group">
           <label for="description" class="col-lg-2 control-label">Description</label>
           <div class="col-lg-10">
-            <textarea class="form-control" rows="3" id="description"></textarea>
-            <span class="help-block">Write a short description for the quiz.</span>
+            <textarea ng-model="ctrl.quiz.description" class="form-control" rows="3" name="description"
+              ng-minlength="5"
+              ng-focus="descFocus=true" ng-blur="descFocus=false"></textarea>
+            <div ng-show="(quizForm.description.$invalid && quizForm.description.$dirty) ||
+              (descFocus && !ctrl.quiz.description)"
+              class="alert alert-warning">
+                <p>Write a short description for the quiz.</p>
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <button class="btn btn-success" 
+              ng-click="ctrl.addQuestion()">Add New Question</button>
           </div>
         </div>
         <div class="form-group">
           <label for="questions" class="col-lg-2 control-label">Question</label>
           <div class="col-lg-10 col-lg-offset-2">
-            <ul class="list-group" id="questions">
+            <ul class="list-group" name="questions">
               <li class="list-group-item">
                 <span class="badge">14</span>
                 Cras justo odio.
@@ -37,7 +57,6 @@
         </div>
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
-            <button class="btn btn-success">Add New Question</button>
             <button class="btn btn-primary">Submit</button>
           </div>
         </div>
