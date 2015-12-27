@@ -70,6 +70,29 @@ label.correct a {
   text-decoration: none;
 }
 
+/* info popup */
+.form-group .popover {
+  width: 45%;
+}
+
+.hide-overflow {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:69%;
+  display:inline-block;
+}
+
+.form-group .list-group .list-group-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.question-list .list-group-item .text-info:hover {
+  cursor: pointer;
+  color: #3E96E2;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
