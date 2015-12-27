@@ -56,6 +56,7 @@
       'ngSanitize',
       'ngTouch',
       'ui.sortable',
+      'ui.bootstrap',
       'LocalStorageModule',
       'quizProjectApp.controllers',
     ])
