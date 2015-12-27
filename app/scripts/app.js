@@ -9,9 +9,7 @@
 (function() {
   'use strict';
 
-  function config($routeProvider, localStorageServiceProvider) {
-
-    localStorageServiceProvider.setPrefix('ls');
+  function config($routeProvider) {
 
     var CONTROLLER_VIEW_MODEL_REFERENCE = 'ctrl';
 
@@ -41,7 +39,6 @@
       });
   }
 
-  
     angular.module('quizProjectApp.services', []);
 
     angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
@@ -55,11 +52,11 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
+      'ngStorage',
       'ui.sortable',
       'ui.bootstrap',
-      'LocalStorageModule',
       'quizProjectApp.controllers',
     ])
-    .config(['$routeProvider', 'localStorageServiceProvider', config]);
+    .config(['$routeProvider', config]);
 
 }());
