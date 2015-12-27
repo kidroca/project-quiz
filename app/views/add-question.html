@@ -2,6 +2,7 @@
     <button type="button" class="close" ng-click="ctrl.cancel()" aria-hidden="true">×</button>
     <h3 class="modal-title">Enter question details</h3>
 </div>
+
 <div class="modal-body">
     <form name="questionForm" class="form-horizontal" novalidate>
         <fieldset>
@@ -55,7 +56,13 @@
         </fieldset>
     </form>
 </div>
+
 <div class="modal-footer">
     <button type="button" class="btn btn-default" type="button" ng-click="ctrl.cancel()">Close</button>
-    <button type="button" class="btn btn-primary" type="button" ng-click="ctrl.ok()">Save Question</button>
+    <span uib-popover="Please, assign the correct answer!" popover-trigger="mouseenter" tooltip-enable="!ctrl.hasCorrect()"
+        popover-placement="bottom" popup-class="danger">
+        <button type="button" class="btn btn-primary" type="button" 
+        ng-click="ctrl.ok()" 
+        ng-disabled="questionForm.$invalid || !ctrl.hasCorrect()">Save Question</button>
+    </span>
 </div>

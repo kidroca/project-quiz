@@ -1,8 +1,6 @@
 (function() {
 	'use strict';
 
-	// Todo: dissallow save if no correct answer selected, show message
-
 	function AddQuestionController($uibModalInstance, resource) {
 		var self = this,
 			backup = '';
