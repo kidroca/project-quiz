@@ -1,14 +1,30 @@
 (function(){
 	'use strict';
 
+	var DEFAULT_STORAGE = {
+		quizzes: []
+	};
+
 	function quizStorageService($localStorage) {
-		
+
+		$localStorage.$default(DEFAULT_STORAGE);
+
 		function getQuizzes() {
 			return $localStorage.quizzes.slice(0);
 		}
 
 		function addQuiz(quiz) {
-			$localStorage.quizzes.push(quiz);
+			var i = 0;
+
+			if ($localStorage.quizzes.some(function (q, index) {
+				i = index;
+				return quiz.title === q.title;
+			})) {
+				console.log('quiz exists, updating...');
+				$localStorage.quizzes[i] = quiz;
+			} else {
+				$localStorage.quizzes.push(quiz);
+			}
 		}
 
 		function removeQuiz(indexOrName) {
