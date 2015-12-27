@@ -20,11 +20,12 @@
                 </div>
             </div>
                 <div ng-repeat="answer in ctrl.question.answers" class="form-group">
-                        <label for="answer"
-                            class="col-lg-2 control-label">
+                        <label for="answerText"
+                            class="col-lg-2 control-label" ng-class="{correct: answer.isCorrect}">
                             <a href="#" 
-                                ng-click="$event.preventDefault(); answer.isCorrect = true"
-                                ng-bind="answer.letter"></a>        
+                                ng-click="$event.preventDefault(); ctrl.markCorrect($index)"
+                                ng-bind="ctrl.letters[$index]">
+                                </a> 
                         </label>
                     <div ng-form name="answerForm" class="col-lg-10">
                         <div class="input-group">

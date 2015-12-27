@@ -1,18 +1,16 @@
 (function() {
 	'use strict';
 
-	// Todo: mark the correct answer with ng-class
-	// Todo: remove button 
+	// Todo: dissallow save if no correct answer selected, show message
 
 	function AddQuestionController($uibModalInstance, resource) {
 		var self = this,
-			letters = 'abcdefghijk',
-			nextLetter = 0,
 			backup = '';
+
+		self.letters = 'abcdefghijk';
 
 		if (resource) {
 			self.question = resource;
-			nextLetter = resource.answers.length;
 			backup = JSON.stringify(resource);
 		} else {
 			self.question = {
@@ -23,7 +21,8 @@
 
 		self.ok = function() {
 			if (backup) {
-				// if backup exists this is an edit, no need to return the question
+				// if backup exists then this is an edit, no need to return the question
+				// it is already passed by reference
 				$uibModalInstance.close(null);
 			} else {
 				// return the question to be added to the quiz
@@ -43,8 +42,23 @@
 
 		self.addAnswer = function addAnswer() {
 			self.question.answers.push({
-				letter: letters[nextLetter++],
 				text: ''
+			});
+		};
+
+		self.removeAnswer = function removeAnswer(index) {
+			self.question.answers.splice(index, 1);
+		};
+
+		self.markCorrect = function markCorrect(index) {
+			self.question.answers.forEach(function(answer, i){
+				answer.isCorrect = i === index;
+			});
+		};
+
+		self.hasCorrect = function hasCorrect() {
+			return self.question.answers.some(function(answer) {
+				return answer.isCorrect;
 			});
 		};
 	}
