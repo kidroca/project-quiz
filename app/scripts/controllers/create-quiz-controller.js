@@ -1,41 +1,43 @@
 (function() {
 	'use strict';
 
-	// Todo: display a list of the created questions with ng-repeat
-	// Todo: selecting a question from the list opens edit menu -> modal
-
-	function CreateQuizController($scope, $uibModal, quizStorage) {
-		var self = this;
-
-		self.bonus = {
-			title: 'spinderman',
-			answers: [{text: 'as', letter: 'a'}, {text: 'bas', letter: 'b'}]
-		};
-
-		self.quiz = {
+	var DEFAULT_STORAGE = {
+		quiz: {
 			title: '',
 			description: '',
 			questions: []
-		};
+		}
+	};
+
+	function CreateQuizController($scope, $uibModal, $sessionStorage, quizStorage) {
+		var self = this;
+
+		$scope.$storage = $sessionStorage.$default(DEFAULT_STORAGE); 
 
 		self.addQuiz = function addQuiz(quiz) {
+			quiz = JSON.parse(JSON.stringify(quiz));
 			quizStorage.addQuiz(quiz);
+			console.log('bachka');
 		};
 
-		self.addQuestion = function addQuestion(question) {
+		self.removeQuestion = function removeQuestion(index) {
+			$sessionStorage.quiz.questions.splice(index, 1);
+		};
+
+		self.openQuesitonMenu = function openQuesitonMenu(question) {
 			var modalInstance = $uibModal.open({
 				animation: true,
 				templateUrl: 'views/add-question.html',
 				controller: 'AddQuestionController',
 				controllerAs: 'ctrl',
 				resolve: {
-					items: question || self.bonus
+					items: question
 				}
 			});
 
 			modalInstance.result.then(function(question) {
 				if (question !== null) {
-					self.quiz.questions.push(question);
+					$sessionStorage.quiz.questions.push(question);
 				}
 
 				console.log(self.quiz.questions);
@@ -47,5 +49,5 @@
 	}
 
 	angular.module('quizProjectApp.controllers')
-		.controller('CreateQuizController', ['$scope', '$uibModal', 'quizStorageService', CreateQuizController]);
+		.controller('CreateQuizController', ['$scope', '$uibModal', '$sessionStorage', 'quizStorageService', CreateQuizController]);
 }());
