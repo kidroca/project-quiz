@@ -19,9 +19,9 @@
         controller: 'MainController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
-      .when('/my', {
-        templateUrl: 'views/my.html',
-        controller: 'MainController',
+      .when('/quizzes', {
+        templateUrl: 'views/quizzes.html',
+        controller: 'QuizzesController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .when('/add', {
