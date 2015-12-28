@@ -1,6 +1,8 @@
 (function(){
 	'use strict';
 
+	// Todo: use prommise to return operation results
+
 	function quizStorageService($localStorage) {
 
 		$localStorage.quizzes = $localStorage.quizzes || [];

@@ -1,6 +1,10 @@
 (function() {
 	'use strict';
 
+	// Todo: Redirect ot home on successfull form submit
+	// Todo: Keep the curently editted question in sessionStorage to preserve it in case of close
+	// if it exist pass it along on addQuestion()
+
 	var DEFAULT_STORAGE = {
 		quiz: {
 			title: '',
@@ -12,12 +16,12 @@
 	function CreateQuizController($scope, $uibModal, $sessionStorage, quizStorage) {
 		var self = this;
 
-		$sessionStorage.quiz = $sessionStorage.quiz || DEFAULT_STORAGE;
+		$sessionStorage.quiz = $sessionStorage.quiz || angular.copy(DEFAULT_STORAGE);
 		$scope.$storage = $sessionStorage.quiz;
 
 		self.addQuiz = function addQuiz(quiz, form) {
-			quiz = JSON.parse(JSON.stringify(quiz));
-			quizStorage.addQuiz(quiz);
+			// quiz = JSON.parse(JSON.stringify(quiz));
+			quizStorage.addQuiz(angular.copy(quiz));
 
 			self.resetForm(form);
 			console.log('bachka');
@@ -27,12 +31,12 @@
 			form.$setPristine();
 			form.$setUntouched();
 
-			$sessionStorage.quiz = DEFAULT_STORAGE;
+			$sessionStorage.quiz = angular.copy(DEFAULT_STORAGE);
 			$scope.$storage = $sessionStorage.quiz;
 		};
 
 		self.removeQuestion = function removeQuestion(index) {
-			$sessionStorage.quiz.questions.splice(index, 1);
+			$scope.$storage.quiz.questions.splice(index, 1);
 		};
 
 		self.openQuesitonMenu = function openQuesitonMenu(question) {
@@ -48,13 +52,12 @@
 
 			modalInstance.result.then(function(question) {
 				if (question !== null) {
-					$sessionStorage.quiz.questions.push(question);
+					$scope.$storage.quiz.questions.push(question);
 				}
 
-				console.log(self.quiz.questions);
+				console.log($sessionStorage.quiz);
 			}, function() {
 				console.log('Modal dismissed at: ' + new Date());
-				console.log(self.bonus);
 			});
 		};
 	}

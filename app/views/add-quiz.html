@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form name="quizForm" class="form-horizontal" 
-    ng-submit="ctrl.addQuiz($storage.quiz, quizForm)" novalidate>
+    <form name="quizForm" class="form-horizontal" novalidate>
       <fieldset>
         <legend>Add Quiz</legend>
         
@@ -67,8 +66,8 @@
         <!-- Submit -->
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
-            <button class="btn btn-primary">Save Quiz</button>
-            <button ng-click="ctrl.resetForm()" class="btn btn-danger">Reset</button>
+            <button ng-click="ctrl.addQuiz($storage.quiz, quizForm)" class="btn btn-primary">Save Quiz</button>
+            <button ng-click="ctrl.resetForm(quizForm)" class="btn btn-danger">Reset</button>
           </div>
         </div>
       </fieldset>
