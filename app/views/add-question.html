@@ -15,7 +15,7 @@
                     ng-focus="titleFocus=true" ng-blur="titleFocus=false"></textarea>
                     <div ng-show="questionForm.title.$invalid && (questionForm.title.$dirty 
                         || titleFocus)"  
-                    class="alert alert-warning">
+                    class="alert alert-info">
                         <p>Enter a question of at least 5 characters.</p>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div ng-show="answerForm.answerText.$invalid && (answerForm.answerText.$dirty 
                             || answer.focus)"
-                            class="alert alert-warning">
+                            class="alert alert-info">
                             <p>Enter an answer of at least 2 characters</p>
                             </div>
                     </div>

@@ -13,7 +13,7 @@
               required ng-minlength="3" 
               ng-focus="titleFocus=true" ng-blur="titleFocus=false">
               <div ng-show="quizForm.title.$invalid && (quizForm.title.$dirty || titleFocus)"  
-              class="alert alert-warning">
+              class="alert alert-info">
                 <p>Enter a quiz title of at least 3 characters.</p>
               </div>
           </div>
@@ -29,7 +29,7 @@
               required ng-minlength="3" 
               ng-focus="categoryFocus=true" ng-blur="categoryFocus=false">
               <div ng-show="quizForm.category.$invalid && (quizForm.title.$dirty || categoryFocus)"  
-              class="alert alert-warning">
+              class="alert alert-info">
                 <p>Enter a quiz title of at least 3 characters.</p>
               </div>
           </div>
@@ -44,7 +44,7 @@
               ng-focus="descFocus=true" ng-blur="descFocus=false"></textarea>
             <div ng-show="(quizForm.description.$invalid && quizForm.description.$dirty) ||
               (descFocus && !$storage.quiz.description)"
-              class="alert alert-warning">
+              class="alert alert-info">
                 <p>Write a short description for the quiz.</p>
               </div>
           </div>
