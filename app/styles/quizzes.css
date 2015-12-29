@@ -1,0 +1,50 @@
+.carousel .carousel-inner {
+  height: inherit;
+}
+
+.text-shadow {
+  text-shadow: -2px 3px 2px rgba(0, 0, 0, 0.6);
+}
+
+.box-shadow {
+	box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.6);
+}
+
+.carousel .carousel-inner .container {
+  font-family: chalk;
+  font-size: 20px;
+  font-style: oblique;
+  color: #fff;
+  
+}
+
+.carousel .carousel-inner .item {
+  height: inherit;
+}
+
+.carousel .carousel-inner .text {
+	font-size: 18px;
+}
+
+.carousel .carousel-inner .quiz-details {
+	color: #FEFC0E;
+  	font-size: 20px;
+}
+
+.carousel .carousel-inner .btn-block {
+	margin-top: 10px;
+	margin-bottom: 10px;
+    position: absolute;
+    left: 225px;
+    top: 350px;
+    z-index: 10;
+}
+
+.carousel .carousel-inner .btn-block .btn {
+	/*font-family: chalk;*/
+	/*font-size: 16px;*/
+}
+
+.carousel .carousel-indicators {
+	display: none;
+}

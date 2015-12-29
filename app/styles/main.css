@@ -1,3 +1,8 @@
+@font-face {
+  font-family: chalk;
+  src: url(../fonts/DJB.ttf); 
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -92,6 +97,12 @@ label.correct a {
   cursor: pointer;
   color: #3E96E2;
 }
+
+.chalk {
+  font-family: chalk;
+}
+
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
