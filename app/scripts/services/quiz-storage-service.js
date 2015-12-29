@@ -35,6 +35,14 @@
 			}
 		}
 
+		function getCategories () {
+			var result = $localStorage.quizzes.map(function (quiz) {
+				return quiz.category;
+			});
+
+			return result;
+		}
+
 		function removeByIndex(index) {
 			$localStorage.quizzes.splice(index, 1);
 		}
@@ -52,7 +60,8 @@
         return {
         	getQuizzes: getQuizzes,
         	addQuiz: addQuiz,
-        	removeQuiz: removeQuiz
+        	removeQuiz: removeQuiz,
+        	getCategories: getCategories
         };
 	}
 

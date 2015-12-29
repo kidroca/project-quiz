@@ -1,19 +1,17 @@
 (function() {
 	'use strict';
 
-	// Todo: Redirect ot home on successfull form submit
-	// Todo: Keep the curently editted question in sessionStorage to preserve it in case of close
-	// if it exist pass it along on addQuestion()
-
 	var DEFAULT_STORAGE = {
 		quiz: {
 			title: '',
 			description: '',
+			category: '',
+			completedCounter: 0,
 			questions: []
 		}
 	};
 
-	function CreateQuizController($scope, $uibModal, $sessionStorage, quizStorage) {
+	function CreateQuizController($scope, $uibModal, $sessionStorage, $location, quizStorage) {
 		var self = this;
 
 		$sessionStorage.quiz = $sessionStorage.quiz || angular.copy(DEFAULT_STORAGE);
@@ -21,10 +19,11 @@
 
 		self.addQuiz = function addQuiz(quiz, form) {
 			// quiz = JSON.parse(JSON.stringify(quiz));
+			quiz.createdOn = (new Date()).toDateString();
 			quizStorage.addQuiz(angular.copy(quiz));
 
 			self.resetForm(form);
-			console.log('bachka');
+			$location.path("/quizzes");
 		};
 
 		self.resetForm = function resetForm(form) {
@@ -37,6 +36,10 @@
 
 		self.removeQuestion = function removeQuestion(index) {
 			$scope.$storage.quiz.questions.splice(index, 1);
+		};
+
+		self.getCategories = function getCategories () {
+			return quizStorage.getCategories();
 		};
 
 		self.openQuesitonMenu = function openQuesitonMenu(question) {
@@ -63,5 +66,5 @@
 	}
 
 	angular.module('quizProjectApp.controllers')
-		.controller('CreateQuizController', ['$scope', '$uibModal', '$sessionStorage', 'quizStorageService', CreateQuizController]);
+		.controller('CreateQuizController', ['$scope', '$uibModal', '$sessionStorage', '$location', 'quizStorageService', CreateQuizController]);
 }());

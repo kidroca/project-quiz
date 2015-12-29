@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <form name="quizForm" class="form-horizontal" novalidate>
+  <div class="col-md-8 col-md-offset-2">
+    <form name="quizForm" class="form-horizontal" novalidate autocomplete="off">
       <fieldset>
         <legend>Add Quiz</legend>
         
@@ -13,6 +13,21 @@
               required ng-minlength="3" 
               ng-focus="titleFocus=true" ng-blur="titleFocus=false">
               <div ng-show="quizForm.title.$invalid && (quizForm.title.$dirty || titleFocus)"  
+              class="alert alert-warning">
+                <p>Enter a quiz title of at least 3 characters.</p>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="quizCategory" class="col-lg-2 control-label">Category</label>
+          <div class="col-lg-10">
+            <input type="text" ng-model="$storage.quiz.category" 
+              uib-typeahead="category for category in ctrl.getCategories() | filter:$viewValue | limitTo: 7"
+              class="form-control" name="category" placeholder="Quiz Category"
+              required ng-minlength="3" 
+              ng-focus="categoryFocus=true" ng-blur="categoryFocus=false">
+              <div ng-show="quizForm.category.$invalid && (quizForm.title.$dirty || titleFocus)"  
               class="alert alert-warning">
                 <p>Enter a quiz title of at least 3 characters.</p>
               </div>
@@ -66,7 +81,8 @@
         <!-- Submit -->
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
-            <button ng-click="ctrl.addQuiz($storage.quiz, quizForm)" class="btn btn-primary">Save Quiz</button>
+            <button ng-click="ctrl.addQuiz($storage.quiz, quizForm)" class="btn btn-primary"
+              ng--disabled="quizForm.$invalid">Save Quiz</button>
             <button ng-click="ctrl.resetForm(quizForm)" class="btn btn-danger">Reset</button>
           </div>
         </div>
