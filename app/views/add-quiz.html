@@ -19,6 +19,7 @@
           </div>
         </div>
 
+        <!-- Category -->
         <div class="form-group">
           <label for="quizCategory" class="col-lg-2 control-label">Category</label>
           <div class="col-lg-10">
@@ -27,7 +28,7 @@
               class="form-control" name="category" placeholder="Quiz Category"
               required ng-minlength="3" 
               ng-focus="categoryFocus=true" ng-blur="categoryFocus=false">
-              <div ng-show="quizForm.category.$invalid && (quizForm.title.$dirty || titleFocus)"  
+              <div ng-show="quizForm.category.$invalid && (quizForm.title.$dirty || categoryFocus)"  
               class="alert alert-warning">
                 <p>Enter a quiz title of at least 3 characters.</p>
               </div>
