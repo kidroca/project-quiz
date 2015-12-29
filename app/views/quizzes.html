@@ -1,23 +1,37 @@
-<div class="container">
-	<h2><em class="text-primary">Top Quizzes</em></h2>
-	<uib-carousel no-wrap="noWrapSlides" style="border-radius: 10px;">
-		<uib-slide ng-repeat="slide in slides" active="slide.active">
-			<img ng-src="{{slide.image}}" style="margin:auto;" />
-			<div class="carousel-caption">
-				<h4>Slide {{$index}}</h4>
-				<p>{{slide.text}}</p>
+<uib-carousel class="col-md-8 col-md-offset-2" no-wrap="noWrapSlides" style="border-radius: 10px; background-image: url(images/chalkboard.jpg); height: 400px; background-size: cover;">
+	<div class="row col-md-8 col-md-offset btn-block">
+				<button class="btn btn-sm btn-success box-shadow">Take this quiz</button>
+				<button class="btn btn-sm btn-warning box-shadow">Edit</button>
+				<button class="btn btn-sm btn-danger box-shadow">Delete</button>
 			</div>
-		</uib-slide>
-	</uib-carousel>
-	<div class="row">
-		<div class="col-md-6">
-			<button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-			<div class="checkbox">
-				<label>
-				  <input type="checkbox" ng-model="noWrapSlides">
-				  Disable Slide Looping
-				</label>
-			</div>
-		</div>
-	</div>
-</div>
+	<uib-slide ng-repeat="quiz in $storage" active="quiz.active">
+		<div class="container col-md-12 text-shadow chalk">
+			<h1 class="chalk">{{quiz.title}}</h1>
+			<p><em>{{quiz.description || "No Description"}}</em></p>	
+			<div class="row">
+				<div class="container col-md-8 col-md-offset-2 quiz-details">
+					<div class="row">
+						<label class="col-md-6 text-right">Category</label>
+						<p class="col-md-6 text-left">{{quiz.category}}</p>
+					</div>
+					<div class="row">
+						<label class="col-md-6 text-right">Questions</label>
+						<p class="col-md-6 text-left">{{quiz.questions.length}}</p>
+					</div>
+					<div class="row">
+						<label class="col-md-6 text-right">Rating</label>
+						<p class="col-md-6 text-left">{{quiz.questions.length}}</p>
+					</div>
+					<div class="row">
+						<label class="col-md-6 text-right">Created on</label>
+						<p class="col-md-6 text-left">{{quiz.createdOn}}</p>
+					</div>
+					<div class="row">
+						<label class="col-md-6 text-right">Times completed</label>
+						<p class="col-md-6 text-left">{{quiz.completedCounter}}</p>
+					</div>
+				</div>
+			</div>			
+		</div>		
+	</uib-slide>
+</uib-carousel>
