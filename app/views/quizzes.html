@@ -1,4 +1,4 @@
-<uib-carousel class="col-md-8 col-md-offset-2" no-wrap="noWrapSlides" style="border-radius: 10px; background-image: url(images/chalkboard.jpg); height: 400px; background-size: cover;">
+<uib-carousel ng-if="$storage.length" class="col-md-8 col-md-offset-2" no-wrap="noWrapSlides" style="border-radius: 10px; background-image: url(images/chalkboard.jpg); height: 400px; background-size: cover;">
 	<div class="row col-md-8 col-md-offset btn-block">
 				<button class="btn btn-sm btn-success box-shadow">Take this quiz</button>
 				<button class="btn btn-sm btn-warning box-shadow">Edit</button>
@@ -35,3 +35,6 @@
 		</div>		
 	</uib-slide>
 </uib-carousel>
+<div ng-if="!$storage.length" class="container">
+	<h2>No quizzes available at the moment</h2>
+</div>
