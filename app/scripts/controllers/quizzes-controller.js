@@ -1,7 +1,9 @@
 (function() {
 	'use strict';
 
-	function QuizzesController($scope, quizStorageService) {
+	// Todo: Edit Quiz sends the selected quiz to session storage and redirects to the given page
+
+	function QuizzesController($scope, $sessionStorage, quizStorageService) {
 		var self = this;
 
 		self.init = function init() {
@@ -16,5 +18,5 @@
 	}
 
 	angular.module('quizProjectApp.controllers')
-		.controller('QuizzesController', ['$scope', 'quizStorageService', QuizzesController]);
+		.controller('QuizzesController', ['$scope', '$sessionStorage', 'quizStorageService', QuizzesController]);
 }());

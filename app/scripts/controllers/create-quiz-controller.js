@@ -14,8 +14,10 @@
 	function CreateQuizController($scope, $uibModal, $sessionStorage, $location, quizStorage) {
 		var self = this;
 
-		$sessionStorage.quiz = $sessionStorage.quiz || angular.copy(DEFAULT_STORAGE);
-		$scope.$storage = $sessionStorage.quiz;
+		self.init = function init() {
+			$sessionStorage.quiz = $sessionStorage.quiz || angular.copy(DEFAULT_STORAGE);
+			$scope.$storage = $sessionStorage.quiz;
+		};
 
 		self.addQuiz = function addQuiz(quiz, form) {
 			// quiz = JSON.parse(JSON.stringify(quiz));
@@ -63,6 +65,8 @@
 				console.log('Modal dismissed at: ' + new Date());
 			});
 		};
+
+		self.init();
 	}
 
 	angular.module('quizProjectApp.controllers')
