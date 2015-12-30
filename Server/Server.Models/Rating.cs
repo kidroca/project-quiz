@@ -1,21 +1,26 @@
 ﻿namespace Server.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Rating
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
-        public virtual Quiz Quiz { get; set; }
-
+        [Key]
+        [Column(Order = 0)]
         public int QuizId { get; set; }
 
-        public User ByUser { get; set; }
-
+        [Key]
+        [Column(Order = 1)]
         [Required]
         public string ByUserId { get; set; }
 
-        [Range(0, 10)]
+        public virtual Quiz Quiz { get; set; }
+
+        public User ByUser { get; set; }
+
+        [Range(1, 10)]
         public double Value { get; set; }
     }
 }

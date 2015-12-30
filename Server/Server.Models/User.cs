@@ -10,9 +10,11 @@
     public class User : IdentityUser
     {
         private ICollection<Quiz> quizzes;
+        private ICollection<Rating> ratingsGiven;
 
         public User()
         {
+            this.ratingsGiven = new HashSet<Rating>();
             this.quizzes = new HashSet<Quiz>();
         }
 
