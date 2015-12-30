@@ -58,9 +58,9 @@
             }
         }
 
-        [Route("quizzes/{fullname}")]
+        [Route("quizzes/{name}")]
         public async Task<IHttpActionResult> GetUserQuizzes(
-            string fullname, [FromUri] QuizSearchModel query, int page = 0, int size = 10)
+            string name, [FromUri] QuizSearchModel query, int page = 0, int size = 10)
         {
             if (!this.ValidatePageAndSize(page, size))
             {
@@ -68,8 +68,8 @@
             }
 
             var userQuizzes = this.quizRepo.All()
-                    .Where(q => (q.CreatedBy.FirstName + q.CreatedBy.LastName)
-                        .Equals(fullname, StringComparison.OrdinalIgnoreCase));
+                    .Where(q => (q.CreatedBy.FirstName + q.CreatedBy.LastName).ToLower()
+                        .Contains(name.ToLower()));
 
             if (query != null)
             {
