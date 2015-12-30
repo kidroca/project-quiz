@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Net.Http;
     using System.Security.Claims;
     using System.Security.Cryptography;
@@ -55,15 +56,20 @@
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        public UserInfoViewModel GetUserInfo()
+        public async Task<UserInfoViewModel> GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(this.User.Identity as ClaimsIdentity);
+
+            string userId = this.User.Identity.GetUserId();
+            var user = await this.UserManager.Users.FirstAsync(u => u.Id == userId);
 
             return new UserInfoViewModel
             {
                 Email = this.User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin?.LoginProvider,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 
