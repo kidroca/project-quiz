@@ -47,7 +47,7 @@
 		self.openQuesitonMenu = function openQuesitonMenu(question) {
 			var modalInstance = $uibModal.open({
 				animation: true,
-				templateUrl: 'views/add-question.html',
+				templateUrl: 'views/quiz/add-question.html',
 				controller: 'AddQuestionController',
 				controllerAs: 'ctrl',
 				resolve: {
