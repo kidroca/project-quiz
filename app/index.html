@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles/readable-bootstrap.css">
     <link rel="stylesheet" href="styles/quizzes.css">
   </head>
-  <body ng-app="quizProjectApp">
+  <body ng-app="quizProjectApp" ng-controller="MainController as ctrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -63,7 +63,7 @@
               <a href="#/quizzes">Quizzes</a>
             </li>
             <li>
-              <a href="#/add">Add New</a>
+              <a href="#/add" ng-if="ctrl.currentUserGlobal">Add New</a>
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Readable <span class="caret"></span></a>
@@ -82,9 +82,14 @@
             </li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-            <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+          <ul ng-if="!ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/register">Register</a></li>
+          </ul>
+
+          <ul ng-if="ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
+            <li><a href="#/login" ng-bind="ctrl.currentUserGlobal.FirstName"></a></li>
+            <li><a href="#" ng-click="ctrl.logout()">Logout</a></li>
           </ul>
 
         </div>
@@ -133,15 +138,20 @@
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/services/quiz-storage-service.js"></script>
-        <script src="scripts/controllers/main-controller.js"></script>
-        <script src="scripts/controllers/about-controller.js"></script>
-        <script src="scripts/controllers/create-quiz-controller.js"></script>
-        <script src="scripts/controllers/add-question-controller.js"></script>
-        <script src="scripts/controllers/quizzes-controller.js"></script>
-        <!-- endbuild -->
+        
+        <!-- start script template tags -->
+                <script src="scripts/app.js"></script>
+                <script src="scripts/controllers/about-controller.js"></script>
+                <script src="scripts/controllers/main-controller.js"></script>
+                <script src="scripts/home/home-controller.js"></script>
+                <script src="scripts/identity/auth-service.js"></script>
+                <script src="scripts/identity/identity-service.js"></script>
+                <script src="scripts/identity/login-controller.js"></script>
+                <script src="scripts/identity/register-conroller.js"></script>
+                <script src="scripts/quizzes/add-question-controller.js"></script>
+                <script src="scripts/quizzes/create-quiz-controller.js"></script>
+                <script src="scripts/quizzes/quiz-storage-service.js"></script>
+                <script src="scripts/quizzes/quizzes-controller.js"></script>
+                <!-- end script template tags -->
 </body>
 </html>
