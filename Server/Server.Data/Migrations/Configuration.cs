@@ -2,11 +2,12 @@ namespace Server.Data.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Server.Data.QuizzesDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<QuizzesDbContext>
     {
         public Configuration()
         {
-            this.AutomaticMigrationsEnabled = false;
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true;
         }
     }
 }
