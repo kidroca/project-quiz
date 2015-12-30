@@ -1,0 +1,93 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form name="registerForm" class="form-horizontal" novalidate>
+            <fieldset>
+                <legend>Register</legend>
+
+                <!-- First Name -->
+                <div class="form-group">
+                    <label for="firstName" class="col-lg-2 control-label">First Name</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="user.firstName" required ng-minlength="2"
+                            ng-focus="firstNameFocus=true" ng-blur="firstNameFocus=false"
+                            class="form-control" name="firstName" placeholder="First Name">
+                        <div ng-show="registerForm.firstName.$invalid && (registerForm.firstName.$dirty 
+                            || firstNameFocus || submitHover)"  
+                            class="alert alert-info">
+                            <p>Name must be at least 2 characters.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group">
+                    <label for="lastName" class="col-lg-2 control-label">Last Name</label>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="user.lastName" required ng-minlength="2"
+                            ng-focus="lastNameFocus=true" ng-blur="lastNameFocus=false"
+                            class="form-control" name="lastName" placeholder="Last Name">
+                        <div ng-show="registerForm.lastName.$invalid && (registerForm.lastName.$dirty 
+                            || lastNameFocus || submitHover)"  
+                            class="alert alert-info">
+                            <p>Name must be at least 2 characters.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="email" ng-model="user.email" required 
+                            ng-focus="emailFocus=true" ng-blur="emailFocus=false"
+                            class="form-control" name="email" placeholder="Email">
+                        <div ng-show="registerForm.email.$invalid && (registerForm.email.$dirty 
+                            || emailFocus || submitHover)"  
+                            class="alert alert-info">
+                            <p>Enter a valid email address.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passowrd -->
+                <div class="form-group">
+                    <label for="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" ng-model="user.password" required minlength="6"
+                            ng-focus="passwordFocus=true" ng-blur="passwordFocus=false"
+                            class="form-control" name="password" placeholder="Password">
+                        <div ng-show="registerForm.password.$invalid && (registerForm.password.$dirty 
+                          || passwordFocus || submitHover)"  
+                          class="alert alert-info">
+                            <p>Password must be at least 6 characters.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm -->
+                <div class="form-group">
+                    <label for="confirmPassword" class="col-lg-2 control-label">Confirm Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" ng-model="user.confirmPassword" required 
+                            ng-focus="confirmFocus=true" ng-blur="confirmFocus=false"
+                            class="form-control" name="confirmPassword" placeholder="Confirm password">
+                        <div ng-show="(user.password != user.confirmPassword)
+                            && (registerForm.confirmPassword.$dirty || confirmFocus || submitHover)"  
+                            class="alert alert-info">
+                            <p>Passwords doesn't match.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2"  ng-mouseover="submitHover=true">
+                        <button ng-click="ctrl.register(user, registerForm)"
+                                ng-disabled="registerForm.$invalid || user.password != user.confirmPassword"
+                                class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -13,21 +13,42 @@
 
     var CONTROLLER_VIEW_MODEL_REFERENCE = 'ctrl';
 
+    var routeResolvers = {
+      authenticated: ['$q', 'auth', function routeResolvers($q, auth) {
+        if (auth.isAuthenticated()) {
+          return true;
+        }
+
+        return $q.reject('not authorised');
+      }]
+    };
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainController',
+        controller: 'HomeController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
+      .when('/register', {
+        templateUrl: 'views/identity/register.html',
+        controller: 'RegisterController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
+      .when('/login', {
+        templateUrl: 'views/identity/login.html',
+        controller: 'LoginController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .when('/quizzes', {
-        templateUrl: 'views/quizzes.html',
+        templateUrl: 'views/quiz/quizzes.html',
         controller: 'QuizzesController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
-      .when('/add', {
-        templateUrl: 'views/add-quiz.html',
+      .when('/quizzes/add', {
+        templateUrl: 'views/quiz/add-quiz.html',
         controller: 'CreateQuizController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resove: routeResolvers.authenticated
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -39,11 +60,24 @@
       });
   }
 
-    angular.module('quizProjectApp.services', []);
+  function run($http, $cookies, $rootScope, $location, auth) {
+    $rootScope.$on('$routeChangeError', function routeError(ev, current, previous, rejection) {
+      if (rejection === 'not authorised') {
+        $location.path('/');
+      }
+    });
 
-    angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
+    if (auth.isAuthenticated()) {
+      $http.defaults.headers.common.Authorization = 'Bearer ' + $cookies.get('authentication');
+      auth.getIdentity();
+    }
+  }
 
-    angular
+  angular.module('quizProjectApp.services', []);
+
+  angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
+
+  angular
     .module('quizProjectApp', [
       'ngAnimate',
       'ngCookies',
@@ -57,6 +91,8 @@
       'ui.bootstrap',
       'quizProjectApp.controllers',
     ])
-    .config(['$routeProvider', config]);
+    .config(['$routeProvider', config])
+    .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
+    .constant('baseUrl', 'http://localhost:42252/');
 
 }());
