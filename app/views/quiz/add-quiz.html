@@ -8,7 +8,7 @@
         <div class="form-group">
           <label for="quizTitle" class="col-lg-2 control-label">Title</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="$storage.quiz.title" 
+            <input type="text" ng-model="quiz.title" 
               class="form-control" name="title" placeholder="Quiz Title"
               required ng-minlength="3" 
               ng-focus="titleFocus=true" ng-blur="titleFocus=false">
@@ -23,11 +23,13 @@
         <div class="form-group">
           <label for="quizCategory" class="col-lg-2 control-label">Category</label>
           <div class="col-lg-10">
-            <input type="text" ng-model="$storage.quiz.category" 
-              uib-typeahead="category for category in ctrl.getCategories() | filter:$viewValue | limitTo: 7"
+            <input type="text" ng-model="quiz.category" 
+              uib-typeahead="category for category in ctrl.getCategories($viewValue)"
+              typeahead-loading="loadingCategories"
               class="form-control" name="category" placeholder="Quiz Category"
               required ng-minlength="3" 
               ng-focus="categoryFocus=true" ng-blur="categoryFocus=false">
+              <i ng-show="loadingCategories" class="glyphicon glyphicon-refresh"></i>
               <div ng-show="quizForm.category.$invalid && (quizForm.category.$dirty || categoryFocus)"  
               class="alert alert-info">
                 <p>Enter a quiz title of at least 3 characters.</p>
@@ -39,11 +41,11 @@
         <div class="form-group">
           <label for="description" class="col-lg-2 control-label">Description</label>
           <div class="col-lg-10">
-            <textarea ng-model="$storage.quiz.description" class="form-control" rows="3" name="description"
+            <textarea ng-model="quiz.description" class="form-control" rows="3" name="description"
               ng-minlength="5"
               ng-focus="descFocus=true" ng-blur="descFocus=false"></textarea>
             <div ng-show="(quizForm.description.$invalid && quizForm.description.$dirty) ||
-              (descFocus && !$storage.quiz.description)"
+              (descFocus && !quiz.description)"
               class="alert alert-info">
                 <p>Write a short description for the quiz.</p>
               </div>
@@ -63,7 +65,7 @@
           <label for="questions" class="col-lg-2 control-label">Questions</label>
           <div class="col-lg-10">
             <ul class="list-group question-list" name="questions">
-              <li class="list-group-item clearfix" ng-repeat="question in $storage.quiz.questions">
+              <li class="list-group-item clearfix" ng-repeat="question in quiz.questions">
                   <em class="text-info hide-overflow" ng-bind="question.title"
                     ng-click="ctrl.openQuesitonMenu(question)"
                     uib-popover="This question has {{question.answers.length}} answers available"
@@ -82,9 +84,9 @@
         <!-- Submit -->
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
-            <button ng-click="ctrl.addQuiz($storage.quiz, quizForm)" class="btn btn-primary"
+            <button ng-click="ctrl.addQuiz(quiz, quizForm)" class="btn btn-primary"
               ng--disabled="quizForm.$invalid">Save Quiz</button>
-            <button ng-click="ctrl.resetForm(quizForm)" class="btn btn-danger">Reset</button>
+            <button ng-click="resetForm(quizForm)" class="btn btn-danger">Reset</button>
           </div>
         </div>
       </fieldset>

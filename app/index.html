@@ -63,7 +63,7 @@
               <a href="#/quizzes">Quizzes</a>
             </li>
             <li>
-              <a href="#/add" ng-if="ctrl.currentUserGlobal">Add New</a>
+              <a href="#/quizzes/add" ng-if="ctrl.currentUserGlobal">Add New</a>
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Readable <span class="caret"></span></a>
@@ -88,7 +88,7 @@
           </ul>
 
           <ul ng-if="ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
-            <li><a href="#/login" ng-bind="ctrl.currentUserGlobal.FirstName"></a></li>
+            <li><a href="#/me">Hi {{ctrl.currentUserGlobal.FirstName}}</a></li>
             <li><a href="#" ng-click="ctrl.logout()">Logout</a></li>
           </ul>
 
@@ -150,8 +150,10 @@
                 <script src="scripts/identity/register-conroller.js"></script>
                 <script src="scripts/quizzes/add-question-controller.js"></script>
                 <script src="scripts/quizzes/create-quiz-controller.js"></script>
-                <script src="scripts/quizzes/quiz-storage-service.js"></script>
+                <script src="scripts/quizzes/quiz-data-service.js"></script>
                 <script src="scripts/quizzes/quizzes-controller.js"></script>
+                <script src="scripts/quizzes/update-quiz-controller.js"></script>
+                <script src="scripts/user/profile-controller.js"></script>
                 <!-- end script template tags -->
 </body>
 </html>

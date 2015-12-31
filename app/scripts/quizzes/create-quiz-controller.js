@@ -11,37 +11,39 @@
 		}
 	};
 
-	function CreateQuizController($scope, $uibModal, $sessionStorage, $location, quizStorage) {
+	function CreateQuizController($scope, $uibModal, $sessionStorage, $location, quizData) {
 		var self = this;
 
-		self.init = function init() {
+		$scope.init = function init() {
+			console.log('parent init..');
 			$sessionStorage.quiz = $sessionStorage.quiz || angular.copy(DEFAULT_STORAGE);
-			$scope.$storage = $sessionStorage.quiz;
+			$scope.quiz = $sessionStorage.quiz;
 		};
 
 		self.addQuiz = function addQuiz(quiz, form) {
 			// quiz = JSON.parse(JSON.stringify(quiz));
-			quiz.createdOn = (new Date()).toDateString();
-			quizStorage.addQuiz(angular.copy(quiz));
-
-			self.resetForm(form);
-			$location.path("/quizzes");
+			console.log(quiz);
+			quizData.addQuiz(angular.copy(quiz))
+				.then(function(id) {
+					$scope.resetForm(form);
+					$location.path('/quizzes/' + id);
+				});
 		};
 
-		self.resetForm = function resetForm(form) {
+		$scope.resetForm = function resetForm(form) {
 			form.$setPristine();
 			form.$setUntouched();
 
 			$sessionStorage.quiz = angular.copy(DEFAULT_STORAGE);
-			$scope.$storage = $sessionStorage.quiz;
+			$scope.quiz = $sessionStorage.quiz;
 		};
 
 		self.removeQuestion = function removeQuestion(index) {
-			$scope.$storage.quiz.questions.splice(index, 1);
+			$scope.quiz.questions.splice(index, 1);
 		};
 
-		self.getCategories = function getCategories () {
-			return quizStorage.getCategories();
+		self.getCategories = function getCategories(pattern) {
+			return quizData.getCategories(pattern);
 		};
 
 		self.openQuesitonMenu = function openQuesitonMenu(question) {
@@ -57,7 +59,7 @@
 
 			modalInstance.result.then(function(question) {
 				if (question !== null) {
-					$scope.$storage.quiz.questions.push(question);
+					$scope.quiz.questions.push(question);
 				}
 
 				console.log($sessionStorage.quiz);
@@ -66,9 +68,15 @@
 			});
 		};
 
-		self.init();
+		$scope.init();
 	}
 
 	angular.module('quizProjectApp.controllers')
-		.controller('CreateQuizController', ['$scope', '$uibModal', '$sessionStorage', '$location', 'quizStorageService', CreateQuizController]);
+		.controller('CreateQuizController', ['$scope',
+			'$uibModal',
+			'$sessionStorage',
+			'$location',
+			'QuizDataService',
+			CreateQuizController
+		]);
 }());

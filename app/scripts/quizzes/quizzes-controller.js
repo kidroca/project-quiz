@@ -1,22 +1,35 @@
 (function() {
 	'use strict';
 
-	// Todo: Edit Quiz sends the selected quiz to session storage and redirects to the given page
+	// Todo: Delete quiz button
+	// Todo: Take Quiz button and page
 
-	function QuizzesController($scope, $sessionStorage, quizStorageService) {
+	function QuizzesController($scope, $sessionStorage, $location, quizData) {
 		var self = this;
 
 		self.init = function init() {
-			$scope.$storage = quizStorageService.getQuizzes();
-			console.log($scope.$storage);
+			quizData.getQuizzes()
+				.then(function(result) {
+					$scope.$storage = result;
+				});
 		};
 
-		$scope.myInterval = 5000;
+		self.editActive = function editActive () {
+			var quiz = $scope.$storage.filter(function(item) {
+				return item.active;
+			})[0];
+
+			console.log(quiz);
+			$sessionStorage.editQuiz = quiz;
+			$location.path('/quizzes/edit');
+		};
+
 		$scope.noWrapSlides = false;
 		
 		self.init();
 	}
 
 	angular.module('quizProjectApp.controllers')
-		.controller('QuizzesController', ['$scope', '$sessionStorage', 'quizStorageService', QuizzesController]);
+		.controller('QuizzesController', 
+			['$scope', '$sessionStorage', '$location', 'QuizDataService', QuizzesController]);
 }());

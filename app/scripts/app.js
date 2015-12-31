@@ -39,6 +39,11 @@
         controller: 'LoginController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
+      .when('/me', {
+        templateUrl: 'views/user/profile.html',
+        controller: 'LoginController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
       .when('/quizzes', {
         templateUrl: 'views/quiz/quizzes.html',
         controller: 'QuizzesController',
@@ -47,6 +52,12 @@
       .when('/quizzes/add', {
         templateUrl: 'views/quiz/add-quiz.html',
         controller: 'CreateQuizController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resove: routeResolvers.authenticated
+      })
+      .when('/quizzes/edit', {
+        templateUrl: 'views/quiz/add-quiz.html',
+        controller: 'UpdateQuizController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
         resove: routeResolvers.authenticated
       })
