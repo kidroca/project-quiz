@@ -229,6 +229,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
+    <Compile Include="App_Start\JsonNetConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -243,10 +244,16 @@
     <Compile Include="Infrastructure\ObjectFactory.cs" />
     <Compile Include="Models\Account\AccountBindingModels.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
+    <Compile Include="Models\Quiz\Question\Answer\AnswerRequestModel.cs" />
+    <Compile Include="Models\Quiz\Question\Answer\AnswerResponseModel.cs" />
+    <Compile Include="Models\Quiz\Question\QuestionRequestModel.cs" />
+    <Compile Include="Models\Quiz\Question\QuestionResponseModel.cs" />
+    <Compile Include="Models\Quiz\QuizRequestModel.cs" />
+    <Compile Include="Models\Quiz\QuizResponseModel.cs" />
     <Compile Include="Models\Quiz\QuizSearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="App_Start\Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,11 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Data.Contracts;
     using Models.Quiz;
     using Server.Models;
 
-    [Authorize]
+    // Todo: Post, Put, Delete
+
+    [RoutePrefix("api/quizzes")]
     public class QuizzesController : BaseController
     {
         private readonly IRepository<Quiz> quizRepo;
@@ -26,18 +30,81 @@
                 return this.BadRequest("Invalid query string paging parameters, must be positive");
             }
 
-            var quizzes = this.quizRepo.All();
+            var quizzes = ApplyQueryParameters(this.quizRepo.All(), query);
 
-            if (query != null)
-            {
-                quizzes = ApplyQueryParameters(quizzes, query);
-            }
+            var response = await quizzes
+                .Skip(page * size)
+                .Take(size)
+                .ProjectTo<QuizResponseModel>().ToListAsync();
 
-            // Todo: ResponseDataModel
-            return this.Ok(await quizzes.Skip(page * size).Take(size).ToListAsync());
+            return this.Ok(response);
         }
 
-        [Route("quizzes/{id}")]
+        [Authorize]
+        public async Task<IHttpActionResult> Post(QuizRequestModel quiz)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            var dbQuiz = await this.quizRepo.All().FirstOrDefaultAsync(
+                q => q.Title.Equals(quiz.Title, StringComparison.OrdinalIgnoreCase));
+
+            bool update = dbQuiz != null;
+
+            quiz.CreatedById = base.UserId;
+            quiz.CreatedOn = DateTime.Now;
+
+            var asDbModel = Mapper.Map<Quiz>(quiz);
+
+            if (update)
+            {
+                if (base.UserId != dbQuiz.CreatedById)
+                {
+                    return this.BadRequest("You are not allowed to change this quiz becase you are not the owner.");
+                }
+
+                dbQuiz.Description = asDbModel.Description;
+                dbQuiz.Category = asDbModel.Category;
+                dbQuiz.Title = asDbModel.Title;
+                dbQuiz.Questions.Clear();
+                foreach (var question in asDbModel.Questions)
+                {
+                    dbQuiz.Questions.Add(question);
+                }
+
+                this.quizRepo.Update(dbQuiz);
+                await this.quizRepo.SaveChangesAsync();
+
+                return this.Ok(dbQuiz.Id);
+            }
+            else
+            {
+                this.quizRepo.Add(asDbModel);
+                await this.quizRepo.SaveChangesAsync();
+
+                int id = asDbModel.Id;
+
+                return this.Created($"api/quizzes/{id}", id);
+            }
+        }
+
+        [Route("categories")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetCategories(string pattern, int take = 10)
+        {
+            string[] categories = await this.quizRepo.All()
+                .Where(quiz => quiz.Category.ToLower().Contains(pattern.ToLower()))
+                .GroupBy(quiz => quiz.Category)
+                .Take(take)
+                .Select(gr => gr.Key.ToLower())
+                .ToArrayAsync();
+
+            return this.Ok(categories);
+        }
+
+        [Route("{id:int}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetById(int id)
         {
@@ -58,7 +125,8 @@
             }
         }
 
-        [Route("quizzes/{name}")]
+        [Route("{name}")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetUserQuizzes(
             string name, [FromUri] QuizSearchModel query, int page = 0, int size = 10)
         {
@@ -79,8 +147,6 @@
             // Todo: ResponseDataModel
             return this.Ok(await userQuizzes.Skip(page * size).Take(size).ToListAsync());
         }
-
-        // Todo: Post, Put, Delete
 
         private static IQueryable<Quiz> ApplyQueryParameters(IQueryable<Quiz> quizzes, QuizSearchModel httpQuery)
         {
@@ -122,6 +188,8 @@
             {
                 quizzes = quizzes.Where(q => q.Ratings.Average(r => r.Value) >= httpQuery.Rating);
             }
+
+            quizzes = quizzes.OrderByDescending(q => q.CreatedOn);
 
             return quizzes;
         }

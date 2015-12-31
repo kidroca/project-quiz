@@ -8,6 +8,7 @@ namespace Server.WebApi
     using System.Reflection;
     using System.Web.Http;
     using Microsoft.Owin.Cors;
+    using Newtonsoft.Json.Serialization;
     using Ninject.Web.Common.OwinHost;
     using Ninject.Web.WebApi.OwinHost;
     using Owin;
@@ -19,9 +20,12 @@ namespace Server.WebApi
             app.UseCors(CorsOptions.AllowAll);
 
             DatabaseConfig.Initialize();
+            
             AutoMapperConfig.RegisterMappings(Assembly.Load("Server.WebApi"));
 
             var config = new HttpConfiguration();
+
+            JsonNetConfig.UseCamelCase(config);
             WebApiConfig.Register(config);
             this.ConfigureAuth(app);
 
