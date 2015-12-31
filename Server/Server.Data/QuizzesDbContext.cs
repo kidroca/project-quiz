@@ -1,6 +1,8 @@
 ﻿namespace Server.Data
 {
     using System.Data.Entity;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Contracts;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
@@ -22,6 +24,35 @@
         public static QuizzesDbContext Create()
         {
             return new QuizzesDbContext();
+        }
+
+        /// <summary>
+        /// Necessary when replacing/updating questions in existing quiz 
+        /// </summary>
+        /// <returns></returns>
+        public override int SaveChanges()
+        {
+            this.Questions
+                .Local
+                .Where(q => q.Quiz == null)
+                .ToList()
+                .ForEach(q => this.Questions.Remove(q));
+
+            return base.SaveChanges();
+        }
+
+        public override async Task<int> SaveChangesAsync()
+        {
+            await Task.Run(() =>
+            {
+                this.Questions
+                    .Local
+                    .Where(q => q.Quiz == null)
+                    .ToList()
+                    .ForEach(q => this.Questions.Remove(q));
+            });
+
+            return await base.SaveChangesAsync();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

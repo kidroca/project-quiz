@@ -28,6 +28,11 @@
             return this.DbSet.AsQueryable();
         }
 
+        public virtual async Task LoadAsync(T model, string propertyName)
+        {
+            await this.Context.Entry(model).Reference(propertyName).LoadAsync();
+        }
+
         public virtual T GetById(object id)
         {
             return this.DbSet.Find(id);

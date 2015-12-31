@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Quiz
     {
@@ -18,6 +19,7 @@
         public int Id { get; set; }
 
         [Required]
+        [Index(IsUnique = true)]
         [MinLength(3)]
         [MaxLength(128)]
         public string Title { get; set; }
