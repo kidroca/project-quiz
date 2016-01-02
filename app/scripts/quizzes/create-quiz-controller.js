@@ -21,12 +21,13 @@
 		};
 
 		self.addQuiz = function addQuiz(quiz, form) {
-			// quiz = JSON.parse(JSON.stringify(quiz));
+			console.log('adding quiz...');
 			console.log(quiz);
 			quizData.addQuiz(angular.copy(quiz))
 				.then(function(id) {
+					console.log('quiz added (id: %s)', id);
 					$scope.resetForm(form);
-					$location.path('/quizzes/' + id);
+					$location.path('/quizzes');
 				});
 		};
 
