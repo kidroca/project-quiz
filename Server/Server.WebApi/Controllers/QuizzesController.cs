@@ -241,13 +241,14 @@
                 {
                     Id = quiz.Id,
                     Title = quiz.Title,
-                    WrongAnswers = new List<WrongAnswerResponseModel>()
+                    WrongAnswers = new List<WrongAnswerResponseModel>(),
+                    TotalQuestions = quiz.Questions.Count
                 };
 
                 quiz.Questions
                 .ForEach((question, i) =>
                 {
-                    int selected = quizSolution.Questions[i].SelectedAnswer;
+                    int selected = quizSolution.Questions[i].Selected;
                     var answers = question.Answers.ToArray();
 
                     if (!answers[selected].IsCorrect)

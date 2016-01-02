@@ -4,6 +4,6 @@ namespace Server.WebApi.Models.Quiz.Question
     {
         public string Title { get; set; }
 
-        public int SelectedAnswer { get; set; }
+        public int Selected { get; set; }
     }
 }

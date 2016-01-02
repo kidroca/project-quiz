@@ -245,13 +245,17 @@
     <Compile Include="Infrastructure\ObjectFactory.cs" />
     <Compile Include="Models\Account\AccountBindingModels.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
+    <Compile Include="Models\Quiz\Question\AnsweredQuestionRequestModel.cs" />
     <Compile Include="Models\Quiz\Question\Answer\AnswerRequestModel.cs" />
     <Compile Include="Models\Quiz\Question\Answer\AnswerResponseModel.cs" />
+    <Compile Include="Models\Quiz\Question\Answer\WrongAnswerResponseModel.cs" />
     <Compile Include="Models\Quiz\Question\QuestionRequestModel.cs" />
     <Compile Include="Models\Quiz\Question\QuestionResponseModel.cs" />
     <Compile Include="Models\Quiz\QuizRequestModel.cs" />
     <Compile Include="Models\Quiz\QuizResponseModel.cs" />
     <Compile Include="Models\Quiz\QuizSearchModel.cs" />
+    <Compile Include="Models\Quiz\QuizSolutionRequestModel.cs" />
+    <Compile Include="Models\Quiz\QuizSolutionResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="App_Start\Results\ChallengeResult.cs" />

@@ -2,7 +2,7 @@ namespace Server.WebApi.Models.Quiz
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Controllers;
+    using Question;
 
     public class QuizSolutionRequestModel
     {
