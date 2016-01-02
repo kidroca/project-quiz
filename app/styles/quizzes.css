@@ -37,7 +37,7 @@
     position: absolute;
     left: 225px;
     top: 350px;
-    z-index: 10;
+    z-index: 1;
 }
 
 .carousel .carousel-inner .btn-block .btn {
@@ -47,4 +47,14 @@
 
 .carousel .carousel-indicators {
 	display: none;
+}
+
+.carousel .carousel-inner .quiz-tip {
+  position: absolute;
+  z-index: 101;
+  top: 80px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.9);
 }

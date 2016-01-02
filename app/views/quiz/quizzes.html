@@ -1,8 +1,13 @@
 <uib-carousel ng-if="$storage.length" class="col-md-8 col-md-offset-2" no-wrap="noWrapSlides" style="border-radius: 10px; background-image: url(images/chalkboard.jpg); height: 400px; background-size: cover;">
 	<div class="row col-md-8 col-md-offset btn-block">
-				<button class="btn btn-sm btn-success box-shadow">Take this quiz</button>
-				<button ng-click="ctrl.editActive()" class="btn btn-sm btn-warning box-shadow">Edit</button>
-				<button class="btn btn-sm btn-danger box-shadow">Delete</button>
+				<button ng-click="ctrl.solveAlctive()"
+					class="btn btn-sm btn-success box-shadow">Take this quiz</button>
+				<button ng-click="ctrl.editActive()" 
+					ng-disabled="userDetails.userId !== ctrl.getActiveQuiz().createdById"
+					class="btn btn-sm btn-warning box-shadow">Edit</button>
+				<button ng-click="ctrl.deleteActive()" 
+					ng-disabled="userDetails.userId !== ctrl.getActiveQuiz().createdById"
+					class="btn btn-sm btn-danger box-shadow">Delete</button>
 			</div>
 	<uib-slide ng-repeat="quiz in $storage" active="quiz.active">
 		<div class="container col-md-12 text-shadow chalk">
@@ -14,9 +19,18 @@
 						<label class="col-md-6 text-right">Category</label>
 						<p class="col-md-6 text-left">{{quiz.category}}</p>
 					</div>
-					<div class="row">
+					<div class="row" ng-mouseover="questionsTooltipVisible=true"
+						ng-mouseleave="questionsTooltipVisible=false">
 						<label class="col-md-6 text-right">Questions</label>
 						<p class="col-md-6 text-left">{{quiz.questions.length}}</p>
+						<div ng-show="questionsTooltipVisible" class="col-md-12 quiz-tip box-shadow">
+							<h4 class="text-left">Questions: </h4>
+							<p ng-repeat="question in quiz.questions | limitTo: 5"
+								class="hide-overflow">
+								{{question.title}}
+							</p>
+							<p ng-if="quiz.questions.length > 5">...</p>
+						</div>
 					</div>
 					<div class="row">
 						<label class="col-md-6 text-right">Rating</label>
@@ -24,11 +38,11 @@
 					</div>
 					<div class="row">
 						<label class="col-md-6 text-right">Created on</label>
-						<p class="col-md-6 text-left">{{quiz.createdOn}}</p>
+						<p class="col-md-6 text-left">{{quiz.createdOn | date:'medium'}}</p>
 					</div>
 					<div class="row">
 						<label class="col-md-6 text-right">Times completed</label>
-						<p class="col-md-6 text-left">{{quiz.completedCounter}}</p>
+						<p class="col-md-6 text-left">{{quiz.timesSolved}}</p>
 					</div>
 				</div>
 			</div>			
