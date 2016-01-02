@@ -16,6 +16,7 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/readable-bootstrap.css">
     <link rel="stylesheet" href="styles/quizzes.css">
+    <link rel="stylesheet" href="styles/solve.css">
   </head>
   <body ng-app="quizProjectApp" ng-controller="MainController as ctrl">
     <!--[if lte IE 8]>
@@ -88,7 +89,7 @@
           </ul>
 
           <ul ng-if="ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
-            <li><a href="#/me">Hi {{ctrl.currentUserGlobal.FirstName}}</a></li>
+            <li><a href="#/me">Hi {{ctrl.currentUserGlobal.firstName}}</a></li>
             <li><a href="#" ng-click="ctrl.logout()">Logout</a></li>
           </ul>
 
@@ -98,7 +99,7 @@
     </div>
 
     <div class="container">
-    <div ng-view="" style="margin-top: 36px"></div>
+      <div ng-view="" style="margin-top: 36px"></div>
     </div>
 
     <div class="footer">
@@ -106,7 +107,6 @@
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
     </div>
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -143,6 +143,7 @@
                 <script src="scripts/app.js"></script>
                 <script src="scripts/controllers/about-controller.js"></script>
                 <script src="scripts/controllers/main-controller.js"></script>
+                <script src="scripts/filters/paging-filter.js"></script>
                 <script src="scripts/home/home-controller.js"></script>
                 <script src="scripts/identity/auth-service.js"></script>
                 <script src="scripts/identity/identity-service.js"></script>
@@ -152,6 +153,8 @@
                 <script src="scripts/quizzes/create-quiz-controller.js"></script>
                 <script src="scripts/quizzes/quiz-data-service.js"></script>
                 <script src="scripts/quizzes/quizzes-controller.js"></script>
+                <script src="scripts/quizzes/result-controller.js"></script>
+                <script src="scripts/quizzes/solve-quiz-controller.js"></script>
                 <script src="scripts/quizzes/update-quiz-controller.js"></script>
                 <script src="scripts/user/profile-controller.js"></script>
                 <!-- end script template tags -->

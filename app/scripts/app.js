@@ -61,6 +61,16 @@
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
         resove: routeResolvers.authenticated
       })
+      .when('/quizzes/solve/:id', {
+        templateUrl: 'views/quiz/solve-quiz.html',
+        controller: 'SolveQuizController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
+      .when('/quizzes/result', {
+        templateUrl: 'views/quiz/result.html',
+        controller: 'ResultController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
@@ -86,6 +96,8 @@
 
   angular.module('quizProjectApp.services', []);
 
+  angular.module('quizProjectApp.filters', []);
+
   angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
 
   angular
@@ -100,10 +112,10 @@
       'ngStorage',
       'ui.sortable',
       'ui.bootstrap',
+      'quizProjectApp.filters',
       'quizProjectApp.controllers',
     ])
     .config(['$routeProvider', config])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
     .constant('baseUrl', 'http://localhost:42252/');
-
 }());
