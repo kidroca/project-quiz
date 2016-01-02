@@ -1,6 +1,7 @@
 ﻿namespace Server.WebApi.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -9,7 +10,9 @@
     using AutoMapper.QueryableExtensions;
     using Data.Contracts;
     using Models.Quiz;
+    using Models.Quiz.Question.Answer;
     using Server.Models;
+    using WebGrease.Css.Extensions;
 
     // Todo: Post, Put, Delete
 
@@ -90,6 +93,22 @@
             }
         }
 
+        [Authorize]
+        [Route("{id:int}")]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            var quiz = this.quizRepo.GetById(id);
+            if (quiz.CreatedById != base.UserId)
+            {
+                return this.BadRequest("You don't have rights to delete this quiz");
+            }
+
+            this.quizRepo.Delete(quiz);
+            await this.quizRepo.SaveChangesAsync();
+
+            return this.Ok("deleted successfully");
+        }
+
         [Route("categories")]
         [HttpGet]
         public async Task<IHttpActionResult> GetCategories(string pattern, int take = 10)
@@ -102,6 +121,24 @@
                 .ToArrayAsync();
 
             return this.Ok(categories);
+        }
+
+        [Route("solve")]
+        public async Task<IHttpActionResult> Solve(QuizSolutionRequestModel quiz)
+        {
+            var dbQuiz = this.quizRepo.GetById(quiz.Id);
+            if (quiz.Questions.Count != dbQuiz.Questions.Count)
+            {
+                return this.BadRequest("Invalid Solution: Questions count mismatch");
+            }
+
+            QuizSolutionResponseModel response = await this.EvaluateSolution(quiz, dbQuiz);
+
+            dbQuiz.TimesSolved++;
+            this.quizRepo.Update(dbQuiz);
+            await this.quizRepo.SaveChangesAsync();
+
+            return this.Ok(response);
         }
 
         [Route("{id:int}")]
@@ -192,6 +229,42 @@
             quizzes = quizzes.OrderByDescending(q => q.CreatedOn);
 
             return quizzes;
+        }
+
+        private async Task<QuizSolutionResponseModel> EvaluateSolution(QuizSolutionRequestModel quizSolution, Quiz quiz)
+        {
+
+
+            var result = await Task.Run(() =>
+            {
+                var response = new QuizSolutionResponseModel
+                {
+                    Id = quiz.Id,
+                    Title = quiz.Title,
+                    WrongAnswers = new List<WrongAnswerResponseModel>()
+                };
+
+                quiz.Questions
+                .ForEach((question, i) =>
+                {
+                    int selected = quizSolution.Questions[i].SelectedAnswer;
+                    var answers = question.Answers.ToArray();
+
+                    if (!answers[selected].IsCorrect)
+                    {
+                        response.WrongAnswers.Add(new WrongAnswerResponseModel
+                        {
+                            Question = question.Title,
+                            SelectedAnswer = answers[selected].Text,
+                            CorrectAnswer = answers.First(a => a.IsCorrect).Text
+                        });
+                    }
+                });
+
+                return response;
+            });
+
+            return result;
         }
     }
 }

@@ -20,6 +20,8 @@
 
         public string CreatedBy { get; set; }
 
+        public string CreatedById { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public int TimesSolved { get; set; }
