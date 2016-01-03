@@ -158,7 +158,8 @@
             else
             {
                 // Todo Quiz Response Model
-                return this.Ok(quiz);
+                var response = Mapper.Map<QuizResponseModel>(quiz);
+                return this.Ok(response);
             }
         }
 

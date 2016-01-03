@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="header">
+		<h4>{{ctrl.result.title}}</h4>
+		<h5>Score: {{ctrl.getScore() + '%'}}</h5>
+	</div>
+	<div ng-repeat="question in ctrl.result.wrongAnswers"
+		class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{question.question}}</h3>
+		</div>
+		<div class="panel-body list-group">
+			<div class="alert alert-success">
+				<strong>Correct: </strong> <span>{{question.correctAnswer}}</span>
+			</div>
+			<div class="alert alert-warning">
+				<strong>Selected: </strong> <span>{{question.selectedAnswer}}</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -232,10 +232,12 @@
     <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\JsonNetConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuizzesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,11 +260,46 @@
     <Compile Include="Models\Quiz\QuizSolutionResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="App_Start\Results\ChallengeResult.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\blackboard.jpg" />
+    <Content Include="images\chalkboard.jpg" />
+    <Content Include="images\quiz.jpg" />
+    <Content Include="scripts\app.js" />
+    <Content Include="scripts\controllers\about-controller.js" />
+    <Content Include="scripts\controllers\main-controller.js" />
+    <Content Include="scripts\filters\paging-filter.js" />
+    <Content Include="scripts\home\home-controller.js" />
+    <Content Include="scripts\identity\auth-service.js" />
+    <Content Include="scripts\identity\identity-service.js" />
+    <Content Include="scripts\identity\login-controller.js" />
+    <Content Include="scripts\identity\register-conroller.js" />
+    <Content Include="scripts\quizzes\add-question-controller.js" />
+    <Content Include="scripts\quizzes\create-quiz-controller.js" />
+    <Content Include="scripts\quizzes\quiz-data-service.js" />
+    <Content Include="scripts\quizzes\quizzes-controller.js" />
+    <Content Include="scripts\quizzes\result-controller.js" />
+    <Content Include="scripts\quizzes\solve-quiz-controller.js" />
+    <Content Include="scripts\quizzes\update-quiz-controller.js" />
+    <Content Include="scripts\user\profile-controller.js" />
+    <Content Include="scripts\vendor.e3270d0e.js" />
+    <Content Include="styles\main.724a05a4.css" />
+    <Content Include="Views\about.html" />
+    <Content Include="Views\Home\Index.cshtml">
+      <BrowseToURL>~/</BrowseToURL>
+    </Content>
+    <Content Include="Views\identity\login.html" />
+    <Content Include="Views\identity\register.html" />
+    <Content Include="Views\main.html" />
+    <Content Include="Views\quiz\add-question.html" />
+    <Content Include="Views\quiz\add-quiz.html" />
+    <Content Include="Views\quiz\quizzes.html" />
+    <Content Include="Views\quiz\result.html" />
+    <Content Include="Views\quiz\solve-quiz.html" />
+    <Content Include="Views\user\profile.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -283,6 +320,9 @@
       <Project>{71cc39c4-d074-4776-8507-195f4037e2b6}</Project>
       <Name>Server.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\DJB.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

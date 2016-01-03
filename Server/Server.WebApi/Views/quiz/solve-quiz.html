@@ -1,0 +1,49 @@
+<div class="container">
+	<div class="row nav nav-bar">
+		<div class="col-md-4">
+			<button class="btn btn-primary">Reject</button>
+		</div>
+		<div class="col-md-4">
+			<h4 class="text-center">Quiz Title</h4>
+		</div>
+		<div class="col-md-4 clearfix">
+			<a class="pull-right dropdown-toggle btn btn-primary" data-toggle="dropdown">
+	      		{{"Questions" || ctrl.questionsPerPage}} <span class="caret"></span>
+	    	</a>
+		    <ul class="pull-right dropdown-menu">
+				<li><a class="text-center">5 per page</a></li>
+				<li><a class="text-center">10 per page</a></li>
+				<li><a class="text-center">15 per page</a></li>
+				<li><a class="text-center">20 per page</a></li>
+		    </ul>	
+		</div>	
+	</div>
+	<div class="progress progress-striped">
+		<div class="progress-bar" style="width: {{ctrl.progress() + '%'}}"></div>
+	</div>
+	<div class="questions-container">
+		<div ng-repeat="question in ctrl.quiz.questions | paging:ctrl.currentPage:ctrl.questionsPerPage"
+			class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">{{question.title}}</h3>
+			</div>
+			<div class="panel-body list-group">
+		 		<a href ng-repeat="answer in question.answers"
+		 			ng-click="question.selected=$index"
+		 			ng-class="{selected: question.selected === $index}"
+		 			class="list-group-item">
+		 			<span>{{answer.text}}</span> 			
+		 		</a>
+		 	</div>
+		</div>
+	</div>
+	<div class="bar text-center clearfix">
+		<uib-pagination total-items="ctrl.quiz.questions.length" 
+			items-per-page="ctrl.questionsPerPage"
+			ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()">
+		</uib-pagination>
+		<button ng-disabled="ctrl.progress() < 100"
+			ng-click="ctrl.submit(ctrl.quiz)"
+			class="btn btn-lg btn-success pull-right">Ready</button>
+	</div>	
+</div>

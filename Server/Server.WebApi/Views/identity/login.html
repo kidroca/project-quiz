@@ -1,0 +1,50 @@
+﻿<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form name="registerForm" class="form-horizontal">
+            <fieldset>
+                <legend>Login</legend>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="emial" ng-model="user.username" required 
+                            ng-focus="emailFocus=true" ng-blur="emailFocus=false"
+                            class="form-control" id="inputEmail" placeholder="Email">
+                        <div ng-show="registerForm.email.$invalid && (registerForm.email.$dirty 
+                            || emailFocus)"  
+                            class="alert alert-info">
+                            <p>Enter a valid email address.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" ng-model="user.password" required 
+                            ng-focus="passwordFocus=true" ng-blur="passwordFocus=false"
+                            class="form-control" id="inputPassword" placeholder="Password">
+                        <div ng-show="registerForm.password.$invalid && (registerForm.password.$dirty 
+                          || passwordFocus)"  
+                          class="alert alert-info">
+                            <p>Enter a password.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button ng-click="ctrl.login(user, registerForm)"
+                                ng-disabled="refisterForm.$invalid"
+                                class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/main.724a05a4.css">
+</head>
+<body ng-app="quizProjectApp" ng-controller="MainController as ctrl">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->    
+    <!-- Add your site or application content here --> <div class="header"> <div class="navbar navbar-default navbar-fixed-top"> <div class="container"> <div class="navbar-header"> <a href="/" class="navbar-brand">Super Quiz</a> <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> </div> <div class="navbar-collapse collapse" id="navbar-main"> <ul class="nav navbar-nav"> <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#/" id="themes">Themes <span class="caret"></span></a> <ul class="dropdown-menu" aria-labelledby="themes"> <li><a href="../default/">Default</a></li> <li class="divider"></li> <li><a href="../cerulean/">Cerulean</a></li> <li><a href="../cosmo/">Cosmo</a></li> <li><a href="../cyborg/">Cyborg</a></li> <li><a href="../darkly/">Darkly</a></li> <li><a href="../flatly/">Flatly</a></li> <li><a href="../journal/">Journal</a></li> <li><a href="../lumen/">Lumen</a></li> <li><a href="../paper/">Paper</a></li> <li><a href="../readable/">Readable</a></li> <li><a href="../sandstone/">Sandstone</a></li> <li><a href="../simplex/">Simplex</a></li> <li><a href="../slate/">Slate</a></li> <li><a href="../spacelab/">Spacelab</a></li> <li><a href="../superhero/">Superhero</a></li> <li><a href="../united/">United</a></li> <li><a href="../yeti/">Yeti</a></li> </ul> </li> <li> <a href="#/quizzes">Quizzes</a> </li> <li> <a href="#/quizzes/add" ng-if="ctrl.currentUserGlobal">Add New</a> </li> <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Readable <span class="caret"></span></a> <ul class="dropdown-menu" aria-labelledby="download"> <li><a href="http://jsfiddle.net/bootswatch/pxg6fkqo/">Open Sandbox</a></li> <li class="divider"></li> <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li> <li><a href="./bootstrap.css">bootstrap.css</a></li> <li class="divider"></li> <li><a href="./variables.less">variables.less</a></li> <li><a href="./bootswatch.less">bootswatch.less</a></li> <li class="divider"></li> <li><a href="./_variables.scss">_variables.scss</a></li> <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li> </ul> </li> </ul> <ul ng-if="!ctrl.currentUserGlobal" class="nav navbar-nav navbar-right"> <li><a href="#/login">Login</a></li> <li><a href="#/register">Register</a></li> </ul> <ul ng-if="ctrl.currentUserGlobal" class="nav navbar-nav navbar-right"> <li><a href="#/me">Hi {{ctrl.currentUserGlobal.firstName}}</a></li> <li><a href="#" ng-click="ctrl.logout()">Logout</a></li> </ul> </div> </div> </div> </div> <div class="container"> <div ng-view="" style="margin-top: 36px"></div> </div> <div class="footer"> <div class="container"> <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p> </div> </div> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+        !function (A, n, g, u, l, a, r) {
+            A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+                (A[l].q = A[l].q || []).push(arguments)
+            }, A[l].l = +new Date, a = n.createElement(g),
+                   r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+        }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-XXXXX-X');
+        ga('send', 'pageview');</script>
+    <script src="scripts/vendor.e3270d0e.js"></script> <!-- start script template tags -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/about-controller.js"></script>
+    <script src="scripts/controllers/main-controller.js"></script>
+    <script src="scripts/filters/paging-filter.js"></script>
+    <script src="scripts/home/home-controller.js"></script>
+    <script src="scripts/identity/auth-service.js"></script>
+    <script src="scripts/identity/identity-service.js"></script>
+    <script src="scripts/identity/login-controller.js"></script>
+    <script src="scripts/identity/register-conroller.js"></script>
+    <script src="scripts/quizzes/add-question-controller.js"></script>
+    <script src="scripts/quizzes/create-quiz-controller.js"></script>
+    <script src="scripts/quizzes/quiz-data-service.js"></script>
+    <script src="scripts/quizzes/quizzes-controller.js"></script>
+    <script src="scripts/quizzes/result-controller.js"></script>
+    <script src="scripts/quizzes/solve-quiz-controller.js"></script>
+    <script src="scripts/quizzes/update-quiz-controller.js"></script>
+    <script src="scripts/user/profile-controller.js"></script> <!-- end script template tags -->
+</body>
+</html>
