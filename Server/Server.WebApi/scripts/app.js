@@ -109,5 +109,5 @@
     ])
     .config(['$routeProvider', config])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
-    .constant('baseUrl', 'http://localhost:42252/');
+    .constant('baseUrl', 'http://superquiz.apphb.com/');
 }());
