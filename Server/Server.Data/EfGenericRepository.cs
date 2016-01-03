@@ -12,7 +12,14 @@
         {
             if (context == null)
             {
-                throw new ArgumentException("An instance of DbContext is required to use this repository.", nameof(context));
+
+                throw new ArgumentException("An instance of DbContext is required to use this repository.",
+#if NETFX_452
+                nameof(context);
+#else
+                    "context"
+#endif
+                    );
             }
 
             this.Context = context;

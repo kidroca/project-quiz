@@ -82,4 +82,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="../VersionSpecificConfig.prop" />
 </Project>
