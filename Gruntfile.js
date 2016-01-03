@@ -306,18 +306,30 @@ module.exports = function(grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    uglify: {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '<%= yeoman.dist %>/scripts/scripts.js'
+          ]
+        }
+      },
+      user: {
+        files: [{
+          expand: true,
+          cwd: 'dist/user',
+          src: '**/*.js',
+          dest: 'dist/user-min'
+        }]
+      }
+    },
+    concat: {
+      dist: {},
+      user: {
+        src: 'app/scripts/**/*.js',
+        dest: 'dist/user/user.js'
+        }
+    },
 
     imagemin: {
       dist: {
