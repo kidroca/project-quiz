@@ -12,7 +12,7 @@
 					deffered.resolve(response.data);
 				}, function(error) {
 					deffered.reject(error);
-					alert(error);
+					// alert(error);
 				});
 
 			return deffered.promise;
@@ -29,7 +29,7 @@
 					deffered.resolve(response);
 				}, function(error) {
 					deffered.reject(error);
-					alert(error);
+					// alert(error);
 				});
 
 			return deffered.promise;
@@ -104,11 +104,11 @@
 		var str = [];
 		for (var p in obj) {
 			if (obj.hasOwnProperty(p)) {
-				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
 			}
 		}
 
-		return str.join("&");
+		return str.join('&');
 	}
 
 	angular.module('quizProjectApp.services')

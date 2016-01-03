@@ -9,7 +9,7 @@
                 auth.register(user)
                     .then(function() {
                         $location.path('/');
-                        alert('Registered Successfully');
+                        // alert('Registered Successfully');
                     });
             }
         };
