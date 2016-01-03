@@ -102,7 +102,6 @@
       'ngSanitize',
       'ngTouch',
       'ngStorage',
-      'ui.sortable',
       'ui.bootstrap',
       'quizProjectApp.filters',
       'quizProjectApp.controllers',
