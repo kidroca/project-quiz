@@ -1,11 +1,3 @@
-/**
- * @ngdoc overview
- * @name quizProjectApp
- * @description
- * # quizProjectApp
- *
- * Main module of the application.
- */
 (function() {
   'use strict';
 

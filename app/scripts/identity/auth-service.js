@@ -16,7 +16,7 @@
                 });
 
             return deferred.promise;
-        }
+        };
 
         var login = function login(user) {
             var deferred = $q.defer();
