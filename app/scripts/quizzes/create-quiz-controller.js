@@ -2,13 +2,11 @@
 	'use strict';
 
 	var DEFAULT_STORAGE = {
-		quiz: {
-			title: '',
-			description: '',
-			category: '',
-			completedCounter: 0,
-			questions: []
-		}
+		title: '',
+		description: '',
+		category: '',
+		completedCounter: 0,
+		questions: []
 	};
 
 	function CreateQuizController($scope, $uibModal, $sessionStorage, $location, quizData) {
@@ -62,8 +60,6 @@
 				if (question !== null) {
 					$scope.quiz.questions.push(question);
 				}
-
-				console.log($sessionStorage.quiz);
 			}, function() {
 				console.log('Modal dismissed at: ' + new Date());
 			});

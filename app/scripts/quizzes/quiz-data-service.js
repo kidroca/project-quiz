@@ -43,7 +43,6 @@
 			var deffered = $q.defer();
 			$http.get(baseUrl + 'api/quizzes/categories?pattern=' + pattern)
 				.then(function(response) {
-					console.log(response);
 					deffered.resolve(response.data);
 				});
 
