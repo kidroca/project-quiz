@@ -51,6 +51,17 @@
               </div>
           </div>
         </div>
+ 
+        <!-- Private/Public -->
+        <div class="form-group">
+          <label for="access" class="col-lg-2 control-label">Quiz Access</label>
+          <div class="col-lg-10">
+            <toggle-switch name="access"
+              ng-model="quiz.isPrivate"
+              on-label="private"
+              off-label="public"></toggle-switch>
+          </div>
+        </div>
 
         <!-- Add Question -->
         <div class="form-group">
@@ -85,7 +96,7 @@
         <div class="form-group">
           <div class="col-lg-10 col-lg-offset-2">
             <button ng-click="ctrl.addQuiz(quiz, quizForm)" class="btn btn-primary"
-              ng--disabled="quizForm.$invalid">Save Quiz</button>
+              ng--disabled="quizForm.$invalid || !quiz.questions.length">Save Quiz</button>
             <button ng-click="resetForm(quizForm)" class="btn btn-danger">Reset</button>
           </div>
         </div>
