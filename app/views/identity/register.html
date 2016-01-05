@@ -1,13 +1,13 @@
 ﻿<div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-lg-8 col-lg-offset-2">
         <form name="registerForm" class="form-horizontal" novalidate>
             <fieldset>
                 <legend>Register</legend>
 
                 <!-- First Name -->
                 <div class="form-group">
-                    <label for="firstName" class="col-lg-2 control-label">First Name</label>
-                    <div class="col-md-10">
+                    <label for="firstName" class="col-lg-3 control-label">First Name</label>
+                    <div class="col-lg-9">
                         <input type="text" ng-model="user.firstName" required ng-minlength="2"
                             ng-focus="firstNameFocus=true" ng-blur="firstNameFocus=false"
                             class="form-control" name="firstName" placeholder="First Name">
@@ -21,8 +21,8 @@
 
                 <!-- Last Name -->
                 <div class="form-group">
-                    <label for="lastName" class="col-lg-2 control-label">Last Name</label>
-                    <div class="col-md-10">
+                    <label for="lastName" class="col-lg-3 control-label">Last Name</label>
+                    <div class="col-lg-9">
                         <input type="text" ng-model="user.lastName" required ng-minlength="2"
                             ng-focus="lastNameFocus=true" ng-blur="lastNameFocus=false"
                             class="form-control" name="lastName" placeholder="Last Name">
@@ -36,8 +36,8 @@
 
                 <!-- Email -->
                 <div class="form-group">
-                    <label for="email" class="col-lg-2 control-label">Email</label>
-                    <div class="col-lg-10">
+                    <label for="email" class="col-lg-3 control-label">Email</label>
+                    <div class="col-lg-9">
                         <input type="email" ng-model="user.email" required 
                             ng-focus="emailFocus=true" ng-blur="emailFocus=false"
                             class="form-control" name="email" placeholder="Email">
@@ -51,8 +51,8 @@
 
                 <!-- Passowrd -->
                 <div class="form-group">
-                    <label for="password" class="col-lg-2 control-label">Password</label>
-                    <div class="col-lg-10">
+                    <label for="password" class="col-lg-3 control-label">Password</label>
+                    <div class="col-lg-9">
                         <input type="password" ng-model="user.password" required minlength="6"
                             ng-focus="passwordFocus=true" ng-blur="passwordFocus=false"
                             class="form-control" name="password" placeholder="Password">
@@ -66,8 +66,8 @@
 
                 <!-- Confirm -->
                 <div class="form-group">
-                    <label for="confirmPassword" class="col-lg-2 control-label">Confirm Password</label>
-                    <div class="col-lg-10">
+                    <label for="confirmPassword" class="col-lg-3 control-label">Confirm Password</label>
+                    <div class="col-lg-9">
                         <input type="password" ng-model="user.confirmPassword" required 
                             ng-focus="confirmFocus=true" ng-blur="confirmFocus=false"
                             class="form-control" name="confirmPassword" placeholder="Confirm password">
@@ -81,10 +81,10 @@
 
                 <!-- Submit -->
                 <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2"  ng-mouseover="submitHover=true">
+                    <div class="col-lg-9 col-lg-offset-3 clearfix"  ng-mouseover="submitHover=true">
                         <button ng-click="ctrl.register(user, registerForm)"
                                 ng-disabled="registerForm.$invalid || user.password != user.confirmPassword"
-                                class="btn btn-primary">Submit</button>
+                                class="btn btn-primary pull-right">Submit</button>
                     </div>
                 </div>
             </fieldset>
