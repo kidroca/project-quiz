@@ -37,6 +37,9 @@ module.exports = function(config) {
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/ngstorage/ngStorage.js',
+      'bower_components/angular-toggle-switch/angular-toggle-switch.js',
+      'bower_components/angular-slider/build/angular-slider.js',
+      'bower_components/angularjs-slider/dist/rzslider.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

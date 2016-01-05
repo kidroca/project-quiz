@@ -9,10 +9,15 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/readable-bootstrap.css">
+    <link rel="stylesheet" href="styles/angular-toggle-switch-bootstrap.css">
+    <link rel="stylesheet" href="styles/angular-toggle-switch.css">
+    <link rel="stylesheet" href="styles/rzslider.css">
     <link rel="stylesheet" href="styles/main.css">  
     <link rel="stylesheet" href="styles/quizzes.css">
     <link rel="stylesheet" href="styles/solve.css">
@@ -61,13 +66,7 @@
     </div>
 
     <div class="container">
-      <div ng-view="" style="margin-top: 36px"></div>
-    </div>
-
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
+      <div ng-view="" style="margin-top: 36px" class="page-view"></div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -80,7 +79,7 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-    
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
     <!-- <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script> -->
@@ -99,9 +98,11 @@
         
       <!-- start script template tags -->
               <script src="scripts/app.js"></script>
+              <script src="scripts/common/angular-toggle-switch.js"></script>
+              <script src="scripts/common/paging-filter.js"></script>
+              <script src="scripts/common/rzslider.js"></script>
               <script src="scripts/controllers/about-controller.js"></script>
               <script src="scripts/controllers/main-controller.js"></script>
-              <script src="scripts/filters/paging-filter.js"></script>
               <script src="scripts/home/home-controller.js"></script>
               <script src="scripts/identity/auth-service.js"></script>
               <script src="scripts/identity/identity-service.js"></script>
