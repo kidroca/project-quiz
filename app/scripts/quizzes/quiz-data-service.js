@@ -50,15 +50,11 @@
 		};
 
 		this.getQuizzes = function getQuizzes(query) {
-			var deffered = $q.defer(),
-				url = baseUrl + 'api/quizzes';
+			var deffered = $q.defer();
 
-			if (query !== null) {
-				url += '?' + toQueryString(query);
-				console.log(url);
-			}
-
-			$http.get(url)
+				$http.get(baseUrl + 'api/quizzes', {
+					params: query
+				})
 				.then(function(response) {
 					console.log(response);
 					deffered.resolve(response.data);
@@ -102,7 +98,7 @@
 	function toQueryString(obj) {
 		var str = [];
 		for (var p in obj) {
-			if (obj.hasOwnProperty(p)) {
+			if (obj.hasOwnProperty(p) && obj[p]) {
 				str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
 			}
 		}
