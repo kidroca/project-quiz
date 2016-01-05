@@ -1,7 +1,3 @@
-.carousel .carousel-inner {
-  height: inherit;
-}
-
 .text-shadow {
   text-shadow: -2px 3px 2px rgba(0, 0, 0, 0.6);
 }
@@ -10,7 +6,40 @@
 	box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.6);
 }
 
-.carousel .carousel-inner .container {
+.quizzes {
+  z-index: 1;
+}
+
+.quizzes > div {
+  position: relative;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.quizzes .main-wrapper {
+  margin: 0 15%;
+}
+
+.quizzes .main-wrapper .left-side > div {
+  /*float: right;*/
+}
+
+.quizzes .main-wrapper .right-side > div {
+  /*float: left;*/
+}
+
+.quizzes .main-wrapper .quiz-title {
+  /*margin-top: 0;*/
+  font-size: 48px;
+  text-align: left; 
+}
+
+.quizzes .main-wrapper .quiz-description {
+  /*margin-left: 5%;*/
+}
+
+.quizzes .quizzes-container {
   font-family: chalk;
   font-size: 20px;
   font-style: oblique;
@@ -18,43 +47,116 @@
   
 }
 
-.carousel .carousel-inner .item {
+.quizzes .paging {
+  width: 100%;
+  position: absolute;
+  z-index: 100;
+}
+
+.quizzes .quizzes-container .quiz-details label {
+  text-align: right;
+}
+
+.quizzes .quizzes-container .quiz-details div > p {
+  text-align: left;
+}
+
+.quizzes .quizzes-container .item {
   height: inherit;
 }
 
-.carousel .carousel-inner .text {
+.quizzes .quizzes-container .text {
 	font-size: 18px;
 }
 
-.carousel .carousel-inner .quiz-details {
+.quizzes .quizzes-container .quiz-details {
 	color: #FEFC0E;
-  	font-size: 20px;
+	font-size: 20px;
 }
 
-.carousel .carousel-inner .btn-block {
+.quizzes .interaction-block {
 	margin-top: 10px;
 	margin-bottom: 10px;
-    position: absolute;
+    /*position: absolute;
     left: 225px;
     top: 350px;
-    z-index: 1;
+    z-index: 1;*/
 }
 
-.carousel .carousel-inner .btn-block .btn {
-	/*font-family: chalk;*/
-	/*font-size: 16px;*/
-}
-
-.carousel .carousel-indicators {
-	display: none;
-}
-
-.carousel .carousel-inner .quiz-tip {
+.quizzes .quizzes-container .quiz-tip {
   position: absolute;
   z-index: 101;
-  top: 80px;
+  top: 30px;
   border: 1px solid #fff;
   border-radius: 4px;
   color: #fff;
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+.search-options {
+  background-color: rgba(23, 28, 37, 0.4);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.search-options .form-control {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+}
+
+.search-options #form-toggle {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  color: #B3B3B3;
+}
+
+.search-options .slider label{
+  margin: 10px 0 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: #B3B3B3;
+}
+
+.search-options .slider rzslider{
+  margin: 20px 0 15px;
+}
+
+.search-options .toggle-switch div span {
+  min-height: 38px;
+  line-height: 1.9;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000;
+}
+  /* flip the pane (.flip toggle) */
+.flip-container.flip .flipper {
+  transform: rotateY(180deg);
+}
+.flip-container {
+  width: auto;
+  height: auto;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.5s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front {
+  backface-visibility: hidden;
+}
+
+/* front pane, placed above back */
+.front {
+  /* for firefox 31 */
+  transform: rotateY(0deg);
 }

@@ -12,6 +12,12 @@
 
 body {
   padding: 0;
+  background-image: url(../images/blackboard.jpg); 
+  background-size: cover;
+}
+
+body > .container .page-view {
+  color: #fff;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -27,12 +33,27 @@ body {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
+
+.header .navbar-fixed-top {
+  /*background-color: rgba(255, 255, 255, 0.9);*/
+}
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
   padding-bottom: 19px;
+}
+
+.page-view legend {
+  font-family: chalk;
+  font-size: 32px;
+  color:#fff;
+}
+
+.page-view label {
+  font-family: chalk;
+  font-size: 20px;
 }
 
 /* Custom page footer */
