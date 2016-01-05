@@ -84,10 +84,10 @@
 								<button ng-click="ctrl.solveAlctive()"
 									class="btn btn-md btn-success box-shadow">Take this quiz</button>
 								<button ng-click="ctrl.editActive()" 
-									ng-disabled="userDetails.userId !== ctrl.getActiveQuiz().createdById"
+									ng-disabled="userDetails.userId !== quiz.createdById"
 									class="btn btn-md btn-warning box-shadow">Edit</button>
 								<button ng-click="ctrl.deleteActive()" 
-									ng-disabled="userDetails.userId !== ctrl.getActiveQuiz().createdById"
+									ng-disabled="userDetails.userId !== quiz.createdById"
 									class="btn btn-md btn-danger box-shadow">Delete</button>
 							</section>
 
