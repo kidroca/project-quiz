@@ -6,13 +6,38 @@
     var CONTROLLER_VIEW_MODEL_REFERENCE = 'ctrl';
 
     var routeResolvers = {
-      authenticated: ['$q', 'auth', function routeResolvers($q, auth) {
+      authenticated: ['$q', 'auth', function ($q, auth) {
+        console.log('route resolve');
         if (auth.isAuthenticated()) {
           return true;
         }
 
         return $q.reject('not authorised');
       }]
+    };
+
+    var solveQuizResolvers = {
+      loadQuizIfNeeded: ['$q', '$route', '$sessionStorage', 'QuizDataService',
+        function solveQuizResolvers($q, $route, $sessionStorage, QuizDataService) {
+
+          if (!$sessionStorage.solveQuiz || $sessionStorage.solveQuiz.id !== +$route.current.params.id) {
+            var deffered = $q.defer();
+            
+            QuizDataService.getQuiz($route.current.params.id)
+              .then(function(result) {
+                console.log(result);
+                $sessionStorage.solveQuiz = result;
+                deffered.resolve(true);
+              }, function (error) {
+                deffered.reject(error);
+              });
+
+              return deffered.promise;
+          } else {
+            return true;
+          }
+        }
+      ]
     };
 
     $routeProvider
@@ -45,18 +70,19 @@
         templateUrl: 'views/quiz/add-quiz.html',
         controller: 'CreateQuizController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-        resove: routeResolvers.authenticated
-      })
+        resolve: routeResolvers.authenticated
+       })
       .when('/quizzes/edit', {
         templateUrl: 'views/quiz/add-quiz.html',
         controller: 'UpdateQuizController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-        resove: routeResolvers.authenticated
+        resolve: routeResolvers.authenticated
       })
       .when('/quizzes/solve/:id', {
         templateUrl: 'views/quiz/solve-quiz.html',
         controller: 'SolveQuizController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resolve: solveQuizResolvers.loadQuizIfNeeded
       })
       .when('/quizzes/result', {
         templateUrl: 'views/quiz/result.html',
@@ -103,6 +129,9 @@
       'ngTouch',
       'ngStorage',
       'ui.bootstrap',
+      'toggle-switch',
+      'rzModule',
+      'quizProjectApp.services',
       'quizProjectApp.filters',
       'quizProjectApp.controllers',
     ])
