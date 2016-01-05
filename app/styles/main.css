@@ -99,6 +99,7 @@ label.correct a {
 /* info popup */
 .form-group .popover {
   width: 45%;
+  color: 333;
 }
 
 .hide-overflow {
