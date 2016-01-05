@@ -70,7 +70,8 @@
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin?.LoginProvider,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                QuizzesCreated = user.Quizzes.Count
             };
         }
 

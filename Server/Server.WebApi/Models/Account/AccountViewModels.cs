@@ -37,6 +37,10 @@
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public int QuizzesCreated { get; set; }
+
+        public int QuizzesTaken { get; set; }
     }
 
     public class UserLoginInfoViewModel
