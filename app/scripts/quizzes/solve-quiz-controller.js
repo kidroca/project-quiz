@@ -5,9 +5,10 @@
 		$scope, $routeParams, $sessionStorage, $location, quizData) {
 		var self = this;
 
-		$sessionStorage.solveQuiz = $sessionStorage.solveQuiz || 
-			quizData.get($routeParams.id);
-
+		if (!$sessionStorage.solveQuiz) {
+			throw new Error('No data for the quiz to be solved');
+		}
+			
 		self.quiz = $sessionStorage.solveQuiz;
 
 		self.questionsPerPage = 2;
@@ -46,6 +47,7 @@
 
 			quizData.submitSolution(result)
 				.then(function () {
+					delete $sessionStorage.solveQuiz;
 					$location.path('/quizzes/result');
 				});
 		};
