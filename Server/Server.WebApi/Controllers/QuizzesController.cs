@@ -11,6 +11,7 @@
     using Data.Contracts;
     using Models.Quiz;
     using Models.Quiz.Question.Answer;
+    using Models.Quiz.Search;
     using Server.Models;
     using WebGrease.Css.Extensions;
 
@@ -33,7 +34,10 @@
                 return this.BadRequest("Invalid query string paging parameters, must be positive");
             }
 
-            var quizzes = ApplyQueryParameters(this.quizRepo.All(), query);
+            var quizzes = this.quizRepo.All()
+                .Where(quiz => !quiz.IsPrivate);
+
+            quizzes = ApplyQueryParameters(quizzes, query);
 
             var response = await quizzes
                 .Skip(page * size)
@@ -71,6 +75,7 @@
                 dbQuiz.Description = asDbModel.Description;
                 dbQuiz.Category = asDbModel.Category;
                 dbQuiz.Title = asDbModel.Title;
+                dbQuiz.IsPrivate = asDbModel.IsPrivate;
                 dbQuiz.Questions.Clear();
                 foreach (var question in asDbModel.Questions)
                 {
@@ -155,9 +160,12 @@
             {
                 return this.NotFound();
             }
+            else if (quiz.IsPrivate && base.UserId != quiz.CreatedById)
+            {
+                return this.BadRequest("This quiz is private, and you don't have the rights tp access it.");
+            }
             else
             {
-                // Todo Quiz Response Model
                 var response = Mapper.Map<QuizResponseModel>(quiz);
                 return this.Ok(response);
             }
@@ -177,22 +185,22 @@
                     .Where(q => (q.CreatedBy.FirstName + q.CreatedBy.LastName).ToLower()
                         .Contains(name.ToLower()));
 
-            if (query != null)
-            {
-                userQuizzes = ApplyQueryParameters(userQuizzes, query);
-            }
+            // Only return private quizzes if they are created by the user making the request
+            userQuizzes = userQuizzes.Where(quiz => !quiz.IsPrivate || quiz.CreatedById == this.UserId);
 
-            // Todo: ResponseDataModel
-            return this.Ok(await userQuizzes.Skip(page * size).Take(size).ToListAsync());
+            userQuizzes = ApplyQueryParameters(userQuizzes, query);
+
+            var response = await userQuizzes
+                .Skip(page * size)
+                .Take(size)
+                .ProjectTo<QuizResponseModel>()
+                .ToListAsync();
+
+            return this.Ok(response);
         }
 
         private static IQueryable<Quiz> ApplyQueryParameters(IQueryable<Quiz> quizzes, QuizSearchModel httpQuery)
         {
-            if (httpQuery.Title != null)
-            {
-                quizzes = quizzes.Where(q => q.Title.Equals(httpQuery.Title, StringComparison.OrdinalIgnoreCase));
-            }
-
             if (httpQuery.Category != null)
             {
                 quizzes = quizzes.Where(q => q.Category.Equals(httpQuery.Category, StringComparison.OrdinalIgnoreCase));
@@ -209,22 +217,32 @@
 
             if (httpQuery.FromDate != null)
             {
-                quizzes = quizzes.Where(q => q.CreatedOn.CompareTo(httpQuery.FromDate) >= 0);
+                quizzes = quizzes.Where(q => q.CreatedOn >= httpQuery.FromDate);
             }
 
             if (httpQuery.ToDate != null)
             {
-                quizzes = quizzes.Where(q => q.CreatedOn.CompareTo(httpQuery.ToDate) <= 0);
+                quizzes = quizzes.Where(q => q.CreatedOn <= httpQuery.ToDate);
             }
 
-            if (httpQuery.Questions != null)
+            if (httpQuery.MinQuestions != null)
             {
-                quizzes = quizzes.Where(q => q.Questions.Count >= httpQuery.Questions);
+                quizzes = quizzes.Where(q => q.Questions.Count >= httpQuery.MinQuestions);
             }
 
-            if (httpQuery.Rating != null)
+            if (httpQuery.MaxQuestions != null)
             {
-                quizzes = quizzes.Where(q => q.Ratings.Average(r => r.Value) >= httpQuery.Rating);
+                quizzes = quizzes.Where(q => q.Questions.Count <= httpQuery.MaxQuestions);
+            }
+
+            if (httpQuery.MinRating != null)
+            {
+                quizzes = quizzes.Where(q => q.Ratings.Average(r => r.Value) >= httpQuery.MinRating);
+            }
+
+            if (httpQuery.MaxRating != null)
+            {
+                quizzes = quizzes.Where(q => q.Ratings.Average(r => r.Value) <= httpQuery.MaxRating);
             }
 
             quizzes = quizzes.OrderByDescending(q => q.CreatedOn);
@@ -234,8 +252,6 @@
 
         private async Task<QuizSolutionResponseModel> EvaluateSolution(QuizSolutionRequestModel quizSolution, Quiz quiz)
         {
-
-
             var result = await Task.Run(() =>
             {
                 var response = new QuizSolutionResponseModel

@@ -43,6 +43,8 @@
         [Range(0, int.MaxValue)]
         public int TimesSolved { get; set; }
 
+        public bool IsPrivate { get; set; }
+
         public virtual ICollection<Rating> Ratings
         {
             get { return this.rattings; }
