@@ -92,18 +92,20 @@
 			return deffered.promise;
 		};
 
+		this.rateQuiz = function rateQuiz(id, value) {
+			var deffered = $q.defer();
+
+			$http.post(baseUrl + 'api/quizzes/rate/' + id + '?value=' + value)
+				.then(function (response) {
+					deffered.resolve(response.data);
+				}, function (error) {
+					deffered.reject(error);
+				});
+
+			return deffered.promise;	
+		};
+
 		this.resultResponse = {};
-	}
-
-	function toQueryString(obj) {
-		var str = [];
-		for (var p in obj) {
-			if (obj.hasOwnProperty(p) && obj[p]) {
-				str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-			}
-		}
-
-		return str.join('&');
 	}
 
 	angular.module('quizProjectApp.services')

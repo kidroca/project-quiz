@@ -2359,18 +2359,20 @@ angular.module('quizProjectApp')
 			return deffered.promise;
 		};
 
+		this.rateQuiz = function rateQuiz(id, value) {
+			var deffered = $q.defer();
+
+			$http.post(baseUrl + 'api/quizzes/rate/' + id + '?value=' + value)
+				.then(function (response) {
+					deffered.resolve(response.data);
+				}, function (error) {
+					deffered.reject(error);
+				});
+
+			return deffered.promise;	
+		};
+
 		this.resultResponse = {};
-	}
-
-	function toQueryString(obj) {
-		var str = [];
-		for (var p in obj) {
-			if (obj.hasOwnProperty(p) && obj[p]) {
-				str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-			}
-		}
-
-		return str.join('&');
 	}
 
 	angular.module('quizProjectApp.services')
@@ -2412,8 +2414,8 @@ angular.module('quizProjectApp')
 			selected: self.orderOptions[0]
 		};
 
-		self.sliderChanged = function sliderChanged (id) {
-			switch(id){
+		self.sliderChanged = function sliderChanged(id) {
+			switch (id) {
 				case 'rating':
 					self.quizQuery.minRating = self.ratingSlider.minValue;
 					self.quizQuery.maxRating = self.ratingSlider.maxValue;
@@ -2426,7 +2428,7 @@ angular.module('quizProjectApp')
 					break;
 			}
 
-			
+
 		};
 
 		self.ratingSlider = {
@@ -2493,7 +2495,7 @@ angular.module('quizProjectApp')
 			$location.path('/quizzes/solve/' + $scope.quiz.id);
 		};
 
-		self.submitQuery = function submitQuery () {
+		self.submitQuery = function submitQuery() {
 			$scope.queryDissabled = true;
 			console.log(self.quizQuery);
 			quizData.getQuizzes(self.quizQuery)
@@ -2510,13 +2512,13 @@ angular.module('quizProjectApp')
 			return quizData.getCategories(pattern);
 		};
 
-		self.pageChanged = function pageChanged () {
+		self.pageChanged = function pageChanged() {
 			$scope.pageFlip = !$scope.pageFlip;
 
-			$timeout(function () {
+			$timeout(function() {
 				$scope.quiz = $scope.$storage[self.currentPage - 1];
-				$scope.pageFlip = !$scope.pageFlip;	
-			}, 500);		
+				$scope.pageFlip = !$scope.pageFlip;
+			}, 500);
 		};
 
 		self.prevPage = function prevPage() {
@@ -2531,6 +2533,15 @@ angular.module('quizProjectApp')
 				self.currentPage++;
 				self.pageChanged();
 			}
+		};
+
+		self.rateQuiz = function rateQuiz() {
+			console.log('rating...');
+			quizData.rateQuiz($scope.quiz.id, $scope.quiz.rating)
+				.then(function (response) {
+					console.log(response);
+					$scope.quiz.rating = response.rating;
+				});
 		};
 
 		self.init();

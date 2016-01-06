@@ -37,7 +37,7 @@
 							
 							<section class="row">
 								<!-- Left -->
-								<div class="left-side col-lg-6 quiz-details clearfix">
+								<div class="left-side col-lg-5 quiz-details clearfix">
 									<div class="row">
 										<label class="col-md-6 text-right">Category</label>
 										<p class="col-md-6 text-left">{{quiz.category}}</p>
@@ -53,9 +53,9 @@
 								</div>
 
 								<!-- Right -->
-								<div class="right-side col-lg-6 quiz-details clearfix">
+								<div class="right-side col-lg-7 quiz-details clearfix">
 									<div class="row">
-										<label class="col-md-6"
+										<label class="col-md-5"
 											ng-mouseover="questionsTooltipVisible=true"
 											ng-mouseleave="questionsTooltipVisible=false">Questions</label>
 										<p class="col-md-6">{{quiz.questions.length}}</p>
@@ -69,11 +69,18 @@
 										</div>
 									</div>
 									<div class="row">
-										<label class="col-md-6">Rating</label>
-										<p class="col-md-6">{{quiz.questions.length}}</p>
+										<label class="col-md-5">Rating</label>
+										<!-- <p class="col-md-6">{{quiz.rating}}</p> -->
+											<uib-rating class="col-md-6"
+											ng-model="quiz.rating" max="10"
+											ng-click="ctrl.rateQuiz()"
+											readonly="!userDetails.userId"
+											state-on="'glyphicon-ok-sign'" 
+											state-off="'glyphicon-ok-circle'"
+											aria-labelledby="default-rating"></uib-rating>
 									</div>
 									<div class="row">
-										<label class="col-md-6">Times completed</label>
+										<label class="col-md-5">Times completed</label>
 										<p class="col-md-6">{{quiz.timesSolved}}</p>
 									</div>
 								</div>

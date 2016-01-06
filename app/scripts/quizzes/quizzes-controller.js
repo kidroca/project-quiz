@@ -34,8 +34,8 @@
 			selected: self.orderOptions[0]
 		};
 
-		self.sliderChanged = function sliderChanged (id) {
-			switch(id){
+		self.sliderChanged = function sliderChanged(id) {
+			switch (id) {
 				case 'rating':
 					self.quizQuery.minRating = self.ratingSlider.minValue;
 					self.quizQuery.maxRating = self.ratingSlider.maxValue;
@@ -48,7 +48,7 @@
 					break;
 			}
 
-			
+
 		};
 
 		self.ratingSlider = {
@@ -115,7 +115,7 @@
 			$location.path('/quizzes/solve/' + $scope.quiz.id);
 		};
 
-		self.submitQuery = function submitQuery () {
+		self.submitQuery = function submitQuery() {
 			$scope.queryDissabled = true;
 			console.log(self.quizQuery);
 			quizData.getQuizzes(self.quizQuery)
@@ -132,13 +132,13 @@
 			return quizData.getCategories(pattern);
 		};
 
-		self.pageChanged = function pageChanged () {
+		self.pageChanged = function pageChanged() {
 			$scope.pageFlip = !$scope.pageFlip;
 
-			$timeout(function () {
+			$timeout(function() {
 				$scope.quiz = $scope.$storage[self.currentPage - 1];
-				$scope.pageFlip = !$scope.pageFlip;	
-			}, 500);		
+				$scope.pageFlip = !$scope.pageFlip;
+			}, 500);
 		};
 
 		self.prevPage = function prevPage() {
@@ -153,6 +153,15 @@
 				self.currentPage++;
 				self.pageChanged();
 			}
+		};
+
+		self.rateQuiz = function rateQuiz() {
+			console.log('rating...');
+			quizData.rateQuiz($scope.quiz.id, $scope.quiz.rating)
+				.then(function (response) {
+					console.log(response);
+					$scope.quiz.rating = response.rating;
+				});
 		};
 
 		self.init();
