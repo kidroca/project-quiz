@@ -31,7 +31,7 @@
 
 		self.orderBy = {
 			desending: false,
-			selected: self.orderOptions[0]
+			selected: null
 		};
 
 		self.sliderChanged = function sliderChanged(id) {
