@@ -36,7 +36,7 @@
                 .ForMember(res => res.CreatedBy, opts => opts.MapFrom(
                     db => db.CreatedBy.FirstName + " " + db.CreatedBy.LastName))
                 .ForMember(res => res.Rating, opts => opts.MapFrom(
-                    db => db.Ratings.Count > 0 ? db.Ratings.Average(r => r.Value) : 1));
+                    db => db.Ratings.Count > 0 ? db.Ratings.Average(r => r.Value) : 0));
         }
     }
 }

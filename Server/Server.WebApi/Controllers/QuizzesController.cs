@@ -114,6 +114,46 @@
             return this.Ok("deleted successfully");
         }
 
+        [Authorize]
+        [Route("rate/{id:int}")]
+        public async Task<IHttpActionResult> RateQuiz(int id, double value)
+        {
+            value = Math.Round(value * 10) / 10;
+
+            if (value <= 0 || 10 < value)
+            {
+                return this.BadRequest("Rating must be between 0.1 and 10");
+            }
+
+            var quiz = this.quizRepo.GetById(id);
+            if (quiz == null)
+            {
+                return this.NotFound();
+            }
+
+            var rating = await
+                Task.Run(() => quiz.Ratings.FirstOrDefault(r => r.ByUserId == this.UserId));
+
+            if (rating != null)
+            {
+                rating.Value = value;
+            }
+            else
+            {
+                quiz.Ratings.Add(new Rating
+                {
+                    ByUserId = this.UserId,
+                    Value = value,
+                });
+            }
+
+            this.quizRepo.Update(quiz);
+            await this.quizRepo.SaveChangesAsync();
+
+            var response = Mapper.Map<QuizResponseModel>(quiz);
+            return this.Ok(response);
+        }
+
         [Route("categories")]
         [HttpGet]
         public async Task<IHttpActionResult> GetCategories(string pattern, int take = 10)
@@ -199,6 +239,7 @@
             return this.Ok(response);
         }
 
+        // Todo: Extract in a service
         private static IQueryable<Quiz> ApplyQueryParameters(IQueryable<Quiz> quizzes, QuizSearchModel httpQuery)
         {
             if (httpQuery.Category != null)
@@ -245,11 +286,43 @@
                 quizzes = quizzes.Where(q => q.Ratings.Average(r => r.Value) <= httpQuery.MaxRating);
             }
 
-            quizzes = quizzes.OrderByDescending(q => q.CreatedOn);
+            quizzes = ApplyOrdering(quizzes, httpQuery);
 
             return quizzes;
         }
 
+        // Todo: Extract in a service
+        private static IQueryable<Quiz> ApplyOrdering(IQueryable<Quiz> quizzes, QuizSearchModel httpQuery)
+        {
+            if (httpQuery.OrderBy == null)
+            {
+                return quizzes.OrderByDescending(q => q.CreatedOn);
+            }
+            switch (httpQuery.OrderBy)
+            {
+                case ResultOrder.ByDate:
+                    quizzes = quizzes.OrderBy(q => q.CreatedOn);
+                    break;
+                case ResultOrder.ByRating:
+                    quizzes = quizzes.OrderBy(q => q.Ratings.Average(r => r.Value));
+                    break;
+                case ResultOrder.ByNumberOfQuestions:
+                    quizzes = quizzes.OrderBy(q => q.Questions.Count);
+                    break;
+                case ResultOrder.ByTimesTaken:
+                    quizzes = quizzes.OrderBy(q => q.TimesSolved);
+                    break;
+            }
+
+            if (httpQuery.OrderDescending)
+            {
+                quizzes = quizzes.Reverse();
+            }
+
+            return quizzes;
+        }
+
+        // Todo: Extract in a service
         private async Task<QuizSolutionResponseModel> EvaluateSolution(QuizSolutionRequestModel quizSolution, Quiz quiz)
         {
             var result = await Task.Run(() =>
