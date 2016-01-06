@@ -2082,7 +2082,9 @@ angular.module('quizProjectApp')
 				auth.login(user)
 					.then(function (res) {
 						console.log(res);
-						$location.path('/');
+						$location.path('/quizzes');
+					}, function (error) {
+					    alert(error);
 					});
 			}
 		};
@@ -2101,8 +2103,8 @@ angular.module('quizProjectApp')
 			if (registerForm.$valid) {
 				auth.register(user)
 					.then(function() {
-						$location.path('/');
-						// alert('Registered Successfully');
+					    $location.path('/login');
+						alert('Registered Successfully');
 					});
 			}
 		};

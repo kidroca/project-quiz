@@ -9,7 +9,9 @@
                 auth.login(user)
                     .then(function (res) {
                         console.log(res);
-                        $location.path('/');
+                        $location.path('/quizzes');
+                    }, function (error) {
+                        alert(error);
                     });
             }
         };

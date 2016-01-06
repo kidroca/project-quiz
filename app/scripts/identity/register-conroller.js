@@ -8,8 +8,8 @@
             if (registerForm.$valid) {
                 auth.register(user)
                     .then(function() {
-                        $location.path('/');
-                        // alert('Registered Successfully');
+                        $location.path('/login');
+                        alert('Registered Successfully');
                     });
             }
         };
