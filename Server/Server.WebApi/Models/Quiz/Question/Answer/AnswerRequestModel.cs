@@ -8,7 +8,7 @@
     public class AnswerRequestModel : IMapFrom<Answer>, IHaveCustomMappings
     {
         [MinLength(2)]
-        [MaxLength(128)]
+        [MaxLength(256)]
         public string Text { get; set; }
 
         public bool IsCorrect { get; set; }
