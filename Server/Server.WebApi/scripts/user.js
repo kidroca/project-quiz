@@ -2084,7 +2084,7 @@ angular.module('quizProjectApp')
 						console.log(res);
 						$location.path('/quizzes');
 					}, function (error) {
-					    alert(error);
+					    alert(error.error_description);
 					});
 			}
 		};
