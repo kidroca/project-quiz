@@ -298,25 +298,25 @@
             {
                 return quizzes.OrderByDescending(q => q.CreatedOn);
             }
+
             switch (httpQuery.OrderBy)
             {
                 case ResultOrder.ByDate:
-                    quizzes = quizzes.OrderBy(q => q.CreatedOn);
-                    break;
+                    return httpQuery.OrderDescending
+                        ? quizzes.OrderByDescending(q => q.CreatedOn)
+                        : quizzes.OrderBy(q => q.CreatedOn);
                 case ResultOrder.ByRating:
-                    quizzes = quizzes.OrderBy(q => q.Ratings.Average(r => r.Value));
-                    break;
+                    return httpQuery.OrderDescending
+                        ? quizzes.OrderByDescending(q => q.Ratings.Average(r => r.Value))
+                        : quizzes.OrderBy(q => q.Ratings.Average(r => r.Value));
                 case ResultOrder.ByNumberOfQuestions:
-                    quizzes = quizzes.OrderBy(q => q.Questions.Count);
-                    break;
+                    return httpQuery.OrderDescending
+                        ? quizzes.OrderByDescending(q => q.Questions.Count)
+                        : quizzes.OrderBy(q => q.Questions.Count);
                 case ResultOrder.ByTimesTaken:
-                    quizzes = quizzes.OrderBy(q => q.TimesSolved);
-                    break;
-            }
-
-            if (httpQuery.OrderDescending)
-            {
-                quizzes = quizzes.Reverse();
+                    return httpQuery.OrderDescending
+                        ? quizzes.OrderByDescending(q => q.TimesSolved)
+                        : quizzes.OrderBy(q => q.TimesSolved);
             }
 
             return quizzes;
