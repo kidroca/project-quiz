@@ -17,40 +17,40 @@
 ### `api/token`
 ##### POST 
 * **Requst Format**:
-    ```javascript
-    {
-        username: required,
-        password: required,
-        grant_type: 'password'
-    }
-    ```
+```javascript
+{
+    username: required,
+    password: required,
+    grant_type: 'password'
+}
+```
 * **Response Data**:
-    ```javascript
-    {
-        access_token: ...,
-        token_type: 'bearer',
-        userName: ...,
-        expires_in: int,
-        .expires: date-string,
-        .issued: date-string
-    }
-    ```
+```javascript
+{
+    access_token: ...,
+    token_type: 'bearer',
+    userName: ...,
+    expires_in: int,
+    .expires: date-string,
+    .issued: date-string
+}
+```
 * *Add **header** `Authorization` to future requests in the following format:*
 `Authorisation: 'Bearer ' + response.access_token`
 
 ### `api/acount/userinfo`
 ##### GET (Requires Token) returns:
-    ```javascript
-    {
-        email,
-        userId,
-        hasRegistered,
-        loginProvider,
-        firstName,
-        lastName,
-        quizzesCreated
-    }
-    ```
+```javascript
+{
+    email,
+    userId,
+    hasRegistered,
+    loginProvider,
+    firstName,
+    lastName,
+    quizzesCreated
+}
+```
  ---
 ## Quiz Related Actions
 
@@ -74,43 +74,43 @@
     * page - int (default = 0)
     * size - int (default = 10)
 * **Sample response.data:** 
-    ```javascript
-    [{
-        category: "General"
-        createdBy: "First Last"
-        createdById: "id"
-        createdOn: "2016-01-08T21:39:47.703"
-        description: "What do you know about whisky?"
-        id: 8
-        questions: [{
-            title: "Whisky is a national drink of:",
-            answers: [{
-                isCorrect: true
-                text: "Scotland"
-            }, ...]
+```javascript
+[{
+    category: "General"
+    createdBy: "First Last"
+    createdById: "id"
+    createdOn: "2016-01-08T21:39:47.703"
+    description: "What do you know about whisky?"
+    id: 8
+    questions: [{
+        title: "Whisky is a national drink of:",
+        answers: [{
+            isCorrect: true
+            text: "Scotland"
         }, ...]
-        rating: 0
-        timesSolved: 3
-        title: "Whisky"
-    }]
-    ```
+    }, ...]
+    rating: 0
+    timesSolved: 3
+    title: "Whisky"
+}]
+```
 ##### POST (Requires Token) creates or updates a quiz
 * **Request Format:**
-    ```javascript
-    {
-        title: string 3 to 128,
-        category: string 3 to 128,
-        description: string 5 to 500,
-        isPrivate: bool,
-        questions: [{
-            title: string 5 to 500,
-            answers: [{
-                text: string 2 to 256,
-                isCorrect: bool
-            }, ...]
+```javascript
+{
+    title: string 3 to 128,
+    category: string 3 to 128,
+    description: string 5 to 500,
+    isPrivate: bool,
+    questions: [{
+        title: string 5 to 500,
+        answers: [{
+            text: string 2 to 256,
+            isCorrect: bool
         }, ...]
-    }
-    ```
+    }, ...]
+}
+```
 * **Response:** `created at api/quizzes/:id`
 
 ### `api/quizzes/{id:int}`
@@ -129,27 +129,27 @@
 ### `api/quizzes/solve`
 ##### POST 
 * **Request Model**: 
-    ```javascript
-    {
-        id: int (quiz id)
-        questions: [{
-            title: string,
-            selected: int (the index of the selected answer)
-        }, ...]
-    ```
-* **Response Data**:
-    ```javascript
-    {
-        id: int,
+```javascript
+{
+    id: int (quiz id)
+    questions: [{
         title: string,
-        totalQuestions: int,
-        wrongAnswers: [{
-            question: string,
-            selectedAnswer: string,
-            correctAnswer: string
-        }, ...]
-    }
-    ```
+        selected: int (the index of the selected answer)
+    }, ...]
+```
+* **Response Data**:
+```javascript
+{
+    id: int,
+    title: string,
+    totalQuestions: int,
+    wrongAnswers: [{
+        question: string,
+        selectedAnswer: string,
+        correctAnswer: string
+    }, ...]
+}
+```
 
 ### `api/quizzes/{username}`
 ##### GET returns the given user's quizzes
