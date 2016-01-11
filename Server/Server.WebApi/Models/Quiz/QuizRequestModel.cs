@@ -26,6 +26,8 @@
         [MaxLength(500)]
         public string Description { get; set; }
 
+        public bool IsPrivate { get; set; }
+
         public string CreatedById { get; set; }
 
         public DateTime? CreatedOn { get; set; }
