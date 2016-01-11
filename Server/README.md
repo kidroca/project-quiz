@@ -1,8 +1,9 @@
 # API Endpoints
 ---
 ## Account Related Actions
+
 ### `api/acount/regiser`
-* ##### POST 
+##### POST 
     ```javascript
     {
     	email: required,
@@ -12,6 +13,7 @@
     	lastName: optional (max: 25)
     }
     ```
+
 ### `api/token`
 * ##### POST 
     * Requst:
@@ -36,8 +38,9 @@
     * *Add **header** `Authorization` to future requests in the following format:*
     `Authorisation: 'Bearer ' + response.access_token`
  ---
+
 ### `api/acount/userinfo`
-* ##### GET (Requires Token) returns:
+##### GET (Requires Token) returns:
 	```javascript
 	{
 		email,
@@ -51,8 +54,9 @@
 	```
  
 ## Quiz Related Actions
+
 ### `api/quizzes`
-* ##### GET (Allows Anonymous) returns an array of quizzes
+##### GET (Allows Anonymous) returns an array of quizzes
     * Available query parameters:
         * category - string
         * keyPhrase - looks for the phrase in quiz title or description
@@ -91,7 +95,7 @@
             title: "Whisky"
         }]
         ```
-* ##### POST (Requires Token) creates or updates a quiz
+##### POST (Requires Token) creates or updates a quiz
     * Request Format:
         ```javascript
         {
@@ -109,20 +113,22 @@
         }
         ```
     * Response: `created at api/quizzes/:id`
+
 ### `api/quizzes/{id:int}`
-* ##### GET returns the quiz by the given id 
+##### GET returns the quiz by the given id 
     * the quiz model is available above 
     * if the quiz is **private** it will only be return if requested by it's maker 
-* ##### DELETE deletes the quiz with the given id
+##### DELETE deletes the quiz with the given id
     * the quiz will be deleted only if request is made by it's creator
+
 ### `api/quizzes/categories`
-* ##### GET returns a collection of category names
+##### GET returns a collection of category names
     * Query parameters:
         * pattern - string (filters categories containing the pattern)
         * take - int (maximal size of the result collection)
 
 ### `api/quizzes/solve`
-* ##### POST 
+##### POST 
     * Request Model: 
         ```javascript
         {
@@ -145,10 +151,12 @@
             }, ...]
         }
         ```
+
 ### `api/quizzes/{username}`
-* ##### GET returns the given user's quizzes
+##### GET returns the given user's quizzes
     * Supports the same query parameters as the GET `api/quizzes` route
     * Returns only the public quizzes of the given user, or if the user request his own quizzes returns the private too
+    
 ### `api/quizzes/rate/{id:int}`
-* ##### POST 
+##### POST 
     * Requires a query parameter **value** - double between `0.1` and `10`
