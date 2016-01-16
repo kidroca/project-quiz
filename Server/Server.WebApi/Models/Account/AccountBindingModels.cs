@@ -47,9 +47,11 @@
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [MinLength(2)]
         [MaxLength(25)]
         public string FirstName { get; set; }
 
+        [MinLength(2)]
         [MaxLength(25)]
         public string LastName { get; set; }
     }
