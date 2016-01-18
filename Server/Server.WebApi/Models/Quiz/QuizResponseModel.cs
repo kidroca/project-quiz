@@ -28,6 +28,8 @@
 
         public double Rating { get; set; }
 
+        public string AvatarUrl { get; set; }
+
         public virtual IEnumerable<QuestionResponseModel> Questions { get; set; }
 
         public void CreateMappings(IConfiguration config)
@@ -36,7 +38,9 @@
                 .ForMember(res => res.CreatedBy, opts => opts.MapFrom(
                     db => db.CreatedBy.FirstName + " " + db.CreatedBy.LastName))
                 .ForMember(res => res.Rating, opts => opts.MapFrom(
-                    db => db.Ratings.Count > 0 ? db.Ratings.Average(r => r.Value) : 0));
+                    db => db.Ratings.Count > 0 ? db.Ratings.Average(r => r.Value) : 0))
+                .ForMember(res => res.AvatarUrl, opts => opts.MapFrom(
+                    db => db.CreatedBy.AvatarUrl));
         }
     }
 }

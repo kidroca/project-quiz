@@ -33,6 +33,10 @@
             set { this.quizzes = value; }
         }
 
+        [Url]
+        [MaxLength(256)]
+        public string AvatarUrl { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
