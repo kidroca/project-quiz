@@ -91,7 +91,6 @@
      * @returns {Function}
      */
     return function(func, wait, options) {
-      'use strict';
       /* istanbul ignore next */
       var getTime = (Date.now || function() {
         return new Date().getTime();
@@ -122,12 +121,10 @@
         }
         return result;
       };
-    }
+    };
   }])
 
   .factory('RzSlider', ['$timeout', '$document', '$window', '$compile', 'RzSliderOptions', 'rzThrottle', function($timeout, $document, $window, $compile, RzSliderOptions, rzThrottle) {
-    'use strict';
-
     /**
      * Slider
      *
@@ -348,9 +345,9 @@
             return;
           if (newValue === oldValue)
             return;
-          if (newValue != null)
+          if (newValue !== null)
             thrHigh();
-          if (self.range && newValue == null || !self.range && newValue != null) {
+          if (self.range && newValue === null || !self.range && newValue !== null) {
             self.applyOptions();
             self.resetSlider();
           }
@@ -535,7 +532,7 @@
         if (hide)
           this.hideEl(el);
         else
-          this.showEl(el)
+          this.showEl(el);
       },
 
       /**
@@ -639,7 +636,7 @@
 
         this.minValue = this.roundStep(+this.options.floor);
 
-        if (this.options.ceil != null)
+        if (this.options.ceil !== null)
           this.maxValue = this.roundStep(+this.options.ceil);
         else
           this.maxValue = this.options.ceil = this.range ? this.scope.rzSliderHigh : this.scope.rzSliderModel;
@@ -931,10 +928,10 @@
         var position = 0,
           dimension = 0;
         if (this.range || !this.options.showSelectionBarEnd) {
-          dimension = Math.abs(this.maxH.rzsp - this.minH.rzsp) + this.handleHalfDim
+          dimension = Math.abs(this.maxH.rzsp - this.minH.rzsp) + this.handleHalfDim;
           position = this.range ? this.minH.rzsp + this.handleHalfDim : 0;
         } else {
-          dimension = Math.abs(this.maxPos - this.minH.rzsp) + this.handleHalfDim
+          dimension = Math.abs(this.maxPos - this.minH.rzsp) + this.handleHalfDim;
           position = this.minH.rzsp + this.handleHalfDim;
         }
         this.setDimension(this.selBar, dimension);
@@ -998,7 +995,7 @@
        * @returns {number}
        */
       roundStep: function(value) {
-        var steppedValue = parseFloat(value / this.step).toPrecision(12)
+        var steppedValue = parseFloat(value / this.step).toPrecision(12);
         steppedValue = Math.round(steppedValue) * this.step;
         steppedValue = steppedValue.toFixed(this.precision);
         return +steppedValue;
@@ -1398,7 +1395,7 @@
           },
           key = keys[keyCode],
           action = actions[key];
-        if (action == null || this.tracking === '') return;
+        if (action === null || this.tracking === '') return;
         event.preventDefault();
 
         var newValue = this.roundStep(this.sanitizeValue(action)),
@@ -1578,7 +1575,6 @@
   }])
 
   .directive('rzslider', ['RzSlider', function(RzSlider) {
-    'use strict';
 
     return {
       restrict: 'E',
@@ -1641,7 +1637,6 @@
    */
 
   module.run(['$templateCache', function($templateCache) {
-  'use strict';
 
   $templateCache.put('rzSliderTpl.html',
     "<span class=rz-bar-wrapper><span class=rz-bar></span></span> <span class=rz-bar-wrapper><span class=\"rz-bar rz-selection\" ng-style=barStyle></span></span> <span class=rz-pointer></span> <span class=rz-pointer></span> <span class=\"rz-bubble rz-limit\"></span> <span class=\"rz-bubble rz-limit\"></span> <span class=rz-bubble></span> <span class=rz-bubble></span> <span class=rz-bubble></span><ul ng-show=showTicks class=rz-ticks><li ng-repeat=\"t in ticks track by $index\" class=tick ng-class=\"{selected: t.selected}\" ng-style=t.style ng-attr-uib-tooltip=\"{{ t.tooltip }}\" ng-attr-tooltip-placement={{t.tooltipPlacement}} ng-attr-tooltip-append-to-body=\"{{ t.tooltip ? true : undefined}}\"><span ng-if=\"t.value != null\" class=tick-value ng-attr-uib-tooltip=\"{{ t.valueTooltip }}\" ng-attr-tooltip-placement={{t.valueTooltipPlacement}}>{{ t.value }}</span></li></ul>"
@@ -1649,5 +1644,5 @@
 
 }]);
 
-  return module
+  return module;
 }));

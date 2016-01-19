@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    title #{headTitle || 'Bad website'}
+
+    include styleheets
+
+  body(ng-app='demoApp')
+    header: nav.navbar.navbar-inverse: .container-fluid
+      .navbar-header: a.navbar-brand(href='/')
+        | Home
+      ul.nav.navbar-nav
+        each link in [{url: '/page1', text: 'First Page'}, {url:'//another.html', text: 'Another Page'}]
+          li: a(href=link.url) #{link.text}
+    #wrapper.container
+      block main-content
+
+    include scripts
