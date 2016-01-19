@@ -9,7 +9,7 @@ logs
 *.log
 
 # Webstorm
-idea
+.idea
 
 # Directory for development app test and try
 dev
