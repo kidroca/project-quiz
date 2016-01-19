@@ -1,18 +1,18 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6ea8b427dbfdb68b9104e4390d883238466c9a2c
 /node_modules
 /dist
 /.tmp
 /.sass-cache
 /bower_components
-<<<<<<< HEAD
-=======
-=======
+
 # Logs
 logs
 *.log
+
+# Webstorm
+idea
+
+# Directory for development app test and try
+dev
 
 # Runtime data
 pids
@@ -37,5 +37,3 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
->>>>>>> 05a6893ee8d7219d46e2c4c370b1800e96efe13e
->>>>>>> 6ea8b427dbfdb68b9104e4390d883238466c9a2c
