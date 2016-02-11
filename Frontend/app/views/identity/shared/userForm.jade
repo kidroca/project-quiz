@@ -3,67 +3,70 @@ name='registerForm', method='post'): fieldset
   legend
     span.fa.fa-sign-in
     | {{ctrl.formLegend}}
-    block block-extension-top
 
-    // Email
-    .form-group
-      label.col-lg-3.control-label(for='email') Email
-      .col-lg-9
-        input.form-control(
-        type='email', required=required, value='pesho@pesho.bg',
-        name='email', id='email', placeholder='Email'
-        )
+  // Top Extension
+  block block-extension-top
 
-    // First Name
-    .form-group
-      label.col-lg-3.control-label(for='firstName') First Name
-      .col-lg-9
-        input.form-control(
-        type='text', required=required, value='Peter',
-        name='firstName', id='firstName', placeholder='First Name'
-        )
+  // Email
+  .form-group
+    label.col-lg-3.control-label(for='email') Email
+    .col-lg-9
+      input.form-control(
+      type='email', required=required, value='pesho@pesho.bg',
+      name='email', id='email', placeholder='Email'
+      )
 
-    // Last Name
-    .form-group
-      label.col-lg-3.control-label(for='lastName') Last Name
-      .col-lg-9
-        input.form-control(
-        type='text', required=required, value='Peshov',
-        name='lastName', id='lastName', placeholder='Last Name'
-        )
+  // First Name
+  .form-group
+    label.col-lg-3.control-label(for='firstName') First Name
+    .col-lg-9
+      input.form-control(
+      type='text', required=required, value='Peter',
+      name='firstName', id='firstName', placeholder='First Name'
+      )
 
-    // Profile Picture
-    .form-group
-      label.col-lg-3.control-label(for='avatar') Profile Picture
-      .col-lg-9
-        input.form-control(
-        type='url',
-        name='avatar', id='avatar', placeholder='Profile Picture Url'
-        )
+  // Last Name
+  .form-group
+    label.col-lg-3.control-label(for='lastName') Last Name
+    .col-lg-9
+      input.form-control(
+      type='text', required=required, value='Peshov',
+      name='lastName', id='lastName', placeholder='Last Name'
+      )
 
-    // Password
-    .form-group
-      label.col-lg-3.control-label(for='password') Password
-      .col-lg-9
-        input.form-control(
-        type='password', required=required,
-        minlength='5',
-        name='password', id='password', placeholder='Password'
-        )
+  // Profile Picture
+  .form-group
+    label.col-lg-3.control-label(for='avatar') Profile Picture
+    .col-lg-9
+      input.form-control(
+      type='url',
+      name='avatar', id='avatar', placeholder='Profile Picture Url'
+      )
 
-    // Confirm Password
-    .form-group
-      label.col-lg-3.control-label(for='confirmPassword') Confirm Password
-      .col-lg-9
-        input.form-control(
-        type='password', required=required,
-        minlength='5',
-        name='confirmPassword', id='confirmPassword', placeholder='Confirm password'
-        )
+  // Password
+  .form-group
+    label.col-lg-3.control-label(for='password') Password
+    .col-lg-9
+      input.form-control(
+      type='password', required=required,
+      minlength='5',
+      name='password', id='password', placeholder='Password'
+      )
 
-    block block-extension-bottom
+  // Confirm Password
+  .form-group
+    label.col-lg-3.control-label(for='confirmPassword') Confirm Password
+    .col-lg-9
+      input.form-control(
+      type='password', required=required,
+      minlength='5',
+      name='confirmPassword', id='confirmPassword', placeholder='Confirm password'
+      )
 
-      // Submit
-    .form-group
-      .col-lg-9.col-lg-offset-3.clearfix
-        button.btn.btn-primary.pull-right Submit
+  // Bottom Extensions
+  block block-extension-bottom
+
+    // Submit
+  .form-group
+    .col-lg-9.col-lg-offset-3.clearfix
+      button.btn.btn-primary.pull-right Submit

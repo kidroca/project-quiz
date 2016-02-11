@@ -2,7 +2,9 @@
     'use strict';
 
     function RegisterController($location, auth) {
-        var self = this;      
+        var self = this;
+
+        self.formLegend = "Register";
 
         self.register = function register(user, registerForm) {
             if (registerForm.$valid) {

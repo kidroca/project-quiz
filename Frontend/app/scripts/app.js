@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+  var BASE_URL = "http://localhost:42252/";
 
   function config($routeProvider) {
 
@@ -56,11 +57,11 @@
         controller: 'LoginController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
-      //.when('/me', {
-      //  templateUrl: 'views/user/profile.html',
-      //  controller: 'LoginController',
-      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      //})
+      .when('/me', {
+        templateUrl: 'views/Profile/profile.html',
+        controller: 'LoginController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
       //.when('/quizzes', {
       //  templateUrl: 'views/quiz/quizzes.html',
       //  controller: 'QuizzesController',
@@ -137,5 +138,5 @@
     ])
     .config(['$routeProvider', config])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
-    .constant('baseUrl', 'http://localhost:9578/');
+    .constant('baseUrl', BASE_URL);
 }());
