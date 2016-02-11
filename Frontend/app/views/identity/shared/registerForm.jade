@@ -1,0 +1,14 @@
+extends userForm
+block block-extension-top
+
+  // Username
+  .form-group
+    label.col-lg-3.control-label(for='username') Username
+    .col-lg-9
+      input.form-control(
+      type='text', required='required',
+      minlength='#{minUsernameLength || 6}',
+      maxlength='#{maxUsernameLength || 20}',
+      name='username', id='username', placeholder='Username', value='peshoAb'
+      )
+

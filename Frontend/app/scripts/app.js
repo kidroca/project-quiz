@@ -16,33 +16,33 @@
       }]
     };
 
-    var solveQuizResolvers = {
-      loadQuizIfNeeded: ['$q', '$route', '$sessionStorage', 'QuizDataService',
-        function solveQuizResolvers($q, $route, $sessionStorage, QuizDataService) {
-
-          if (!$sessionStorage.solveQuiz || $sessionStorage.solveQuiz.id !== +$route.current.params.id) {
-            var deffered = $q.defer();
-            
-            QuizDataService.getQuiz($route.current.params.id)
-              .then(function(result) {
-                console.log(result);
-                $sessionStorage.solveQuiz = result;
-                deffered.resolve(true);
-              }, function (error) {
-                deffered.reject(error);
-              });
-
-              return deffered.promise;
-          } else {
-            return true;
-          }
-        }
-      ]
-    };
+    //var solveQuizResolvers = {
+    //  loadQuizIfNeeded: ['$q', '$route', '$sessionStorage', 'QuizDataService',
+    //    function solveQuizResolvers($q, $route, $sessionStorage, QuizDataService) {
+    //
+    //      if (!$sessionStorage.solveQuiz || $sessionStorage.solveQuiz.id !== +$route.current.params.id) {
+    //        var deffered = $q.defer();
+    //
+    //        QuizDataService.getQuiz($route.current.params.id)
+    //          .then(function(result) {
+    //            console.log(result);
+    //            $sessionStorage.solveQuiz = result;
+    //            deffered.resolve(true);
+    //          }, function (error) {
+    //            deffered.reject(error);
+    //          });
+    //
+    //          return deffered.promise;
+    //      } else {
+    //        return true;
+    //      }
+    //    }
+    //  ]
+    //};
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/home/home.html',
         controller: 'HomeController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
@@ -56,44 +56,44 @@
         controller: 'LoginController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
-      .when('/me', {
-        templateUrl: 'views/user/profile.html',
-        controller: 'LoginController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      })
-      .when('/quizzes', {
-        templateUrl: 'views/quiz/quizzes.html',
-        controller: 'QuizzesController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      })
-      .when('/quizzes/add', {
-        templateUrl: 'views/quiz/add-quiz.html',
-        controller: 'CreateQuizController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-        resolve: routeResolvers.authenticated
-       })
-      .when('/quizzes/edit', {
-        templateUrl: 'views/quiz/add-quiz.html',
-        controller: 'UpdateQuizController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-        resolve: routeResolvers.authenticated
-      })
-      .when('/quizzes/solve/:id', {
-        templateUrl: 'views/quiz/solve-quiz.html',
-        controller: 'SolveQuizController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-        resolve: solveQuizResolvers.loadQuizIfNeeded
-      })
-      .when('/quizzes/result', {
-        templateUrl: 'views/quiz/result.html',
-        controller: 'ResultController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      })
+      //.when('/me', {
+      //  templateUrl: 'views/user/profile.html',
+      //  controller: 'LoginController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      //})
+      //.when('/quizzes', {
+      //  templateUrl: 'views/quiz/quizzes.html',
+      //  controller: 'QuizzesController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      //})
+      //.when('/quizzes/add', {
+      //  templateUrl: 'views/quiz/add-quiz.html',
+      //  controller: 'CreateQuizController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+      //  resolve: routeResolvers.authenticated
+      // })
+      //.when('/quizzes/edit', {
+      //  templateUrl: 'views/quiz/add-quiz.html',
+      //  controller: 'UpdateQuizController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+      //  resolve: routeResolvers.authenticated
+      //})
+      //.when('/quizzes/solve/:id', {
+      //  templateUrl: 'views/quiz/solve-quiz.html',
+      //  controller: 'SolveQuizController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+      //  resolve: solveQuizResolvers.loadQuizIfNeeded
+      //})
+      //.when('/quizzes/result', {
+      //  templateUrl: 'views/quiz/result.html',
+      //  controller: 'ResultController',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      //})
+      //.when('/about', {
+      //  templateUrl: 'views/about.html',
+      //  controller: 'AboutCtrl',
+      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      //})
       .otherwise({
         redirectTo: '/'
       });
@@ -127,15 +127,15 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
-      'ngStorage',
-      'ui.bootstrap',
-      'toggle-switch',
-      'rzModule',
+      //'ngStorage',
+      //'ui.bootstrap',
+      //'toggle-switch',
+      //'rzModule',
       'quizProjectApp.services',
       'quizProjectApp.filters',
-      'quizProjectApp.controllers',
+      'quizProjectApp.controllers'
     ])
     .config(['$routeProvider', config])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
-    .constant('baseUrl', 'http://localhost:42252/');
+    .constant('baseUrl', 'http://localhost:9578/');
 }());

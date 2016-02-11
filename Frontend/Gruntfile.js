@@ -11,8 +11,20 @@ module.exports = function (grunt) {
         // DEV VARIABLES =========
         // =======================
         dev: {
-            scripts: ['dev/scripts/**/*.js'],
-            css: ['dev/styles/**/*.css']
+            libs: [
+                'dev/libs/**/*.js',
+                '!dev/libs/**/src/**',
+                '!dev/libs/**/demo/**',
+                '!dev/libs/**/*.min.js',
+                '!dev/libs/**/*index.js',
+                '!dev/libs/jquery/dist/jquery.js', // jquery is declared manually on top
+                '!dev/libs/angular/angular.js' // angular is declared manually on top
+            ],
+            scripts: [
+                'dev/scripts/**/*.js',
+                '!dev/scripts/libs/**'
+            ],
+            css: ['dev/styles/**/*.css', 'dev/libs/**/*.css', '!dev/libs/**/demo/**']
         },
         // =======================
         // JADE CONFIG ===========
@@ -25,7 +37,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/',
-                    src: ['index.jade', 'views/**/*.jade'],
+                    src: ['index.jade', 'views/**/*.jade', '!views/**/shared/**'],
                     dest: 'dev/',
                     ext: '.html'
                 }]
@@ -42,7 +54,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/less',
-                    src: ['**/*.less'],
+                    src: ['**/*.less', '!helpers/**'],
                     dest: 'dev/styles',
                     ext: '.css'
                 }]
@@ -64,7 +76,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/',
-                    src: ['images/**'],
+                    src: ['images/**', 'fonts/**', 'libs/**'],
                     dest: 'dev/'
                 }]
             },
@@ -80,7 +92,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'dev/',
-                    src: ['images/**', '**/*.html', '!views/shared/**'],
+                    src: ['images/**', '**/*.html', 'fonts/**'],
                     dest: 'dist/'
                 }]
             }
@@ -91,10 +103,11 @@ module.exports = function (grunt) {
         jshint: {
             lint: {
                 options: {
-                    jshintrc: './jshintrc',
-                    reporter: require('jshint-stylish')
+                    jshintrc: '.jshintrc',
+                    reporter: require('jshint-stylish'),
+                    force: true
                 },
-                src: 'app/scripts/**/*.js'
+                src: ['app/scripts/**/*.js', '!app/scripts/libs/**']
             },
         },
         // =======================
@@ -133,23 +146,22 @@ module.exports = function (grunt) {
                     'dev/scripts/**/*.js'
                 ]
             },
-            // change
             js: {
-                files: ['app/scripts/**/*.js'],
+                files: ['app/scripts/**/*.js', 'app/libs/**/*.js'],
                 // the created js files linting is done here
                 tasks: ['newer:copy:scripts', 'newer:jshint']
             },
-            stylus: {
-                files: ['app/stylus/**/*.styl'],
-                tasks: ['newer:stylus:dev']
+            less: {
+                files: ['app/less/**/*.less'],
+                tasks: ['newer:less:dev']
             },
             views: {
                 files: ['app/**/*.jade'],
                 tasks: ['jade:dev'] // removed newer: because changes to layout are not reflection
             },
             includeSource: {
-                files: ['dev/scripts/**/*.js', 'dev/styles/**/*.js'],
-                tasks: ['includeSource:singlePage'],
+                files: ['dev/scripts/**/*.js', 'dev/styles/**/*.css '],
+                tasks: ['includeSource'],
                 options: {
                     event: ['added', 'deleted']
                 }
@@ -173,12 +185,10 @@ module.exports = function (grunt) {
                 }
             },
             targets: {
-                // this main template hold all the style and script references and is applied to all pages
-                files: {'app/views/shared/layout.jade': 'app/views/shared/layout.jade'}
-            },
-            singlePage: {
-                // used in a single page application
-                files: {'dev/index.html': 'dev/index.html'}
+                files: {
+                    'app/views/shared/scripts.jade': 'app/views/shared/scripts.jade',
+                    'app/views/shared/stylesheets.jade': 'app/views/shared/stylesheets.jade'
+                }
             }
         },
         // =======================
@@ -245,8 +255,8 @@ module.exports = function (grunt) {
         'copy:scripts',
         'copy:dev',
         'less:dev',
-        'jade:dev',
-        'includeSource:singlePage',
+        'includeSource',
+        'jade:dev'
     ]);
 
     grunt.registerTask('serve', [

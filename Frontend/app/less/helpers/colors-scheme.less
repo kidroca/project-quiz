@@ -1,0 +1,27 @@
+@import "mix-ins";
+
+// main
+@background: #11161c; //#31363B;
+@background-blue: rgb(17, 22, 28);
+@primary-light: #39434c;
+@layout-headings-links: #fff;
+@nav-link-hovered: #8d96a0;
+
+// Colors independent from theme
+@content-article-color: #838383;
+@shadow: rgba(0, 0, 0, 0.62);
+@carousel-container-bg: #25575e;
+@btn-default-color: #1f262d;
+
+// ======== gradients ============
+// Panel
+@panel-gradient-start: rgb(62, 72, 82);
+@panel-gradient-end: rgb(50, 59, 68);
+
+// Btn
+@btn-start-grad: #323a43;
+@btn-end-grad: @btn-default-color;
+.btn-grad {
+  background-color: @btn-default-color;
+  .linear-grad(@colors: @btn-start-grad, @btn-end-grad; @dir: 180deg);
+}

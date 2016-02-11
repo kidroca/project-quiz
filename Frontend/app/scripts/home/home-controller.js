@@ -1,12 +1,12 @@
 ﻿(function() {
     'use strict';
 
-    function HomeController() {
+    function HomeController($scope) {
         var self = this;
 
         self.hi = 'HI!';
     }
 
     angular.module('quizProjectApp.controllers')
-        .controller('HomeController', [HomeController]);
+        .controller('HomeController', ['$scope', HomeController]);
 }());

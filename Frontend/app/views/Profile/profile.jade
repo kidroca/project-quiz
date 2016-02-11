@@ -1,0 +1,51 @@
+.page-header.text-center.clearfix
+   h1
+      span.fa.fa-anchor
+      |  Profile Page
+   a.btn.btn-default.btn-sm.pull-left(href='/profile/update') Update Info
+   a.btn.btn-default.btn-sm.pull-right(href='/logout') Logout
+
+.row.profiles
+   // Local
+   .col-md-12
+      .panel.panel-primary
+         .panel-heading: h3.panel-title
+            span.fa.fa-user
+               |  Local
+
+         .panel-body
+            .col-md-4.profile-picture
+               img(
+               src="currentUser.avatar",
+               alt='profile photo').img-thumbnail.img-responsive
+
+            ul.list-group.col-md-6
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Id
+                  .col-md-6 currentUser.id
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Username
+                  .col-md-6 currentUser.username
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Email
+                  .col-md-6 currentUser.email
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right First Name
+                  .col-md-6 currentUser.firstName
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Last Name
+                  .col-md-6 currentUser.lastName
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Facebook Profile
+                  .col-md-6
+                     if (currentUser)
+                        a(href="currentUser.facebook") Visit
+                     else
+                        | No information
+               li.list-group-item: .form-group
+                  label.col-md-6.text-right Youtube Profile
+                  .col-md-6
+                     if (currentUser   )
+                        a(href=currentUser.youtube) Visit
+                     else
+                        | No information
