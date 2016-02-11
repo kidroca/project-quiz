@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+  head
+    title Project Quiz
+
+    include stylesheets
+
+  body(ng-app='quizProjectApp' ng-controller='MainController as mainCtrl')
+    #main-illumination.illumination
+    #main-wrapper
+
+      include header
+
+      #content-wrapper.container-fluid(ng-view='')
+        block main-content
+
+    include footer
+
+    include scripts

@@ -1,0 +1,47 @@
+header
+  #logo: img(src='images/logo.png', alt='logo')
+
+  nav.navbar.navbar-inverse: .container-fluid
+    .navbar-header
+
+      button.navbar-toggle.collapsed(
+      data-toggle='collapse',
+      data-target='#main-nav',
+      aria-expanded='false')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+
+    #main-nav.navbar-collapse.collapse(aria-expanded='false' style='height: 0.8px;')
+      ul.nav.navbar-nav
+        li: a.home-link(href='#/') Home
+
+        li.dropdown
+          a.dropdown-toggle(href='') Features
+
+          ul.dropdown-menu.drop-shadow(role='menu')
+            li: a.home-link(href='#/') Home
+            li: a(href='') Themes
+            li: a(href='') Features
+            li: a(href='') About
+            li: a(href='') Quizzes
+
+        li.dropdown
+          a.dropdown-toggle(href='') Themes
+
+          ul.dropdown-menu(role='menu')
+            li: a(href='') Black
+            li: a(href='') Green
+            li: a(href='') Purple
+            li: a(href='') Red
+        //li: a(href='#') Quizzes
+        //li: a(href='#') About
+        //li: a(href='#') Blog
+        //li: a(href='#') Support
+        //li: a(href='#') Affiliates
+        li: a(href='#/login') Login
+        li: a(href='#/register') Join Today
+        li: a(href='#/me') Profile
+        //li: a(href='#') Location
+        //li: a(href='#') Support Forum

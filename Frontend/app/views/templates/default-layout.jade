@@ -1,0 +1,14 @@
+.page-wrapper: h2 {{ctrl.pageTitle}}
+
+.content
+ .page-wrapper
+   .current-route: span(ng-bind-html='ctrl.pageRoute')
+   .row
+
+     // Main Content
+     .col-lg-9.page-content
+       section(ng-include='ctrl.mainContentTemplate')
+
+     // Side Content
+     .col-lg-3.sidebar
+       aside(ng-include='ctrl.sidebarTemplate')

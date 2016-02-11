@@ -1,33 +1,35 @@
-.col-lg-8.col-lg-offset-2
+.content
+  .row
+    .col-lg-8.col-lg-offset-2
+      .widget: .well
+        form.form-horizontal(
+        name='loginForm', method='post'): fieldset
 
- form.form-horizontal(
- name='loginForm', method='post'): fieldset
+          legend
+            span.fa.fa-sign-in
+            | Login
 
-   legend
-     span.fa.fa-sign-in
-     |  Login
+          // Email
+          .form-group
+            label.col-md-3.control-label(for="email") Email
+            .col-md-9
+              input.form-control(type="email" ng-model="user.username" required
+              ng-focus="emailFocus=true" ng-blur="emailFocus=false"
+              name="email" placeholder="Email")
 
-   // Email
-   .form-group
-      label.col-md-3.control-label(for="email") Email
-      .col-md-9
-      input.form-control(type="email" ng-model="user.username" required
-      ng-focus="emailFocus=true" ng-blur="emailFocus=false"
-      name="email" placeholder="Email")
+          // Password
+          .form-group
+            label.col-md-3.control-label(for="password") Password
+            .col-md-9
+              input.form-control(type="password" ng-model="user.password" required
+              ng-focus="passwordFocus=true" ng-blur="passwordFocus=false"
+              name="password" placeholder="Password")
 
-   // Password
-   .form-group
-      label.col-md-3.control-label(for="password") Password
-      .col-md-9
-      input.form-control(type="password" ng-model="user.password" required
-      ng-focus="passwordFocus=true" ng-blur="passwordFocus=false"
-      name="password" placeholder="Password")
+          // Submit
+          .form-group
+            .col-lg-9.col-lg-offset-3.clearfix
+              button.btn.btn-primary.pull-right Submit
 
-   // Submit
-   .form-group
-     .col-lg-9.col-lg-offset-3.clearfix
-       button.btn.btn-primary.pull-right Submit
-
- hr
- p.text-right #{'Need an account? '}
-   a(href='/register') Signup
+        hr
+        p.text-right #{'Need an account? '}
+          a(href='/register') Signup

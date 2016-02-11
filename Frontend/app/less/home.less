@@ -1,11 +1,7 @@
 // ======== Imports =============
-@import "helpers/mix-ins";
-@import "helpers/colors-scheme";
-@import "helpers/sizes";
-@import "helpers/fonts";
+@import "index";
 
-
-
+// ======== Main ================
 .carousel-container {
   font-family: @font-thin;
 
@@ -163,18 +159,8 @@
 }
 
 .content {
-  position: relative;
 
   margin-top: 6rem;
-  border: 1px solid #fff;
-  border-left: 0;
-  border-right: 0;
-  .box-shadow-double(@blur: 20px);
-  .box-shadow-inset(@blur: 15px);
-  .box-shadow-double-inset(@double-shadow, @inset-double);
-
-  background-image: url('../images/content-bg.png');
-  background-repeat: repeat;
 
   .illumination {
     .transform(@property: rotate; @value: 180deg;);
@@ -274,7 +260,6 @@
       left: 0;
       right: 0;
       margin: 0 auto;
-      text-shadow: none;
     }
 
     .read-more-state ~ .read-more-trigger:before {
@@ -292,14 +277,6 @@
     h3 {
       max-width: @base-width;
       margin: 4rem auto;
-    }
-
-    .btn-default {
-      border: 1px solid #000;
-      border-radius: 5px;
-      color: #fff;
-      .btn-grad();
-      .box-shadow(@y: 1px; @blur: 2px);
     }
   }
 

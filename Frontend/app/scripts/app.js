@@ -43,7 +43,7 @@
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home/home.html',
+        templateUrl: 'views/home.html',
         controller: 'HomeController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
@@ -58,8 +58,8 @@
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .when('/me', {
-        templateUrl: 'views/Profile/profile.html',
-        controller: 'LoginController',
+        templateUrl: 'views/templates/default-layout.html',
+        controller: 'ProfileController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       //.when('/quizzes', {

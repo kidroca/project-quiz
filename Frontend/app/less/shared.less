@@ -1,0 +1,112 @@
+// ======== Imports =============
+@import "index";
+
+// ========= Common/Shared =============
+
+.content {
+  position: relative;
+
+  margin-top: 1rem;
+  padding: 0 1rem;
+  border: 1px solid #fff;
+  border-left: 0;
+  border-right: 0;
+  .box-shadow-double(@blur: 20px);
+  .box-shadow-inset(@blur: 15px);
+  .box-shadow-double-inset(@double-shadow, @inset-double);
+
+  background-image: url('../images/content-bg.png');
+  background-repeat: repeat;
+}
+
+.illumination {
+  position: absolute;
+  .radial-grad(
+  @colors:
+    rgba(255, 255, 255, 0.95) 20%,
+    rgba(255, 255, 255, 0.25) 49%,
+    rgba(255, 255, 255, 0.02) 66%,
+    transparent 70%;
+  @pos: top center;
+  @type: circle);
+
+  mix-blend-mode: soft-light;
+}
+
+#main-illumination {
+  width: 100%;
+  height: 50rem;
+  top: 0;
+  left: 0;
+}
+
+.btn-default {
+  border: 1px solid #000;
+  border-radius: 5px;
+  color: #fff;
+  .btn-grad();
+  .box-shadow(@y: 1px; @blur: 2px);
+  text-shadow: none;
+  transition: 0.25s;
+
+  &:hover {
+    color: darken(#fff, 30%);
+//        background-color: lighten(@btn-default-color, 30%);
+    border-color: lighten(#000, 20%);
+//        text-shadow: 0 0 1px darken(#fff, 30%);
+  }
+}
+
+.widget {
+
+  > h3 {
+    font-family: @font-thin;
+  }
+
+  .well {
+    border-radius: 15px;
+    .linear-grad(darken(white, 3%), white);
+  }
+}
+
+.page-wrapper {
+  max-width: @base-width;
+  margin: 0 auto;
+
+  h2 {
+    font-family: @font-thin;
+    color: @pageHeading;
+    .pageTitleShadow();
+  }
+
+  // Todo: remove border
+  border: 1px solid #4affff;
+
+  color: @pageText;
+  .pageTextShadow();
+
+  .current-route {
+    margin: 2.5rem 0 4rem;
+    font-size: 12px;
+
+    strong {
+      font-weight: normal;
+      color: @sectionHeading;
+    }
+  }
+
+  .page-content {
+    padding: 0;
+    // Todo: remove border
+    border: 1px solid #4affff;
+  }
+
+  .sidebar {
+    // Todo: remove border
+    border: 1px solid #4affff;
+  }
+}
+
+.post {
+
+}

@@ -186,8 +186,8 @@ module.exports = function (grunt) {
             },
             targets: {
                 files: {
-                    'app/views/shared/scripts.jade': 'app/views/shared/scripts.jade',
-                    'app/views/shared/stylesheets.jade': 'app/views/shared/stylesheets.jade'
+                    'app/views/shared/main/scripts.jade': 'app/views/shared/main/scripts.jade',
+                    'app/views/shared/main/stylesheets.jade': 'app/views/shared/main/stylesheets.jade'
                 }
             }
         },

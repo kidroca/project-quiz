@@ -7,11 +7,20 @@
 @layout-headings-links: #fff;
 @nav-link-hovered: #8d96a0;
 
-// Colors independent from theme
+//========== THEME INDEPENDENT ===============
 @content-article-color: #838383;
-@shadow: rgba(0, 0, 0, 0.62);
-@carousel-container-bg: #25575e;
-@btn-default-color: #1f262d;
+  @shadow: rgba(0, 0, 0, 0.62);
+  @carousel-container-bg: #25575e;
+  @btn-default-color: #1f262d;
+
+// Text
+@pageText: #a3a3a3;
+@pageHeading: white;
+@sectionHeading: #505050;
+.pageTextShadow { text-shadow: 1px 1px 1px white; }
+.pageTitleShadow { text-shadow: 1px 1px 1px black; }
+
+// ===========================================
 
 // ======== gradients ============
 // Panel
@@ -21,6 +30,7 @@
 // Btn
 @btn-start-grad: #323a43;
 @btn-end-grad: @btn-default-color;
+
 .btn-grad {
   background-color: @btn-default-color;
   .linear-grad(@colors: @btn-start-grad, @btn-end-grad; @dir: 180deg);
