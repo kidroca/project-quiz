@@ -88,7 +88,12 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/',
-                    src: ['images/**', 'fonts/**', 'libs/**'],
+                    src: [
+                        'images/**',
+                        'fonts/**',
+                        'libs/**',
+                        'views/**/*.html'
+                    ],
                     dest: 'dev/'
                 }]
             },
@@ -120,7 +125,7 @@ module.exports = function (grunt) {
                     force: true
                 },
                 src: ['app/scripts/**/*.js', '!app/scripts/libs/**']
-            },
+            }
         },
         // =======================
         // CONNECT CONFIG ========
@@ -168,8 +173,10 @@ module.exports = function (grunt) {
                 tasks: ['less:dev']
             },
             views: {
-                files: ['app/**/*.jade'],
-                tasks: ['jade:dev'] // removed newer: because changes to layout are not reflection
+                files: ['app/views/**/*.jade', 'app/index.jade'],
+                // no newer for jade because if the change is in a template
+                // a file using the template won't be considered newer
+                tasks: ['jade:dev', 'newer:copy:dev']
             },
             includeSource: {
                 files: ['dev/scripts/**/*.js', 'dev/styles/**/*.css '],
