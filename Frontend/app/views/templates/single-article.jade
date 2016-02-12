@@ -1,2 +1,8 @@
 article
-   h3 {{article.heading}}
+   .article-header(transclude-id='article-header')
+
+   .article-body.clearfix
+      .article-image.pull-left
+         img.img-responsive(src='{{articleImage}}' alt='article image')
+
+      .article-content.pull-left(transclude-id='article-content')

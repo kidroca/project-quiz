@@ -117,6 +117,8 @@
 
   angular.module('quizProjectApp.filters', []);
 
+  angular.module('quizProjectApp.directives', []);
+
   angular.module('quizProjectApp.controllers', ['quizProjectApp.services']);
 
   angular
@@ -132,11 +134,16 @@
       //'ui.bootstrap',
       //'toggle-switch',
       //'rzModule',
+      'ngToast',
       'quizProjectApp.services',
       'quizProjectApp.filters',
+      'quizProjectApp.directives',
       'quizProjectApp.controllers'
     ])
     .config(['$routeProvider', config])
+    .config(['$httpProvider', function($httpProvider) {
+      $httpProvider.interceptors.push('responseInterceptor');
+    }])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
     .constant('baseUrl', BASE_URL);
 }());

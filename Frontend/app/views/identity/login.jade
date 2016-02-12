@@ -9,13 +9,13 @@
             span.fa.fa-sign-in
             | Login
 
-          // Email
+          // Username
           .form-group
-            label.col-md-3.control-label(for="email") Email
+            label.col-md-3.control-label(for="username") Username
             .col-md-9
-              input.form-control(type="email" ng-model="user.username" required
-              ng-focus="emailFocus=true" ng-blur="emailFocus=false"
-              name="email" placeholder="Email")
+              input.form-control(type="text" ng-model="user.username" required
+              ng-focus="usernameFocus=true" ng-blur="usernameFocus=false"
+              name="username" placeholder="Username")
 
           // Password
           .form-group
@@ -28,7 +28,9 @@
           // Submit
           .form-group
             .col-lg-9.col-lg-offset-3.clearfix
-              button.btn.btn-primary.pull-right Submit
+              button.btn.btn-primary.pull-right(
+              ng-click='ctrl.login(user, loginForm)'
+              ng-disabled='loginForm.$invalid') Submit
 
         hr
         p.text-right #{'Need an account? '}

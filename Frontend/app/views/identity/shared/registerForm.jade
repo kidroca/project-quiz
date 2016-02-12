@@ -2,11 +2,12 @@ extends userForm
 block block-extension-top
 
   // Username
-  .form-group
+  .form-group.required
     label.col-lg-3.control-label(for='username') Username
     .col-lg-9
       input.form-control(
       type='text', required='required',
+      ng-model='user.username',
       minlength='#{minUsernameLength || 6}',
       maxlength='#{maxUsernameLength || 20}',
       name='username', id='username', placeholder='Username', value='peshoAb'

@@ -7,30 +7,21 @@ name='registerForm', method='post'): fieldset
   // Top Extension
   block block-extension-top
 
-  // Email
-  .form-group
-    label.col-lg-3.control-label(for='email') Email
-    .col-lg-9
-      input.form-control(
-      type='email', required=required, value='pesho@pesho.bg',
-      name='email', id='email', placeholder='Email'
-      )
-
   // First Name
-  .form-group
+  .form-group.required
     label.col-lg-3.control-label(for='firstName') First Name
     .col-lg-9
       input.form-control(
-      type='text', required=required, value='Peter',
+      type='text', required=required, ng-model="user.firstName",
       name='firstName', id='firstName', placeholder='First Name'
       )
 
   // Last Name
-  .form-group
+  .form-group.required
     label.col-lg-3.control-label(for='lastName') Last Name
     .col-lg-9
       input.form-control(
-      type='text', required=required, value='Peshov',
+      type='text', required=required, ng-model="user.lastName",
       name='lastName', id='lastName', placeholder='Last Name'
       )
 
@@ -39,27 +30,36 @@ name='registerForm', method='post'): fieldset
     label.col-lg-3.control-label(for='avatar') Profile Picture
     .col-lg-9
       input.form-control(
-      type='url',
+      type='url', ng-model="user.avatarUrl",
       name='avatar', id='avatar', placeholder='Profile Picture Url'
       )
 
-  // Password
+  // Email
   .form-group
+    label.col-lg-3.control-label(for='email') Email
+    .col-lg-9
+      input.form-control(
+      type='email', name='email', ng-model="user.email",
+      id='email', placeholder='Email'
+      )
+
+  // Password
+  .form-group.required
     label.col-lg-3.control-label(for='password') Password
     .col-lg-9
       input.form-control(
       type='password', required=required,
-      minlength='5',
+      minlength='5', ng-model="user.password",
       name='password', id='password', placeholder='Password'
       )
 
   // Confirm Password
-  .form-group
+  .form-group.required
     label.col-lg-3.control-label(for='confirmPassword') Confirm Password
     .col-lg-9
       input.form-control(
       type='password', required=required,
-      minlength='5',
+      minlength='5', ng-model="user.confirmPassword",
       name='confirmPassword', id='confirmPassword', placeholder='Confirm password'
       )
 
@@ -69,4 +69,7 @@ name='registerForm', method='post'): fieldset
     // Submit
   .form-group
     .col-lg-9.col-lg-offset-3.clearfix
-      button.btn.btn-primary.pull-right Submit
+      button.btn.btn-primary.pull-right(
+      ng-click='ctrl.register(user, registerForm)'
+      ng-disabled='registerForm.$invalid'
+      ) Submit

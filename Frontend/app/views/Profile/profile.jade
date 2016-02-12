@@ -1,0 +1,14 @@
+single-article(article-image='{{ctrl.user.avatarUrl}}')
+   h4.sub-title(transclude-to='article-header')
+      | {{ctrl.user.username}} registered on
+      span {{ctrl.user.registeredOn | date}}
+
+   ul.list-group(transclude-to='article-content')
+      li.list-group-item Username:
+         span.badge {{ctrl.user.username}}
+      li.list-group-item First Name:
+         span.badge {{ctrl.user.firstName}}
+      li.list-group-item Last Name:
+         span.badge {{ctrl.user.lastName}}
+      li.list-group-item Email:
+         span.badge {{ctrl.user.email}}

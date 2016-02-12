@@ -1,0 +1,16 @@
+.widget
+  h3 {{ctrl.recent.title}}
+  .well
+    p {{ctrl.recent.content}}
+
+.widget
+  h3 {{ctrl.comments.title}}
+  .well
+    ul: li(ng-repeat='comment in ctrl.comments.items track by $index')
+      | {{comment}}
+
+.widget
+  h3 {{ctrl.comments.title}}
+  .well
+    ul: li(ng-repeat='comment in ctrl.comments.items track by $index')
+      | {{comment}}

@@ -56,6 +56,14 @@
   @box-shadow: @arguments;
 }
 
+.box-shadow-inset(@x: 0; @y: 10px; @blur: 10px; @color: rgba(0, 0, 0, 0.25)) {
+  @inset-shadow: inset @arguments;
+
+  -webkit-box-shadow: @inset-shadow;
+  -moz-box-shadow: @inset-shadow;
+  box-shadow: @inset-shadow;
+}
+
 .box-shadow-double(@x: 0; @y: -10px; @blur: 3px; @color: rgba(0, 0, 0, 0.7)) {
 
   .box-shadow(@x; @y; @blur; @color);
@@ -70,12 +78,12 @@
   box-shadow: @double-shadow;
 }
 
-.box-shadow-inset(@x: 0; @y: 10px; @blur: 10px; @color: rgba(0, 0, 0, 0.25)) {
+.box-shadow-inset-double(@x: 0; @y: 10px; @blur: 10px; @color: rgba(0, 0, 0, 0.25)) {
 
   @x2: -@x;
   @y2: -@y;
 
-  @inset-double: @arguments inset, @x2 @y2 @blur @color inset;
+  @inset-double: inset @arguments, inset @x2 @y2 @blur @color;
 
   -webkit-box-shadow: @inset-double;
   -moz-box-shadow: @inset-double;
@@ -91,15 +99,15 @@
   box-shadow: @double-inset-shadow;
 }
 
-.border-gradient(@dir: to top; @colors: #000, transparent) {
+.border-gradient(@dir: top; @colors: #000, transparent) {
   -webkit-border-image:
-          -webkit-linear-gradient(@arguments) 1 100%;
+          -webkit-linear-gradient(@dir, @colors) 1 100%;
   -moz-border-image:
-          -moz-linear-gradient(@arguments) 1 100%;
+          -moz-linear-gradient(@dir, @colors) 1 100%;
   -o-border-image:
-          -o-linear-gradient(@arguments) 1 100%;
+          -o-linear-gradient(@dir, @colors) 1 100%;
   border-image:
-          linear-gradient(@arguments) 1 100%;
+          linear-gradient(@dir, @colors) 1 100%;
 }
 
 .absolute-center {
