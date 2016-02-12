@@ -26,11 +26,23 @@ body {
   height: 1900px !important;
 }
 
+a {
+  color: @layout-headings-links;
+  padding: 1.5rem 1rem;
+
+  &:hover, a.selected {
+    color: @nav-link-hovered;
+  }
+
+  &.home-link {
+    font-style: italic;
+    font-family: georgia, serif;
+  }
+}
+
 #main-wrapper {
 
   header {
-    margin: 0 auto;
-    max-width: @base-width;
 
     #logo {
       margin-bottom: 3rem;
@@ -43,17 +55,10 @@ body {
 
       a {
         color: @layout-headings-links;
-        //          font-family: @font-thin;
-        //          font-size: 1.6rem;
         padding: 1.5rem 1rem;
 
         &:hover, a.selected {
           color: @nav-link-hovered;
-        }
-
-        &.home-link {
-          font-style: italic;
-          font-family: georgia, serif;
         }
       }
 
@@ -93,20 +98,20 @@ body {
       }
     }
   }
+}
 
-  #content-wrapper {
-    margin-top: 6rem;
-    padding: 0;
-    width: 100%;
+#content-wrapper {
+  margin-top: 6rem;
+  padding: 0;
+  width: 100%;
 
-    h2.page-heading {
-      color: @layout-headings-links;
-      font-family: @font-thin;
-    }
+  h2.page-heading {
+    color: @layout-headings-links;
+    font-family: @font-thin;
   }
 }
 
-footer {
+.footer-base {
   position: relative;
   bottom: 0;
   width: 100%;
@@ -116,13 +121,12 @@ footer {
 
   .illumination {
     width: 100%;
-    height: 30rem;
+    height: 80%;
     top: 0;
     left: 0;
   }
 
-  .row {
-    max-width: @base-width;
-    margin: 0 auto;
+  .description {
+    margin-bottom: 6rem;
   }
 }

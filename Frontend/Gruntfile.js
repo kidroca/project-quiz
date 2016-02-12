@@ -165,7 +165,7 @@ module.exports = function (grunt) {
             },
             less: {
                 files: ['app/less/**/*.less'],
-                tasks: ['newer:less:dev']
+                tasks: ['less:dev']
             },
             views: {
                 files: ['app/**/*.jade'],

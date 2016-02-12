@@ -1,4 +1,4 @@
-header
+header.wrapper
   #logo: img(src='images/logo.png', alt='logo')
 
   nav.navbar.navbar-inverse: .container-fluid
@@ -37,11 +37,10 @@ header
             li: a(href='') Red
         //li: a(href='#') Quizzes
         //li: a(href='#') About
-        //li: a(href='#') Blog
-        //li: a(href='#') Support
-        //li: a(href='#') Affiliates
-        li: a(href='#/login') Login
-        li: a(href='#/register') Join Today
-        li: a(href='#/me') Profile
+        li: a(href='#/login' ng-if='!mainCtrl.currentUserGlobal') Login
+        li: a(href='#/register' ng-if='!mainCtrl.currentUserGlobal') Join Today
+        li: a(href='#/users') Users
         //li: a(href='#') Location
-        //li: a(href='#') Support Forum
+      ul.nav.navbar-nav.navbar-right(ng-if='mainCtrl.currentUserGlobal')
+        li: a(href='#/me' ng-bind='mainCtrl.currentUserGlobal.firstName')
+        li: a(href='#/' ng-click='mainCtrl.logut()') Logout

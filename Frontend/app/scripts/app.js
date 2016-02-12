@@ -60,7 +60,8 @@
       .when('/me', {
         templateUrl: 'views/templates/default-layout.html',
         controller: 'ProfileController',
-        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resolve: routeResolvers.authenticated
       })
       //.when('/quizzes', {
       //  templateUrl: 'views/quiz/quizzes.html',

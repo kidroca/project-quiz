@@ -1,15 +1,16 @@
-.page-wrapper: h2 {{ctrl.pageTitle}}
+.page
+  .wrapper: h2 {{ctrl.pageTitle}}
 
-.content
- .page-wrapper
-   .current-route: span(ng-bind-html='ctrl.pageRoute')
+  .content
+   .wrapper
+     .current-route: span(ng-bind-html='ctrl.pageRoute')
 
-   .container-fluid.clearfix
+     .container-fluid.clearfix
 
-     // Main Content
-     .page-content.pull-left
-       section(ng-include='ctrl.mainContentTemplate')
+       // Main Content
+       .page-content.pull-left
+         section(ng-include='ctrl.mainContentTemplate')
 
-     // Side Content
-     .sidebar.pull-right
-       aside(ng-include='ctrl.sidebarTemplate')
+       // Side Content
+       .sidebar.pull-right
+         aside(ng-include='ctrl.sidebarTemplate')
