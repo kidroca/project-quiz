@@ -11,6 +11,9 @@ logs
 # Webstorm
 .idea
 
+# bower libraries custom location
+libs
+
 # Directory for development app test and try
 dev
 
