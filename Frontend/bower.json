@@ -31,6 +31,7 @@
     "ngstorage": "~0.3.10",
     "jquery": "~2.2.0",
     "angular-slick": "~0.2.1",
-    "slick-carousel": "~1.5.9"
+    "slick-carousel": "~1.5.9",
+    "ngToast": "ngtoast#^1.5.6"
   }
 }
