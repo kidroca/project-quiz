@@ -12,19 +12,31 @@ module.exports = function (grunt) {
         // =======================
         dev: {
             libs: [
-                'dev/libs/**/*.js',
+                // !Order matters!
+                'dev/libs/**/*.js', // include
                 '!dev/libs/**/src/**',
                 '!dev/libs/**/demo/**',
+                '!dev/libs/**/js/**',
+                '!dev/libs/**/grunt/**',
+
+                'dev/libs/**/dist/js/*.js',// include
                 '!dev/libs/**/*.min.js',
                 '!dev/libs/**/*index.js',
-                '!dev/libs/jquery/dist/jquery.js', // jquery is declared manually on top
-                '!dev/libs/angular/angular.js' // angular is declared manually on top
+                '!dev/libs/**/*package.js',
+                '!dev/libs/**/*npm.js',
+                '!dev/libs/**/*Gruntfile.js',
+                '!dev/libs/jquery/dist/jquery.js', // jquery is declared manually to be on top
+                '!dev/libs/angular/angular.js' // angular is declared manually to be on top
             ],
             scripts: [
                 'dev/scripts/**/*.js',
                 '!dev/scripts/libs/**'
             ],
-            css: ['dev/styles/**/*.css', 'dev/libs/**/*.css', '!dev/libs/**/demo/**']
+            css: [
+                'dev/libs/**/*.css',
+                '!dev/libs/**/demo/**',
+                '!dev/libs/**/*.min.css',
+                'dev/styles/**/*.css']
         },
         // =======================
         // JADE CONFIG ===========
@@ -54,7 +66,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: 'app/less',
-                    src: ['**/*.less', '!helpers/**'],
+                    src: ['index.less'],
                     dest: 'dev/styles',
                     ext: '.css'
                 }]
