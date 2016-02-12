@@ -1,4 +1,4 @@
-single-article(article-image='{{user.avatarUrl}}')
+single-article(article-image='{{user.avatarUrl || ctrl.defaultAvatar}}')
    h4.sub-title(transclude-to='article-header')
       | {{user.username}} registered on
       span {{user.registeredOn | date}}

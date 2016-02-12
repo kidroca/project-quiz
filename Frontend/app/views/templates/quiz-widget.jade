@@ -1,0 +1,36 @@
+h2 {{quiz.title}}
+single-article(article-image='{{qiuz.avatarUrl || ctrl.defaultAvatar}}')
+   h4.sub-title(transclude-to='article-header')
+      | Created by {{quiz.createdBy}} on
+      span {{quiz.createdOn | date}}
+
+   .quiz-details(transclude-to='article-content')
+      p {{quiz.description}}
+      div
+         .basic-info
+
+            p
+               label Category:
+               | {{quiz.category}}
+
+            p
+               label Rating:
+               uib-rating.text-left(
+               ng-model="quiz.rating" max="10"
+               ng-click="ctrl.rateQuiz()"
+               readonly="!userDetails.userId"
+               state-on="'glyphicon-ok-sign'"
+               state-off="'glyphicon-ok-circle'"
+               aria-labelledby="default-rating")
+
+            p
+               label Times Completed:
+               | {{quiz.timesSolved}}
+
+         .additional-info
+            h4 {{quiz.questions.count > 5 ? 5 : quiz.questions.count}} random questions in this quiz
+            ul.questions
+               li(ng-repeat='question in getRandomQuestions(quiz, 5)')
+                  p {{question.title}}
+
+button.btn.btn-primary.pull-right(ng-click='checkOut(quiz)') Check It Out

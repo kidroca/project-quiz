@@ -2,6 +2,8 @@
   'use strict';
   var BASE_URL = "http://localhost:42252/";
 
+  var DEFAULT_AVATAR = "Todo";
+
   function config($routeProvider) {
 
     var CONTROLLER_VIEW_MODEL_REFERENCE = 'ctrl';
@@ -63,17 +65,17 @@
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
         resolve: routeResolvers.authenticated
       })
-      //.when('/quizzes', {
-      //  templateUrl: 'views/quiz/quizzes.html',
-      //  controller: 'QuizzesController',
-      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      //})
-      //.when('/quizzes/add', {
-      //  templateUrl: 'views/quiz/add-quiz.html',
-      //  controller: 'CreateQuizController',
-      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-      //  resolve: routeResolvers.authenticated
-      // })
+      .when('/quizzes', {
+        templateUrl: 'views/templates/default-layout.html',
+        controller: 'QuizzesController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
+      .when('/quizzes/add', {
+        templateUrl: 'views/templates/default-layout.html',
+        controller: 'CreateQuizController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resolve: routeResolvers.authenticated
+      })
       //.when('/quizzes/edit', {
       //  templateUrl: 'views/quiz/add-quiz.html',
       //  controller: 'UpdateQuizController',
@@ -131,7 +133,7 @@
       'ngRoute',
       'ngSanitize',
       'ngTouch',
-      //'ngStorage',
+      'ngStorage',
       //'ui.bootstrap',
       //'toggle-switch',
       //'rzModule',
@@ -146,5 +148,6 @@
       $httpProvider.interceptors.push('responseInterceptor');
     }])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
-    .constant('baseUrl', BASE_URL);
+    .constant('baseUrl', BASE_URL)
+    .constant('defaultAvatar', DEFAULT_AVATAR);
 }());

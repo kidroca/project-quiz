@@ -1,10 +1,15 @@
 (function() {
 	'use strict';
 
-	function QuizzesController($rootScope, $scope, $sessionStorage, $location, $timeout, quizData, identity) {
+	function QuizzesController(
+		$rootScope, $scope, $sessionStorage, $location, $timeout, quizData, identity, sidebarService, defaultAvatar) {
 		var self = this;
 
-		$scope.$storage = [];
+		console.log('Hello From Quizzes Controller');
+		init(self, $scope, quizData, identity, sidebarService);
+
+		self.defaultAvatar = defaultAvatar;
+
 		$scope.pageFlip = false;
 
 		self.quizQuery = {
@@ -75,20 +80,6 @@
 				hideLimitLabels: true,
 				onChange: self.sliderChanged
 			}
-		};
-
-		self.init = function init() {
-			quizData.getQuizzes()
-				.then(function(result) {
-					console.log(result);
-					$scope.$storage = result;
-					$scope.quiz = $scope.$storage[0];
-				});
-
-			identity.getUser()
-				.then(function(result) {
-					$scope.userDetails = result;
-				});
 		};
 
 		self.editActive = function editActive() {
@@ -163,8 +154,39 @@
 					$scope.quiz.rating = response.rating;
 				});
 		};
+	}
 
-		self.init();
+	function init(self, $scope, quizData, identity, sidebarService) {
+
+		$scope.$storage = [];
+
+		self.pageTitle = "Quizzes";
+		self.pageRoute = "Home » <strong class='sub-title'>Quizzes</strong>";
+
+		self.mainContentTemplate = "views/quiz/quizzes.html";
+		self.sidebarTemplate = 'views/templates/side-content/recent.html';
+
+		quizData.getQuizzes()
+			.then(function(result) {
+				console.log(result);
+				$scope.$storage = result;
+				$scope.quiz = $scope.$storage[0];
+			});
+
+		identity.getUser()
+			.then(function(result) {
+				$scope.userDetails = result;
+			});
+
+		sidebarService.getComments()
+			.then(function(comments) {
+				self.comments = comments;
+			});
+
+		sidebarService.getPosts()
+			.then(function(recent) {
+				self.recent = recent;
+			});
 	}
 
 	angular.module('quizProjectApp.controllers')
@@ -176,6 +198,8 @@
 			'$timeout',
 			'QuizDataService',
 			'identity',
+			'sidebarService',
+			'defaultAvatar',
 			QuizzesController
 		]);
 }());
