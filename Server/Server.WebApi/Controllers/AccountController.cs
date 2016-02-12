@@ -67,10 +67,11 @@
             {
                 Email = this.User.Identity.GetUserName(),
                 UserId = userId,
-                HasRegistered = externalLogin == null,
+                RegisteredOn = user.RegisteredOn,
                 LoginProvider = externalLogin?.LoginProvider,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                AvatarUrl = user.AvatarUrl,
                 QuizzesCreated = user.Quizzes.Count
             };
         }
@@ -347,7 +348,9 @@
                 UserName = model.UserName,
                 Email = model.Email,
                 LastName = model.LastName,
-                FirstName = model.FirstName
+                FirstName = model.FirstName,
+                AvatarUrl = model.AvatarUrl,
+                RegisteredOn = DateTime.Now
             };
 
             IdentityResult result = await this.UserManager.CreateAsync(user, model.Password);

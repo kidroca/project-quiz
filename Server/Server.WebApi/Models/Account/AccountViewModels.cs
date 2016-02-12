@@ -1,5 +1,6 @@
 ﻿namespace Server.WebApi.Models.Account
 {
+    using System;
     using System.Collections.Generic;
 
     // Models returned by AccountController actions.
@@ -30,7 +31,7 @@
 
         public string UserId { get; set; }
 
-        public bool HasRegistered { get; set; }
+        public DateTime RegisteredOn { get; set; }
 
         public string LoginProvider { get; set; }
 
@@ -41,6 +42,8 @@
         public int QuizzesCreated { get; set; }
 
         public int QuizzesTaken { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 
     public class UserLoginInfoViewModel

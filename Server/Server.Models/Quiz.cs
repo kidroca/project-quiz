@@ -43,6 +43,9 @@
         [Range(0, int.MaxValue)]
         public int TimesSolved { get; set; }
 
+        [Url]
+        public string ThumbnailUrl { get; set; }
+
         public bool IsPrivate { get; set; }
 
         public virtual ICollection<Rating> Ratings

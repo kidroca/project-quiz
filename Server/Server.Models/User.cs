@@ -1,5 +1,6 @@
 ﻿namespace Server.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Security.Claims;
@@ -42,6 +43,8 @@
             get { return this.ratingsGiven; }
             set { this.ratingsGiven = value; }
         }
+
+        public DateTime RegisteredOn { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
