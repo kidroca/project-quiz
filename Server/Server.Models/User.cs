@@ -34,8 +34,14 @@
         }
 
         [Url]
-        [MaxLength(256)]
+        [MaxLength(500)]
         public string AvatarUrl { get; set; }
+
+        public virtual ICollection<Rating> RatingsGiven
+        {
+            get { return this.ratingsGiven; }
+            set { this.ratingsGiven = value; }
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {

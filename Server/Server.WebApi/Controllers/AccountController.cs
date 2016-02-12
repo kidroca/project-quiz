@@ -332,6 +332,11 @@
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            if (model == null)
+            {
+                return this.BadRequest("Error: Missing user information");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
@@ -339,7 +344,7 @@
 
             var user = new User()
             {
-                UserName = model.Email,
+                UserName = model.UserName,
                 Email = model.Email,
                 LastName = model.LastName,
                 FirstName = model.FirstName
