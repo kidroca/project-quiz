@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var BASE_URL = "http://localhost:42252/";
+  var BASE_URL = "http://superquiz.apphb.com/";
   var DEFAULT_TEMPLATE_URL = 'views/templates/default-layout.html';
 
   function config($routeProvider) {
