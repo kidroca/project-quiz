@@ -1,0 +1,18 @@
+
+<single-article article-image="{{user.avatarUrl || mainCtrl.defaultAvatar}}">
+  <h4 transclude-to="article-header" class="sub-title">{{user.username || user.email || user.lastName}} registered on<span> {{user.registeredOn | date}}</span></h4>
+  <ul transclude-to="article-content" class="list-group">
+    <li class="list-group-item">
+      <label>Username:</label><span> {{user.username}}</span>
+    </li>
+    <li class="list-group-item">
+      <label>First Name:</label><span> {{user.firstName}}</span>
+    </li>
+    <li class="list-group-item">
+      <label> Last Name:</label><span> {{user.lastName}}</span>
+    </li>
+    <li ng-if="user.email" class="list-group-item">
+      <label>Email:</label><span><a href="mailto:{{user.email}}">{{user.email}}</a></span>
+    </li>
+  </ul>
+</single-article>

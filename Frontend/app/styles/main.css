@@ -1,0 +1,148 @@
+@font-face {
+  font-family: chalk;
+  src: url(../fonts/DJB.ttf); 
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+  background-image: url(../images/blackboard.jpg); 
+  background-size: cover;
+}
+
+body > .container .page-view {
+  color: #fff;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+
+.header .navbar-fixed-top {
+  /*background-color: rgba(255, 255, 255, 0.9);*/
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+.page-view legend {
+  font-family: chalk;
+  font-size: 32px;
+  color:#fff;
+}
+
+.page-view label {
+  font-family: chalk;
+  font-size: 20px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+label.correct a::before {
+  color: #5CB85C;
+  font-size: 24px;
+  line-height: 0;
+  content: "\2713 ";
+}
+
+label.correct a {
+  text-decoration: none;
+}
+
+/* info popup */
+.form-group .popover {
+  width: 45%;
+  color: 333;
+}
+
+.hide-overflow {
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  width:69%;
+  display:inline-block;
+}
+
+.form-group .list-group .list-group-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.question-list .list-group-item .text-info:hover {
+  cursor: pointer;
+  color: #3E96E2;
+}
+
+.chalk {
+  font-family: chalk;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}

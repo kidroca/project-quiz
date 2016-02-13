@@ -1,0 +1,30 @@
+
+<h2>{{quiz.title}}</h2>
+<single-article article-image="{{qiuz.avatarUrl || mainCtrl.defaultQuizThumb}}">
+  <h4 transclude-to="article-header" class="sub-title">Created by {{quiz.createdBy}} on<span>{{quiz.createdOn | date}}</span></h4>
+  <div transclude-to="article-content" class="quiz-details">
+    <div class="basic-info">
+      <p>
+        <label>Category:</label><span> {{quiz.category}}</span>
+      </p>
+      <p>
+        <label>Rating:</label>
+        <uib-rating ng-model="quiz.rating" max="10" ng-click="rateQuiz()" readonly="!userDetails.userId" state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'" aria-labelledby="default-rating" class="quiz-rating"></uib-rating>
+      </p>
+      <p>
+        <label>Question:</label><span> {{quiz.questions.length}}</span>
+      </p>
+      <p>
+        <label>Times Completed:</label><span> {{quiz.timesSolved}}</span>
+      </p>
+    </div>
+    <div class="description">
+      <label>Description:</label>
+      <p class="hide-overflow"> {{quiz.description}}</p>
+    </div>
+  </div>
+</single-article>
+<!-- btn-lol abused...-->
+<div>
+  <button ng-click="checkOut(quiz)" class="btn btn-primary btn-round col-md-offset-9">Check It Out</button>
+</div>

@@ -1,14 +1,18 @@
-single-article(article-image='{{user.avatarUrl || ctrl.defaultAvatar}}')
+single-article(article-image='{{user.avatarUrl || mainCtrl.defaultAvatar}}')
    h4.sub-title(transclude-to='article-header')
-      | {{user.username}} registered on
-      span {{user.registeredOn | date}}
+      | {{user.username || user.email || user.lastName}} registered on
+      span  {{user.registeredOn | date}}
 
    ul.list-group(transclude-to='article-content')
-      li.list-group-item Username:
-         span.badge {{user.username}}
-      li.list-group-item First Name:
-         span.badge {{user.firstName}}
-      li.list-group-item Last Name:
-         span.badge {{user.lastName}}
-      li.list-group-item Email:
-         span.badge {{user.email}}
+      li.list-group-item
+         label Username:
+         span  {{user.username}}
+      li.list-group-item
+         label First Name:
+         span  {{user.firstName}}
+      li.list-group-item
+         label  Last Name:
+         span  {{user.lastName}}
+      li.list-group-item(ng-if='user.email')
+         label Email:
+         span: a(href='mailto:{{user.email}}') {{user.email}}

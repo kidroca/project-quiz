@@ -1,81 +1,154 @@
 ﻿@inherits System.Web.Mvc.WebViewPage
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="stylesheet" href="styles/main.724a05a4.css">
+    <title>Project Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- build:css styles/style.min.css-->
+    <!-- include: "type": "css", "files": "<%= dev.css %>"-->
+    <link href="libs/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet" type="text/css">
+    <link href="libs/angular-toggle-switch/angular-toggle-switch-bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="libs/angular-toggle-switch/angular-toggle-switch.css" rel="stylesheet" type="text/css">
+    <link href="libs/angular/angular-csp.css" rel="stylesheet" type="text/css">
+    <link href="libs/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="libs/ngToast/dist/ngToast-animations.css" rel="stylesheet" type="text/css">
+    <link href="libs/ngToast/dist/ngToast.css" rel="stylesheet" type="text/css">
+    <link href="libs/slick-carousel/slick/slick-theme.css" rel="stylesheet" type="text/css">
+    <link href="libs/slick-carousel/slick/slick.css" rel="stylesheet" type="text/css">
+    <link href="styles/index.css" rel="stylesheet" type="text/css">
+    <!-- /include-->
+    <!-- /build-->
 </head>
-<body ng-app="quizProjectApp" ng-controller="MainController as ctrl">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Add your site or application content here -->
-    <div class="header">
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Super Quiz</a>
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<body ng-app="quizProjectApp" ng-controller="MainController as mainCtrl">
+    <div id="main-illumination" class="illumination"></div>
+    <div id="main-wrapper">
+        <!-- Notification messages container-->
+        <toast></toast>
+        <header class="wrapper">
+            <div id="logo"><img src="images/logo.png" alt="logo"></div>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button data-toggle="collapse" data-target="#main-nav" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    </div>
+                    <div id="main-nav" aria-expanded="false" style="height: 0.8px;" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#/" class="home-link">Home</a></li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle">Features</a>
+                                <ul role="menu" class="dropdown-menu drop-shadow">
+                                    <li><a href="#/" class="home-link">Home</a></li>
+                                    <li><a href="#">Themes</a></li>
+                                    <li><a href="#">Features</a></li>
+                                    <li><a href="#/quizzes">Quizzes</a></li>
+                                    <li><a href="#/quizzes/create" ng-if="mainCtrl.currentUserGlobal">Create Quiz</a></li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle">Themes</a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="#">Black</a></li>
+                                    <li><a href="#">Green</a></li>
+                                    <li><a href="#">Purple</a></li>
+                                    <li><a href="#">Red</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#/quizzes">Quizzes</a></li>
+                            <li><a href="#/quizzes/create" ng-if="mainCtrl.currentUserGlobal">Create Quiz</a></li>
+                            <!--li: a(href='#') About-->
+                            <li><a href="#/login" ng-if="!mainCtrl.currentUserGlobal">Login</a></li>
+                            <li><a href="#/register" ng-if="!mainCtrl.currentUserGlobal">Join Today</a></li>
+                            <li><a href="#/users">Users</a></li>
+                            <!--li: a(href='#') Location-->
+                        </ul>
+                        <ul ng-if="mainCtrl.currentUserGlobal" class="nav navbar-nav navbar-right">
+                            <li><a href="#/me" ng-bind="mainCtrl.currentUserGlobal.firstName"></a></li>
+                            <li><a href="#/" ng-click="mainCtrl.logout()">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="navbar-collapse collapse" id="navbar-main">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#/quizzes">Quizzes</a>
-                        </li>
-                        <li>
-                            <a href="#/quizzes/add" ng-if="ctrl.currentUserGlobal">Add New</a>
-                        </li>
-                    </ul>
-
-                    <ul ng-if="!ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
-                        <li><a href="#/login">Login</a></li>
-                        <li><a href="#/register">Register</a></li>
-                    </ul>
-
-                    <ul ng-if="ctrl.currentUserGlobal" class="nav navbar-nav navbar-right">
-                        <li><a href="#/me">Hi {{ctrl.currentUserGlobal.firstName}}</a></li>
-                        <li><a href="#" ng-click="ctrl.logout()">Logout</a></li>
-                    </ul>
-
-                </div>
-            </div>
+            </nav>
+        </header>
+        <div id="content-wrapper" ng-view="" class="container-fluid">
         </div>
     </div>
-
-    <div class="container">
-        <div ng-view="" style="margin-top: 36px" class="page-view"></div>
-    </div>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-        !function (A, n, g, u, l, a, r) {
-            A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-                (A[l].q = A[l].q || []).push(arguments)
-            }, A[l].l = +new Date, a = n.createElement(g),
-                r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-        }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-XXXXX-X');
-        ga('send', 'pageview');
-    </script>
-    <!-- Libraries -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-cookies.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-messages.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-resource.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-route.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-sanitize.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.1/angular-touch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
-    <!-- User Scripts -->
-    <script src="scripts/user.js"></script>
+    <footer class="footer-base container-fluid">
+        <div class="illumination"></div>
+        <section class="description row wrapper">
+            <article ng-repeat="article in mainCtrl.footerContent" class="col-md-4 footer-article">
+                <h3 ng-bind="article.title"></h3>
+                <p ng-bind="article.content"></p>
+            </article>
+        </section>
+        <nav class="wrapper">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/" class="home-link">Home</a></li>
+                    <li>
+                    <li><a href="">Features</a></li>
+                    </li>
+                    <li>
+                    <li><a href="">Themes</a></li>
+                    </li>
+                    <!--li: a(href='#') Quizzes-->
+                    <!--li: a(href='#') About-->
+                    <li><a href="#/login" ng-if="!mainCtrl.currentUserGlobal">Login</a></li>
+                    <li><a href="#/register" ng-if="!mainCtrl.currentUserGlobal">Join Today</a></li>
+                    <li><a href="#/users">Users</a></li>
+                    <!--li: a(href='#') Location-->
+                </ul>
+                <ul ng-if="mainCtrl.currentUserGlobal" class="nav navbar-nav navbar-right">
+                    <li><a href="#/me" ng-bind="mainCtrl.currentUserGlobal.firstName"></a></li>
+                    <li><a href="#/" ng-click="mainCtrl.logut()">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
+    <!-- build:js scripts/scripts.min.js-->
+    <!-- Libs and Frameworks-->
+    <script src="libs/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="libs/angular/angular.js" type="text/javascript"></script>
+    <!-- include: "type": "js", "files": "<%= dev.libs %>"-->
+    <script src="libs/angular-animate/angular-animate.js" type="text/javascript"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js" type="text/javascript"></script>
+    <script src="libs/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+    <script src="libs/angular-local-storage/dist/angular-local-storage.js" type="text/javascript"></script>
+    <script src="libs/angular-messages/angular-messages.js" type="text/javascript"></script>
+    <script src="libs/angular-resource/angular-resource.js" type="text/javascript"></script>
+    <script src="libs/angular-route/angular-route.js" type="text/javascript"></script>
+    <script src="libs/angular-sanitize/angular-sanitize.js" type="text/javascript"></script>
+    <script src="libs/angular-slick/dist/slick.js" type="text/javascript"></script>
+    <script src="libs/angular-toggle-switch/angular-toggle-switch.js" type="text/javascript"></script>
+    <script src="libs/angular-touch/angular-touch.js" type="text/javascript"></script>
+    <script src="libs/ngToast/dist/ngToast.js" type="text/javascript"></script>
+    <script src="libs/ngstorage/ngStorage.js" type="text/javascript"></script>
+    <script src="libs/slick-carousel/slick/slick.js" type="text/javascript"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+    <!-- /include-->
+    <!-- app scripts-->
+    <!-- include: "type": "js", "files": "<%= dev.scripts %>"-->
+    <script src="scripts/app.js" type="text/javascript"></script>
+    <script src="scripts/common/paging-filter.js" type="text/javascript"></script>
+    <script src="scripts/common/response-interceptor.js" type="text/javascript"></script>
+    <script src="scripts/common/sidebar-service.js" type="text/javascript"></script>
+    <script src="scripts/common/single-article-directive.js" type="text/javascript"></script>
+    <script src="scripts/controllers/main-controller.js" type="text/javascript"></script>
+    <script src="scripts/home/home-controller.js" type="text/javascript"></script>
+    <script src="scripts/identity/auth-service.js" type="text/javascript"></script>
+    <script src="scripts/identity/identity-service.js" type="text/javascript"></script>
+    <script src="scripts/identity/login-controller.js" type="text/javascript"></script>
+    <script src="scripts/identity/register-conroller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/add-question-controller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/create-quiz-controller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/quiz-data-service.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/quizzes-controller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/result-controller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/solve-quiz-controller.js" type="text/javascript"></script>
+    <script src="scripts/quizzes/update-quiz-controller.js" type="text/javascript"></script>
+    <script src="scripts/user/profile-controller.js" type="text/javascript"></script>
+    <!-- /include-->
+    <!-- /build-->
 </body>
 </html>

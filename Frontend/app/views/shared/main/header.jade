@@ -22,20 +22,22 @@ header.wrapper
 
           ul.dropdown-menu.drop-shadow(role='menu')
             li: a.home-link(href='#/') Home
-            li: a(href='') Themes
-            li: a(href='') Features
-            li: a(href='') About
+            li: a(href='#') Themes
+            li: a(href='#') Features
             li: a(href='#/quizzes') Quizzes
+            li: a(href='#/quizzes/create' ng-if='mainCtrl.currentUserGlobal') Create Quiz
+            li: a(href='#') About
 
         li.dropdown
           a.dropdown-toggle(href='') Themes
 
           ul.dropdown-menu(role='menu')
-            li: a(href='') Black
-            li: a(href='') Green
-            li: a(href='') Purple
-            li: a(href='') Red
+            li: a(href='#') Black
+            li: a(href='#') Green
+            li: a(href='#') Purple
+            li: a(href='#') Red
         li: a(href='#/quizzes') Quizzes
+        li: a(href='#/quizzes/create' ng-if='mainCtrl.currentUserGlobal') Create Quiz
         //li: a(href='#') About
         li: a(href='#/login' ng-if='!mainCtrl.currentUserGlobal') Login
         li: a(href='#/register' ng-if='!mainCtrl.currentUserGlobal') Join Today
@@ -43,4 +45,4 @@ header.wrapper
         //li: a(href='#') Location
       ul.nav.navbar-nav.navbar-right(ng-if='mainCtrl.currentUserGlobal')
         li: a(href='#/me' ng-bind='mainCtrl.currentUserGlobal.firstName')
-        li: a(href='#/' ng-click='mainCtrl.logut()') Logout
+        li: a(href='#/', ng-click='mainCtrl.logout()') Logout

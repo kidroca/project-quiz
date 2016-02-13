@@ -3,21 +3,6 @@
 
 // ========= Common/Shared =============
 
-.content {
-  position: relative;
-
-  padding: 0 1rem;
-  border: 1px solid #fff;
-  border-left: 0;
-  border-right: 0;
-  .box-shadow-double(@blur: 20px);
-  .box-shadow-inset-double(@blur: 15px);
-  .box-shadow-double-inset(@double-shadow, @inset-double);
-
-  background-image: url('../images/content-bg.png');
-  background-repeat: repeat;
-}
-
 .illumination {
   position: absolute;
   .radial-grad(
@@ -39,109 +24,31 @@
   left: 0;
 }
 
-.btn-default {
-  border: 1px solid #000;
-  border-radius: 5px;
-  color: #fff;
-  .btn-grad();
-  .box-shadow(@y: 1px; @blur: 2px);
-  text-shadow: none;
-  transition: 0.25s;
-
-  &:hover {
-    color: darken(#fff, 30%);
-//        background-color: lighten(@btn-default-color, 30%);
-    border-color: lighten(#000, 20%);
-//        text-shadow: 0 0 1px darken(#fff, 30%);
-  }
-}
-
-.form-group {
-
-  &.required .control-label {
-    &:after {
-      content:"*";
-      color: #ff4d00;
-    }
-  }
-
-}
-
-.widget {
-
-  > h3 {
-    margin-top: 0;
-    font-family: @font-thin;
-  }
-
-  .well {
-    padding: 2.8rem;
-    border-radius: 15px;
-    .linear-grad(darken(white, 3%), white 75%);
-
-    > ul {
-      padding-left: 1rem;
-
-      li {
-        margin-top: 2rem;
-      }
-    }
-  }
-}
-
-.single-article {
-  position: relative;
-
-  &:before, &:after {
-    display: block;
-    position: absolute;
-    width: 75%;
-    left: -1rem;
-    content: "";
-    height: 1px;
-
-    // Todo: substitude with the gradient mixin
-    background-image: linear-gradient(
-            to right, rgba(0, 0, 0, 0) 0%, rgba(196, 196, 196, 1) 5%, rgba(196, 196, 196, 1) 55%, rgba(0, 0, 0, 0) 100%);
-  }
-
-  &:after {
-    top: 1px;
-
-    background-image: linear-gradient(
-            to right, rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 50%,rgba(255, 255, 255, 0) 80%);
-  }
-
-  // todo ilumination or gradient...
-
-  .article-body {
-    margin-top: 1.5rem;
-
-    .article-content {
-      width: 68%;
-    }
-
-    .article-image {
-      width: 32%;
-      border: 1px solid lighten(@articleImageBackground, 9%);
-      border-bottom-color: darken(@articleImageBackground, 5%);
-
-      img {
-        border: 5px solid white;
-        background-color: @articleImageBackground;
-
-        .box-shadow-inset(@x: 3px; @y: 3px; @blur: 5px; @color: rgba(0, 0, 0, 0.43));
-      }
-    }
-  }
-}
-
 .page {
   color: @pageText;
   .pageTextShadow();
 
+  a {
+    color: @medium-dark;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten(@medium-dark, 35%);
+    }
+  }
+
   .content {
     margin-top: 1rem;
+
+    h2 {
+      margin-top: 0;
+      color: @articleHeading;
+      text-shadow: none;
+    }
+
+    > .wrapper {
+      padding-bottom: 4rem;
+    }
   }
 
   .container-fluid {
@@ -155,10 +62,10 @@
   }
 
   .sub-title {
-    padding: 1rem 0 0.25rem;
+    padding: 1rem 0 0;
     margin-bottom: 0;
 
-    color: @sectionHeading;
+    color: @articleHeading;
     font-weight: normal;
     .pageTextShadow();
   }
@@ -169,11 +76,10 @@
   }
 
   .page-content {
-    min-width: 70%;
+    max-width: 70%;
+    min-width: 60%;
     padding: 0;
 
-    // Todo: remove border
-    //    border: 1px solid #4affff;
   }
 
   .sidebar {
@@ -182,16 +88,5 @@
     color: @sideText;
     font-size: 1.2rem;
 
-    border: 1px solid #4affff;
-    padding: 0;
   }
-}
-
-.wrapper {
-  max-width: @base-width;
-  margin: 0 auto;
-}
-
-.post {
-
 }

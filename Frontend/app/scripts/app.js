@@ -1,8 +1,7 @@
 (function() {
   'use strict';
-  var BASE_URL = "http://localhost:42252/";
-
-  var DEFAULT_AVATAR = "Todo";
+  var BASE_URL = "http://superquiz.apphb.com/";
+  var DEFAULT_TEMPLATE_URL = 'views/templates/default-layout.html';
 
   function config($routeProvider) {
 
@@ -19,29 +18,29 @@
       }]
     };
 
-    //var solveQuizResolvers = {
-    //  loadQuizIfNeeded: ['$q', '$route', '$sessionStorage', 'QuizDataService',
-    //    function solveQuizResolvers($q, $route, $sessionStorage, QuizDataService) {
-    //
-    //      if (!$sessionStorage.solveQuiz || $sessionStorage.solveQuiz.id !== +$route.current.params.id) {
-    //        var deffered = $q.defer();
-    //
-    //        QuizDataService.getQuiz($route.current.params.id)
-    //          .then(function(result) {
-    //            console.log(result);
-    //            $sessionStorage.solveQuiz = result;
-    //            deffered.resolve(true);
-    //          }, function (error) {
-    //            deffered.reject(error);
-    //          });
-    //
-    //          return deffered.promise;
-    //      } else {
-    //        return true;
-    //      }
-    //    }
-    //  ]
-    //};
+    var solveQuizResolvers = {
+      loadQuizIfNeeded: ['$q', '$route', '$sessionStorage', 'QuizDataService',
+        function solveQuizResolvers($q, $route, $sessionStorage, QuizDataService) {
+
+          if (!$sessionStorage.solveQuiz || $sessionStorage.solveQuiz.id !== +$route.current.params.id) {
+            var deffered = $q.defer();
+
+            QuizDataService.getQuiz($route.current.params.id)
+              .then(function(result) {
+                console.log(result);
+                $sessionStorage.solveQuiz = result;
+                deffered.resolve(true);
+              }, function (error) {
+                deffered.reject(error);
+              });
+
+              return deffered.promise;
+          } else {
+            return true;
+          }
+        }
+      ]
+    };
 
     $routeProvider
       .when('/', {
@@ -60,18 +59,18 @@
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
       .when('/me', {
-        templateUrl: 'views/templates/default-layout.html',
+        templateUrl: DEFAULT_TEMPLATE_URL,
         controller: 'ProfileController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
         resolve: routeResolvers.authenticated
       })
       .when('/quizzes', {
-        templateUrl: 'views/templates/default-layout.html',
+        templateUrl: DEFAULT_TEMPLATE_URL,
         controller: 'QuizzesController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
       })
-      .when('/quizzes/add', {
-        templateUrl: 'views/templates/default-layout.html',
+      .when('/quizzes/create', {
+        templateUrl: DEFAULT_TEMPLATE_URL,
         controller: 'CreateQuizController',
         controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
         resolve: routeResolvers.authenticated
@@ -82,17 +81,17 @@
       //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
       //  resolve: routeResolvers.authenticated
       //})
-      //.when('/quizzes/solve/:id', {
-      //  templateUrl: 'views/quiz/solve-quiz.html',
-      //  controller: 'SolveQuizController',
-      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
-      //  resolve: solveQuizResolvers.loadQuizIfNeeded
-      //})
-      //.when('/quizzes/result', {
-      //  templateUrl: 'views/quiz/result.html',
-      //  controller: 'ResultController',
-      //  controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
-      //})
+      .when('/quizzes/solve/:id', {
+        templateUrl: DEFAULT_TEMPLATE_URL,
+        controller: 'SolveQuizController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE,
+        resolve: solveQuizResolvers.loadQuizIfNeeded
+      })
+      .when('/quizzes/result', {
+        templateUrl: 'views/quiz/quiz-result.html',
+        controller: 'ResultController',
+        controllerAs: CONTROLLER_VIEW_MODEL_REFERENCE
+      })
       //.when('/about', {
       //  templateUrl: 'views/about.html',
       //  controller: 'AboutCtrl',
@@ -134,9 +133,8 @@
       'ngSanitize',
       'ngTouch',
       'ngStorage',
-      //'ui.bootstrap',
-      //'toggle-switch',
-      //'rzModule',
+      'ui.bootstrap',
+      'toggle-switch',
       'ngToast',
       'quizProjectApp.services',
       'quizProjectApp.filters',
@@ -148,6 +146,5 @@
       $httpProvider.interceptors.push('responseInterceptor');
     }])
     .run(['$http', '$cookies', '$rootScope', '$location', 'auth', run])
-    .constant('baseUrl', BASE_URL)
-    .constant('defaultAvatar', DEFAULT_AVATAR);
+    .constant('baseUrl', BASE_URL);
 }());

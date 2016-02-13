@@ -1,0 +1,23 @@
+
+<div class="widget">
+  <h3>{{ctrl.recent.title}}</h3>
+  <div class="well">
+    <p>{{ctrl.recent.content}}</p>
+  </div>
+</div>
+<div class="widget">
+  <h3>{{ctrl.comments.title}}</h3>
+  <div class="well">
+    <ul>
+      <li ng-repeat="comment in ctrl.comments.items track by $index">{{comment}}</li>
+    </ul>
+  </div>
+</div>
+<div class="widget">
+  <h3>{{ctrl.comments.title}}</h3>
+  <div class="well">
+    <ul>
+      <li ng-repeat="comment in ctrl.comments.items track by $index">{{comment}}</li>
+    </ul>
+  </div>
+</div>

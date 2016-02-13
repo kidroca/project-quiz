@@ -1,36 +1,39 @@
 h2 {{quiz.title}}
-single-article(article-image='{{qiuz.avatarUrl || ctrl.defaultAvatar}}')
+single-article(article-image='{{qiuz.avatarUrl || mainCtrl.defaultQuizThumb}}')
    h4.sub-title(transclude-to='article-header')
       | Created by {{quiz.createdBy}} on
       span {{quiz.createdOn | date}}
 
    .quiz-details(transclude-to='article-content')
-      p {{quiz.description}}
-      div
          .basic-info
 
             p
                label Category:
-               | {{quiz.category}}
+               span  {{quiz.category}}
 
             p
                label Rating:
-               uib-rating.text-left(
+
+               uib-rating.quiz-rating(
                ng-model="quiz.rating" max="10"
-               ng-click="ctrl.rateQuiz()"
+               ng-click="rateQuiz()"
                readonly="!userDetails.userId"
                state-on="'glyphicon-ok-sign'"
                state-off="'glyphicon-ok-circle'"
                aria-labelledby="default-rating")
 
             p
+               label Question:
+               span  {{quiz.questions.length}}
+
+            p
                label Times Completed:
-               | {{quiz.timesSolved}}
+               span  {{quiz.timesSolved}}
 
-         .additional-info
-            h4 {{quiz.questions.count > 5 ? 5 : quiz.questions.count}} random questions in this quiz
-            ul.questions
-               li(ng-repeat='question in getRandomQuestions(quiz, 5)')
-                  p {{question.title}}
+         .description
+           label Description:
+           p.hide-overflow  {{quiz.description}}
 
-button.btn.btn-primary.pull-right(ng-click='checkOut(quiz)') Check It Out
+
+// btn-lol abused...
+div: button.btn.btn-primary.btn-round.col-md-offset-9(ng-click='checkOut(quiz)') Check It Out

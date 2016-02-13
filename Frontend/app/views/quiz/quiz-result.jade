@@ -1,0 +1,6 @@
+.page
+   .wrapper: h2(ng-bind='ctrl.pageTitle')
+   .content
+      .wrapper
+         .current-route: span(ng-bind-html='ctrl.pageRoute')
+         div(ng-include='"views/templates/result.html"')

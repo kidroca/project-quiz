@@ -1,2 +1,7 @@
 .container-fluid
-   .quiz-item(ng-repeat='quiz in $storage', ng-include='"views/templates/quiz-widget.html"')
+   .quiz-item(ng-repeat='quiz in $storage | paging:ctrl.currentPage:ctrl.questionsPerPage', ng-include='"views/templates/quiz-widget.html"')
+   uib-pagination(total-items="$storage.length"
+   items-per-page="ctrl.questionsPerPage"
+   direction-links="false"
+   class="questions-paging"
+   ng-model="ctrl.currentPage" ng-change="ctrl.pageChanged()")

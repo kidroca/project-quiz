@@ -18,6 +18,7 @@ module.exports = function (grunt) {
                 '!dev/libs/**/demo/**',
                 '!dev/libs/**/js/**',
                 '!dev/libs/**/grunt/**',
+                '!dev/libs/**/test/**',
 
                 'dev/libs/**/dist/js/*.js',// include
                 '!dev/libs/**/*.min.js',
@@ -25,6 +26,7 @@ module.exports = function (grunt) {
                 '!dev/libs/**/*package.js',
                 '!dev/libs/**/*npm.js',
                 '!dev/libs/**/*Gruntfile.js',
+                '!dev/libs/**/*ui-bootstrap.js', // can't use ui-boostrap.js and ui-boostrap-tpls.js at the same time
                 '!dev/libs/jquery/dist/jquery.js', // jquery is declared manually to be on top
                 '!dev/libs/angular/angular.js' // angular is declared manually to be on top
             ],

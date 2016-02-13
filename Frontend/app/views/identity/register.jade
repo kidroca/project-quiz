@@ -1,9 +1,13 @@
-.content
-  .row
-    .col-lg-8.col-lg-offset-2
-      .widget: .well
-        include shared/registerForm
+.page
+  .wrapper: h2(ng-bind='ctrl.pageTitle')
+  .content
+    .wrapper
+      .current-route: span(ng-bind-html='ctrl.pageRoute')
+      .row
+        .col-lg-8.col-lg-offset-2
+          .widget: .well
+            include shared/registerForm
 
-        hr
-        p.text-right #{'Already have an account? '}
-          a(href='/login') Login
+            hr
+            p.text-right #{'Already have an account? '}
+              a(href='/login') Login
