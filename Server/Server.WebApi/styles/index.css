@@ -29,11 +29,6 @@
   font-family: 'Colaborate Thin';
   src: url('../fonts/ColabThi.otf');
 }
-@media (max-width: 700px) {
-  .sidebar {
-    display: none;
-  }
-}
 body {
   position: relative;
   font-family: "Droid Sans", sans-serif;
@@ -184,14 +179,28 @@ a.home-link {
   font-size: 12px;
 }
 .page .page-content {
-  max-width: 70%;
-  min-width: 60%;
   padding: 0;
 }
 .page .sidebar {
-  max-width: 30%;
   color: #5e5e5e;
   font-size: 1.2rem;
+}
+@media only screen and (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+  .page-content {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 701px) {
+  .page-content {
+    max-width: 70%;
+    min-width: 60%;
+  }
+  .sidebar {
+    max-width: 30%;
+  }
 }
 .btn {
   color: white;
@@ -378,7 +387,11 @@ form legend {
 }
 .single-article .article-body {
   margin-top: 1.5rem;
-  padding-right: 6rem;
+}
+@media only screen and (min-width: 700px) {
+  .single-article .article-body {
+    padding-right: 6rem;
+  }
 }
 .single-article .article-body .article-content {
   width: 67%;

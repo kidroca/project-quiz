@@ -5,6 +5,7 @@
         var self = this;
 
         self.hi = 'HI!';
+        $scope.hi = 'Hello';
     }
 
     angular.module('quizProjectApp.controllers')

@@ -287,7 +287,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'compile',
-        // 'csslint',
+        //'csslint',
         'concat:js',
         'concat:css',
         'copy:dist',
