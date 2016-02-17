@@ -2,11 +2,11 @@
 
 ## Account Related Actions
 
-### `api/acount/regiser`
+### `api/account/register`
 ##### POST 
 ```javascript
 {
-    email: required,
+    username: required,
     password: required(min: 6,  any), 
     confirmPassword: required,
     firstName: optional (max: 25)
