@@ -239,6 +239,15 @@
             return this.Ok(response);
         }
 
+        [Route("count")]
+        [HttpGet]
+        public IHttpActionResult GetTotalQuizzes()
+        {
+            int count = this.quizRepo.All().Count();
+
+            return this.Ok(new { count });
+        }
+
         // Todo: Extract in a service
         private static IQueryable<Quiz> ApplyQueryParameters(IQueryable<Quiz> quizzes, QuizSearchModel httpQuery)
         {
