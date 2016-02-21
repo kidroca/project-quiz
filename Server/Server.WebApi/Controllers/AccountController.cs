@@ -65,7 +65,7 @@
 
             return new UserInfoViewModel
             {
-                Email = this.User.Identity.GetUserName(),
+                Username = this.User.Identity.GetUserName(),
                 UserId = userId,
                 RegisteredOn = user.RegisteredOn,
                 LoginProvider = externalLogin?.LoginProvider,
