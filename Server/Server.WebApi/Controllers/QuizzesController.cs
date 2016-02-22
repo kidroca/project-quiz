@@ -158,14 +158,21 @@
         [HttpGet]
         public async Task<IHttpActionResult> GetCategories(string pattern, int take = 10)
         {
-            string[] categories = await this.quizRepo.All()
-                .Where(quiz => quiz.Category.ToLower().Contains(pattern.ToLower()))
+            var categories = this.quizRepo.All();
+
+            if (!string.IsNullOrEmpty(pattern.Trim()))
+            {
+                categories = categories
+                    .Where(quiz => quiz.Category.ToLower().Contains(pattern.ToLower()));
+            }
+
+            var result = await categories
                 .GroupBy(quiz => quiz.Category)
                 .Take(take)
                 .Select(gr => gr.Key.ToLower())
                 .ToArrayAsync();
 
-            return this.Ok(categories);
+            return this.Ok(result);
         }
 
         [Route("solve")]

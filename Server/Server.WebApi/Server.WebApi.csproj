@@ -260,7 +260,7 @@
     <Compile Include="Models\Quiz\Search\QuizSearchModel.cs" />
     <Compile Include="Models\Quiz\Search\ResultOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
