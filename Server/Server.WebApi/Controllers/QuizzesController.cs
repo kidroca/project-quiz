@@ -156,11 +156,11 @@
 
         [Route("categories")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetCategories(string pattern, int take = 10)
+        public async Task<IHttpActionResult> GetCategories(string pattern = null, int take = 10)
         {
             var categories = this.quizRepo.All();
 
-            if (!string.IsNullOrEmpty(pattern.Trim()))
+            if (!string.IsNullOrEmpty(pattern))
             {
                 categories = categories
                     .Where(quiz => quiz.Category.ToLower().Contains(pattern.ToLower()));
@@ -218,7 +218,7 @@
             }
         }
 
-        [Route("{name}")]
+        [Route("byUser/{name}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserQuizzes(
             string name, [FromUri] QuizSearchModel query, int page = 0, int size = 10)
